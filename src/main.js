@@ -11,3 +11,6 @@ import './assets/tailwind.css'
 // Vue.use(Vuesax)
 
 createApp(App).use(router).mount('#app')
+
+// Vue.component('v-select', vSelect)
+// import 'vue-select-3/dist/vue-select.css';
