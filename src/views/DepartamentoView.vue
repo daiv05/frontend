@@ -52,6 +52,9 @@
     <div class="flex justify-center">
         <Detalle1></Detalle1>
     </div>
+    <button @click="obtener_cookie()" type = "button">
+        ver el token en consola
+    </button>
 </template>
 
 
@@ -61,12 +64,19 @@ import sidebar1 from '../components/Sidebar1.vue'
 import formLogin from '../components/FormLogin.vue'
 import Detalle1 from '../components/Detalle1.vue'
 import { getAPI } from '../axios-api'
+import user from "@/helper/user"
 export default {
     name: 'Departamento',
     data() {
         return {
             API_Depa: [],
+            token : ""
         };
+    },
+    methods : {
+        obtener_cookie : function(){
+            console.log(user.get_user_logged())
+        }
     },
     created() {
         getAPI.get('/departamento/',)
@@ -98,6 +108,7 @@ const products = [
         price: '$35',
         color: 'Black',
     },
+
     // More products...
 ]
 </script>
