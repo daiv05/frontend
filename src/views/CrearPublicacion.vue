@@ -54,7 +54,7 @@
                                         v-on:change="getCiudadFiltro"
                                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                                         <option disabled value="">Seleccione un elemento</option>
-                                        <option v-for="depa in API_Depa" :key="depa.departamento_id">
+                                        <option v-for="depa in API_Depa" :key="depa.departamento_id" v-bind:value="depa">
                                             {{ depa.nombre_depa }}
                                         </option>
                                     </select>
@@ -64,7 +64,7 @@
                                     <select name="ciudad" id="ciudad_id" v-model="ciu_seleccion"
                                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                                         <option disabled value="">Seleccione un elemento</option>
-                                        <option v-for="ciu in cius" :key="ciu.ciudad_id"> {{ ciu.nombre_ciudad }}
+                                        <option v-for="ciu in cius" :key="ciu.ciudad_id" v-bind:value="ciu"> {{ ciu.nombre_ciudad }}
                                         </option>
                                     </select>
                                 </div>
@@ -156,7 +156,7 @@
                             </div> -->
 
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 text-left">Sube fotos del
+                                <label class="block text-sm font-medium text-gray-700 text-left">Sube una foto del
                                     lugar</label>
                                 <div
                                     class="mt-1 flex justify-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-5 pb-6">
@@ -170,13 +170,12 @@
                                         <div class="flex text-sm text-gray-600">
                                             <label for="file"
                                                 class="relative cursor-pointer rounded-md bg-white font-medium text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500">
-                                                <span>Upload a file</span>
-                                                <input type="file" id="file" ref="file" @change="onFileChange"
-                                                    />
+                                                <span>Sube una imagen</span>
+                                                <input type="file" id="file" ref="file" @change="onFileChange"/>
                                             </label>
-                                            <p class="pl-1">or drag and drop</p>
                                         </div>
-                                        <p class="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
+                                        <p class="text-xs text-gray-500">PNG, JPG, GIF de hasta 10MB</p>
+                                        <p class="pl-1">or drag and drop</p>
                                     </div>
                                 </div>
                             </div>
@@ -204,20 +203,7 @@
 </template>
 
 <style src="vue-multiselect/dist/vue-multiselect.css">
-    .multiselect,
-    .multiselect__select,
-    .multiselect__tags,
-    .multiselect__content-wrapper,
-    .multiselect__input,
-    .multiselect__single,
-    .multiselect__placeholder,
-    .multiselect__tag,
-    .multiselect__tag-icon {
-        line-height: 1.4;
-        font-size: 1em;
-        max-height: 10px;
-        width: 80%;
-    }
+
 </style>
 
 <script>
@@ -227,9 +213,10 @@ import VueMultiselect from 'vue-multiselect'
 import { getAPI } from '../axios-api'
 
 export default {
-    name: 'Departamento',
+    name: 'Publicacion',
     data() {
         return {
+            //Datos a enviar al servidor para crear una nueva publicacion
             perfil: 1,
             titulo: "",
             descrip_lugar: "",
@@ -238,20 +225,21 @@ export default {
             precio: 0,
             tiempo_contrato: "",
             p_activa: false,
-
-
+            //Datos para el formulario
             file: null,
             publi_creada: [],
             depa_seleccion: [],
             ciu_seleccion: [],
             cius: [],
             amenis_seleccion: [],
+            //Datos para mostrar en el formulario
             API_Depa: [],
             API_Ciudad: [],
             API_Amenidad: [],
         };
     },
     created() {
+        //API's para traer los datos del formulario
         getAPI.get('/departamento/',)
             .then(response => {
                 console.log('Department API has received data')
@@ -278,7 +266,8 @@ export default {
             });
     },
     methods: {
-        async getCiudadFiltro() {
+        //Filtro de ciudad segun seleccion de departamento
+        getCiudadFiltro() {
             this.cius = []
             for (let i = 0; i < this.API_Ciudad.length; i++) {
                 if (this.API_Ciudad[i].departamento.nombre_depa == this.depa_seleccion) {
@@ -286,32 +275,14 @@ export default {
                 }
             }
         },
-        handleFileUpload(){
-            this.file = this.$refs.file.files[0];
-
-        },
-        submitFoto(){
-            let formData = new FormData();
-            formData.append('file', this.file);
-            getAPI.post('/foto/', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-            })
-            .then(response => {
-                console.log('Foto API ha enviado data')
-                console.log(response.data);
-            })
-            .catch(error => {
-                console.log(error);
-            });
-        },
+        //Funcion para POST de nueva publicacion
         submitNewPublicacion(){
             getAPI.post('/publicacion_alquiler/', {
                 perfil: this.perfil,
                 titulo: this.titulo,
                 descrip_lugar: this.descrip_lugar,
-                coordenadas: this.depa_seleccion + " " + this.ciu_seleccion,
+                //Por ahora que no está lo de Maps
+                coordenadas: this.depa_seleccion.nombre_depa + " " + this.ciu_seleccion.nombre_ciudad, 
                 num_ocupantes: this.num_ocupantes,
                 precio: this.precio,
                 tiempo_contrato: this.tiempo_contrato,
@@ -321,19 +292,27 @@ export default {
             .then(response => {
                 console.log('Publicacion API has received data')
                 console.log(response.data);
-                this.publi_creada = response.data;
-                this.uploadFile();
+                //Guardo la publicacion creada para usar el id en el submit de las FOTOS
+                this.publi_creada = response.data; 
+                //Llamo a la funcion que sube las fotos
+                this.uploadFile(); 
+                //Llamo a la funcion que guarda las amenidades
+                this.guadarAmenidades(); 
             })
             .catch(error => {
                 console.log(error);
             });
         },
+        //Agarrar la imagen subida y guardarla en 'file'
         onFileChange(e) {
             this.file = e.target.files[0];
         },
+        //Enviar la imagen al servidor
         uploadFile() {
             const formData = new FormData();
-            formData.append('foto_lugar', this.file);
+            //file corresponde a la imagen subida
+            formData.append('foto_lugar', this.file); 
+             //Le paso el id de la publicacion recien creada en SubmitNewPublicacion
             formData.append('publi_alquiler', this.publi_creada.publicacion_id);
             getAPI.post('/foto/', formData, {
                 headers: {
@@ -342,10 +321,25 @@ export default {
             }).then((res) => {
                 console.log("Subida exitosa");
                 console.log(res);
-                //this.objeto_creado = res.data;
             }).catch(err => {
                 console.log(err);
             });
+        },
+        //Guardar las amenidades seleccionadas
+        guadarAmenidades(){
+            for (let i = 0; i < this.amenis_seleccion.length; i++) {
+                getAPI.post('/lista_amenidad/', {
+                    publicacion: this.publi_creada.publicacion_id,
+                    amenidad: this.amenis_seleccion[i].amenidad_id,
+                })
+                .then(response => {
+                    console.log('Amenidad API has send data')
+                    console.log(response.data);
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+            }
         },
     },
     components: {
