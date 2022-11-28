@@ -12,8 +12,8 @@ export default {
     get_header_authorization_token(){
         if (Cookies.get("userLogged")){
             let header = {
-                "Content-type" : "application/json; charset=UTF-8",
-                "Authorization" : "Token " + Cookies.get('userLogged')
+                "Content-type" :"application/json; charset=UTF-8",
+                "Authorization" :"Token " + Cookies.get('userLogged')
             }      
             return header
         }

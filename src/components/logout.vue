@@ -21,7 +21,6 @@ export default{
             .then(response => {
                 user.logout()
                 this.$router.push("/login/")
-                console.log(response)
             })
             .catch(
                 error =>{
