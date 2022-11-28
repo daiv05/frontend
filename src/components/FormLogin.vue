@@ -1,4 +1,7 @@
 <template>
+  <div v-if ="verificar_errores" class="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800" role="alert">
+  <span class="font-medium">{{errors.wrong_credential}}</span> 
+</div>
   <section class="h-screen">
   <div class="px-6 h-full text-gray-800">
     <div
@@ -165,8 +168,6 @@ import { getAPI } from '../axios-api';
           username : "",
           password : "",
           token : "",
-          email : "",
-          status : "",
           errors : {
             username : "",
             password : "",
@@ -180,11 +181,13 @@ import { getAPI } from '../axios-api';
               const url = "/login-api/"
               getAPI.post(url , {username : this.username, password: this.password} )
               .then(response => {
+                this.errors.wrong_credential
                 user.set_user_logged(response.data["token"])
                   this.$router.push("/departamento/")
               })
               .catch(error => {
-                console.log(error)
+                console.log("aqui se captura el error")
+                this.errors.wrong_credential = error["response"]["data"]['error']
               })
           }
           else{
@@ -222,5 +225,15 @@ import { getAPI } from '../axios-api';
           //location.replace("/departamento/")
         }
       },
+      computed : {
+        verificar_errores : function(){
+          if (this.errors.wrong_credential!=""){
+            return true
+          }
+          else{
+            return false
+          }
+        }
+      }
   }
   </script>

@@ -7,6 +7,8 @@
 
 <script>
 import { getAPI } from '@/axios-api';
+import user from "@/helper/user"
+
 export default{
     name : "logoutComponent",
     props : {
@@ -14,9 +16,13 @@ export default{
     },
     methods : {
         logout : function(){
-            let url = "/logout/"
+            let url = "logout/?token="+user.get_user_logged()
             getAPI.get(url)
-            .then(response => console.log(response))
+            .then(response => {
+                user.logout()
+                this.$router.push("/login/")
+                console.log(response)
+            })
             .catch(
                 error =>{
                     console.log(error)
