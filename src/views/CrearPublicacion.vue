@@ -1,20 +1,81 @@
 <template>
-
     <div>
-        <div class="md:grid md:grid-cols-6 md:gap-6">
-            <div class="md:col-span-1">
-                <!-- <div class="px-4 sm:px-0">
-                    <h3 class="text-lg font-medium leading-6 text-gray-900">Profile</h3>
-                    <p class="mt-1 text-sm text-gray-600">This information will be displayed publicly so be careful what
-                        you share.</p>
-                </div> -->
+        <!--NAVBAR SUPERIOR-->
+        <div class="sticky z-10 top-0 h-16 border-transparent bg-gray-900 lg:py-2.5">
+            <div class="px-6 flex items-center justify-between space-x-4 2xl:container">
+                <h5 hidden class="text-2xl text-gray-600 font-medium lg:block">Dashboard</h5>
+                <button class="w-12 h-16 -mr-2 border-r lg:hidden">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 my-auto" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+                <div class="flex space-x-4">
+                    <!--search bar -->
+                    <div hidden class="md:block">
+                        <div class="relative flex items-center text-gray-400 focus-within:text-cyan-400">
+                            <span class="absolute left-4 h-6 flex items-center pr-3 border-r border-gray-300">
+                                <svg xmlns="http://ww50w3.org/2000/svg" class="w-4 fill-current"
+                                    viewBox="0 0 35.997 36.004">
+                                    <path id="Icon_awesome-search" data-name="search"
+                                        d="M35.508,31.127l-7.01-7.01a1.686,1.686,0,0,0-1.2-.492H26.156a14.618,14.618,0,1,0-2.531,2.531V27.3a1.686,1.686,0,0,0,.492,1.2l7.01,7.01a1.681,1.681,0,0,0,2.384,0l1.99-1.99a1.7,1.7,0,0,0,.007-2.391Zm-20.883-7.5a9,9,0,1,1,9-9A8.995,8.995,0,0,1,14.625,23.625Z">
+                                    </path>
+                                </svg>
+                            </span>
+                            <input type="search" name="leadingIcon" id="leadingIcon" placeholder="Search here"
+                                class="w-full pl-14 pr-4 py-2.5 rounded-xl text-sm text-gray-600 outline-none border border-gray-300 focus:border-cyan-300 transition">
+                        </div>
+                    </div>
+                    <!--/search bar -->
+                    <button aria-label="search"
+                        class="w-10 h-10 rounded-xl border bg-gray-100 focus:bg-gray-100 active:bg-gray-200 md:hidden">
+                        <svg xmlns="http://ww50w3.org/2000/svg" class="w-4 mx-auto fill-current text-gray-600"
+                            viewBox="0 0 35.997 36.004">
+                            <path id="Icon_awesome-search" data-name="search"
+                                d="M35.508,31.127l-7.01-7.01a1.686,1.686,0,0,0-1.2-.492H26.156a14.618,14.618,0,1,0-2.531,2.531V27.3a1.686,1.686,0,0,0,.492,1.2l7.01,7.01a1.681,1.681,0,0,0,2.384,0l1.99-1.99a1.7,1.7,0,0,0,.007-2.391Zm-20.883-7.5a9,9,0,1,1,9-9A8.995,8.995,0,0,1,14.625,23.625Z">
+                            </path>
+                        </svg>
+                    </button>
+                    <button aria-label="chat"
+                        class="w-10 h-10 rounded-xl border bg-gray-100 focus:bg-gray-100 active:bg-gray-200">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 m-auto text-gray-600" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
+                        </svg>
+                    </button>
+                    <button aria-label="notification"
+                        class="w-10 h-10 rounded-xl border bg-gray-100 focus:bg-gray-100 active:bg-gray-200">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 m-auto text-gray-600" viewBox="0 0 20 20"
+                            fill="currentColor">
+                            <path
+                                d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z" />
+                        </svg>
+                    </button>
+                </div>
             </div>
+        </div>
+        <!--/NAVBAR SUPERIOR-->
 
-            <div class="mt-5 md:col-span-4 md:mt-0">
+        <div class="md:grid md:grid-cols-12 bg-gray-100">
+
+
+
+            <!--MENU LATERAL-->
+            <div class="md:col-span-3">
+                <sidebar1 />
+            </div>
+            <!--MENU LATERAL-->
+
+
+            <!--CONTEUDO-->
+            <div class="mt-5 md:col-span-8 md:mt-0 border-transparent bg-gray-100">
 
                 <form @submit.prevent="onSubmit">
                     <br>
                     <p class="font-sans text-2xl font-bold">¡Publica la informacion de tu alquiler!</p>
+                    <br>
                     <div class="shadow sm:overflow-hidden sm:rounded-md">
                         <div class="space-y-6 bg-white px-4 py-5 sm:p-6">
 
@@ -54,7 +115,8 @@
                                         v-on:change="getCiudadFiltro"
                                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                                         <option disabled value="">Seleccione un elemento</option>
-                                        <option v-for="depa in API_Depa" :key="depa.departamento_id" v-bind:value="depa">
+                                        <option v-for="depa in API_Depa" :key="depa.departamento_id"
+                                            v-bind:value="depa">
                                             {{ depa.nombre_depa }}
                                         </option>
                                     </select>
@@ -64,7 +126,9 @@
                                     <select name="ciudad" id="ciudad_id" v-model="ciu_seleccion" required
                                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                                         <option disabled value="">Seleccione un elemento</option>
-                                        <option v-for="ciu in cius" :key="ciu.ciudad_id" v-bind:value="ciu"> {{ ciu.nombre_ciudad }}
+                                        <option v-for="ciu in cius" :key="ciu.ciudad_id" v-bind:value="ciu"> {{
+                                                ciu.nombre_ciudad
+                                        }}
                                         </option>
                                     </select>
                                 </div>
@@ -78,7 +142,7 @@
                                 <VueMultiselect class="text-sm" v-model="amenis_seleccion" :options="API_Amenidad"
                                     :multiple="true" :close-on-select="false"
                                     placeholder="Seleccione las comodidades de su hogar..." label="nombre_amenidad"
-                                    track-by="nombre_amenidad" required/>
+                                    track-by="nombre_amenidad" required />
                             </div>
 
 
@@ -92,7 +156,7 @@
                                             class="inline-flex items-center rounded-l-md border border-r-0 border-gray-300 bg-gray-50 px-3 text-sm text-gray-500">$</span>
                                         <input type="number" name="renta" id="rent" v-model="precio"
                                             class="block w-full flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                            placeholder="Valor de la cuota mensual, trimestral..." required/>
+                                            placeholder="Valor de la cuota mensual, trimestral..." required />
                                     </div>
                                 </div>
 
@@ -102,7 +166,7 @@
                                     <div class="mt-1 flex rounded-md shadow-sm">
                                         <input type="number" name="ocupantes" id="ocu" v-model="num_ocupantes"
                                             class="block w-full flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                            placeholder="2 personas..." required/>
+                                            placeholder="2 personas..." required />
                                     </div>
                                 </div>
 
@@ -130,8 +194,10 @@
                                             class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" />
                                     </div>
                                     <div class="ml-3 text-sm">
-                                        <label for="comments" class="font-medium text-gray-700 text-left">Publicacion Activa</label>
-                                        <p class="text-gray-500 text-left">Especifique si la publicacion se mostrará a los demás</p>
+                                        <label for="comments" class="font-medium text-gray-700 text-left">Publicacion
+                                            Activa</label>
+                                        <p class="text-gray-500 text-left">Especifique si la publicacion se mostrará a
+                                            los demás</p>
                                     </div>
                                 </div>
                             </div>
@@ -171,7 +237,8 @@
                                             <label for="file"
                                                 class="relative cursor-pointer rounded-md bg-white font-medium text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500">
                                                 <span>Sube una imagen</span>
-                                                <input type="file" id="file" ref="file" @change="onFileChange" required/>
+                                                <input type="file" id="file" ref="file" @change="onFileChange"
+                                                    required />
                                             </label>
                                         </div>
                                         <p class="text-xs text-gray-500">PNG, JPG, GIF de hasta 10MB</p>
@@ -181,11 +248,7 @@
                             </div>
                         </div>
 
-
                         <div class="bg-gray-50 px-4 py-3 sm:px-6 flex justify-between">
-                            <!-- <button type="submit"
-                                class="inline-flex rounded-md border border-transparent bg-red-600 py-2 px-4 text-sm font-medium text-white 
-                                shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">Cancelar</button> -->
                             <button type="submit"
                                 class="inline-flex rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white 
                                 shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Guardar</button>
@@ -193,8 +256,12 @@
 
                     </div>
                 </form>
+                <button type="submit"
+                    class="inline-flex rounded-md border border-transparent bg-red-600 py-2 px-4 text-sm font-medium text-white 
+                    shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">Cancelar</button>
 
             </div>
+            <!--/CONTENIDO-->
             <div class="md:col-span-1">
             </div>
 
@@ -210,6 +277,7 @@
 import CheckBoxMamalon from '../components/CheckBoxMamalon.vue'
 import SimpleForm from '../components/SimpleForm.vue'
 import VueMultiselect from 'vue-multiselect'
+import sidebar1 from '../components/Sidebar1.vue'
 import { getAPI } from '../axios-api'
 
 export default {
@@ -279,32 +347,32 @@ export default {
             }
         },
         //Funcion para POST de nueva publicacion
-        submitNewPublicacion(){
+        submitNewPublicacion() {
             getAPI.post('/publicacion_alquiler/', {
                 perfil: this.perfil,
                 titulo: this.titulo,
                 descrip_lugar: this.descrip_lugar,
                 //Por ahora que no está lo de Maps
-                coordenadas: this.depa_seleccion.nombre_depa + " " + this.ciu_seleccion.nombre_ciudad, 
+                coordenadas: this.depa_seleccion.nombre_depa + " " + this.ciu_seleccion.nombre_ciudad,
                 num_ocupantes: this.num_ocupantes,
                 precio: this.precio,
                 tiempo_contrato: this.tiempo_contrato,
                 fecha_publi: new Date().toISOString().slice(0, 10),
                 p_activa: this.p_activa,
             })
-            .then(response => {
-                console.log('Publicacion API has received data')
-                console.log(response.data);
-                //Guardo la publicacion creada para usar el id en el submit de las FOTOS
-                this.publi_creada = response.data; 
-                //Llamo a la funcion que sube las fotos
-                this.uploadFile(); 
-                //Llamo a la funcion que guarda las amenidades
-                this.guadarAmenidades(); 
-            })
-            .catch(error => {
-                console.log(error);
-            });
+                .then(response => {
+                    console.log('Publicacion API has received data')
+                    console.log(response.data);
+                    //Guardo la publicacion creada para usar el id en el submit de las FOTOS
+                    this.publi_creada = response.data;
+                    //Llamo a la funcion que sube las fotos
+                    this.uploadFile();
+                    //Llamo a la funcion que guarda las amenidades
+                    this.guadarAmenidades();
+                })
+                .catch(error => {
+                    console.log(error);
+                });
         },
         //Agarrar la imagen subida y guardarla en 'file'
         onFileChange(e) {
@@ -314,8 +382,8 @@ export default {
         uploadFile() {
             const formData = new FormData();
             //file corresponde a la imagen subida
-            formData.append('foto_lugar', this.file); 
-             //Le paso el id de la publicacion recien creada en SubmitNewPublicacion
+            formData.append('foto_lugar', this.file);
+            //Le paso el id de la publicacion recien creada en SubmitNewPublicacion
             formData.append('publi_alquiler', this.publi_creada.publicacion_id);
             getAPI.post('/foto/', formData, {
                 headers: {
@@ -329,19 +397,19 @@ export default {
             });
         },
         //Guardar las amenidades seleccionadas
-        guadarAmenidades(){
+        guadarAmenidades() {
             for (let i = 0; i < this.amenis_seleccion.length; i++) {
                 getAPI.post('/lista_amenidad/', {
                     publicacion: this.publi_creada.publicacion_id,
                     amenidad: this.amenis_seleccion[i].amenidad_id,
                 })
-                .then(response => {
-                    console.log('Amenidad API has send data')
-                    console.log(response.data);
-                })
-                .catch(error => {
-                    console.log(error);
-                });
+                    .then(response => {
+                        console.log('Amenidad API has send data')
+                        console.log(response.data);
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    });
             }
         },
     },
@@ -349,6 +417,7 @@ export default {
         CheckBoxMamalon: CheckBoxMamalon,
         SimpleForm: SimpleForm,
         VueMultiselect,
+        sidebar1: sidebar1,
     }
 };
 
