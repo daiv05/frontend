@@ -16,6 +16,7 @@
     "postcss": "^8",
     "register-service-worker": "^1.7.2",
     "tailwindcss": "^3",
+    "vee-validate": "^4.7.3",
     "vue": "^3.2.13",
     "vue-axios": "^3.5.2",
     "vue-multiselect": "^3.0.0-alpha.2",

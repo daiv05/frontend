@@ -12,7 +12,7 @@
 
             <div class="mt-5 md:col-span-4 md:mt-0">
 
-                <form >
+                <form @submit.prevent="onSubmit">
                     <br>
                     <p class="font-sans text-2xl font-bold">¡Publica la informacion de tu alquiler!</p>
                     <div class="shadow sm:overflow-hidden sm:rounded-md">
@@ -27,7 +27,7 @@
                                     <div class="mt-1 flex rounded-md shadow-sm">
                                         <!-- <span
                                             class="inline-flex items-center rounded-l-md border border-r-0 border-gray-300 bg-gray-50 px-3 text-sm text-gray-500">http://</span> -->
-                                        <input type="text" v-model="titulo"
+                                        <input type="text" v-model="titulo" required
                                             class="block w-full flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                             placeholder="Se renta casa en..." />
                                     </div>
@@ -38,7 +38,7 @@
                                 <label for="about" class="block text-sm font-medium text-gray-700 text-left">Describe tu
                                     hogar y lo que esperas compartir!</label>
                                 <div class="mt-1">
-                                    <textarea id="about" name="about" rows="3" v-model="descrip_lugar"
+                                    <textarea id="about" name="about" rows="3" v-model="descrip_lugar" required
                                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                         placeholder="Mi casita humilde..." />
                                 </div>
@@ -50,7 +50,7 @@
                                 <div class="col-span-6 sm:col-span-3">
                                     <label for="first-name"
                                         class="block text-sm font-medium text-gray-700 text-left">Departamento</label>
-                                    <select v-model="depa_seleccion" name="departamento" id="departamento_id"
+                                    <select v-model="depa_seleccion" name="departamento" id="departamento_id" required
                                         v-on:change="getCiudadFiltro"
                                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                                         <option disabled value="">Seleccione un elemento</option>
@@ -61,7 +61,7 @@
                                     <br>
                                     <label for="last-name"
                                         class="block text-sm font-medium text-gray-700 text-left">Ciudad</label>
-                                    <select name="ciudad" id="ciudad_id" v-model="ciu_seleccion"
+                                    <select name="ciudad" id="ciudad_id" v-model="ciu_seleccion" required
                                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                                         <option disabled value="">Seleccione un elemento</option>
                                         <option v-for="ciu in cius" :key="ciu.ciudad_id" v-bind:value="ciu"> {{ ciu.nombre_ciudad }}
@@ -78,7 +78,7 @@
                                 <VueMultiselect class="text-sm" v-model="amenis_seleccion" :options="API_Amenidad"
                                     :multiple="true" :close-on-select="false"
                                     placeholder="Seleccione las comodidades de su hogar..." label="nombre_amenidad"
-                                    track-by="nombre_amenidad" />
+                                    track-by="nombre_amenidad" required/>
                             </div>
 
 
@@ -92,7 +92,7 @@
                                             class="inline-flex items-center rounded-l-md border border-r-0 border-gray-300 bg-gray-50 px-3 text-sm text-gray-500">$</span>
                                         <input type="number" name="renta" id="rent" v-model="precio"
                                             class="block w-full flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                            placeholder="Valor de la cuota mensual, trimestral..." />
+                                            placeholder="Valor de la cuota mensual, trimestral..." required/>
                                     </div>
                                 </div>
 
@@ -102,7 +102,7 @@
                                     <div class="mt-1 flex rounded-md shadow-sm">
                                         <input type="number" name="ocupantes" id="ocu" v-model="num_ocupantes"
                                             class="block w-full flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                            placeholder="2 personas..." />
+                                            placeholder="2 personas..." required/>
                                     </div>
                                 </div>
 
@@ -112,7 +112,7 @@
                             <div>
                                 <label for="contrat" class="block text-left text-sm font-medium text-gray-700">Tiempo
                                     inicial de Contrato</label>
-                                <select name="contrato" id="contrato_id" v-model="tiempo_contrato"
+                                <select name="contrato" id="contrato_id" v-model="tiempo_contrato" required
                                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                                     <option disabled selected value="">Seleccione un tipo de contrato</option>
                                     <option value="Mensual">Mensual</option>
@@ -126,7 +126,7 @@
                                 <label for="activ" class="block text-left text-sm font-medium text-gray-700"></label>
                                 <div class="flex items-start">
                                     <div class="flex h-5">
-                                        <input id="comments" name="comments" type="checkbox" v-model="p_activa"
+                                        <input id="comments" name="comments" type="checkbox" v-model="p_activa" required
                                             class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" />
                                     </div>
                                     <div class="ml-3 text-sm">
@@ -171,7 +171,7 @@
                                             <label for="file"
                                                 class="relative cursor-pointer rounded-md bg-white font-medium text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500">
                                                 <span>Sube una imagen</span>
-                                                <input type="file" id="file" ref="file" @change="onFileChange"/>
+                                                <input type="file" id="file" ref="file" @change="onFileChange" required/>
                                             </label>
                                         </div>
                                         <p class="text-xs text-gray-500">PNG, JPG, GIF de hasta 10MB</p>
@@ -183,10 +183,10 @@
 
 
                         <div class="bg-gray-50 px-4 py-3 sm:px-6 flex justify-between">
-                            <button type="submit"
+                            <!-- <button type="submit"
                                 class="inline-flex rounded-md border border-transparent bg-red-600 py-2 px-4 text-sm font-medium text-white 
-                                shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">Cancelar</button>
-                            <button type="submit" @click.prevent="submitNewPublicacion"
+                                shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">Cancelar</button> -->
+                            <button type="submit"
                                 class="inline-flex rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white 
                                 shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Guardar</button>
                         </div>
@@ -266,11 +266,14 @@ export default {
             });
     },
     methods: {
+        onSubmit() {
+            this.submitNewPublicacion();
+        },
         //Filtro de ciudad segun seleccion de departamento
         getCiudadFiltro() {
             this.cius = []
             for (let i = 0; i < this.API_Ciudad.length; i++) {
-                if (this.API_Ciudad[i].departamento.nombre_depa == this.depa_seleccion) {
+                if (this.API_Ciudad[i].departamento.nombre_depa == this.depa_seleccion.nombre_depa) {
                     this.cius.push(this.API_Ciudad[i])
                 }
             }
