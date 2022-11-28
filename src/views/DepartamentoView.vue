@@ -52,6 +52,10 @@
     <div class="flex justify-center">
         <Detalle1></Detalle1>
     </div>
+        <button @click="get_amigos()">
+                click para ver los amigos del usuario registrado
+        </button>
+    <logout/>
 </template>
 
 
@@ -60,13 +64,32 @@ import navbar1 from '../components/Navbar1.vue'
 import sidebar1 from '../components/Sidebar1.vue'
 import formLogin from '../components/FormLogin.vue'
 import Detalle1 from '../components/Detalle1.vue'
+import logout from '../components/logout.vue'
+
 import { getAPI } from '../axios-api'
+import user from "@/helper/user"
 export default {
     name: 'Departamento',
     data() {
         return {
             API_Depa: [],
+            token : ""
         };
+    },
+    methods : {
+        obtener_cookie : function(){
+            console.log(user.get_user_logged())
+        },
+        get_amigos : function(){
+            let url = "/chero_list/"
+            getAPI.get(url, {
+                headers : user.get_header_authorization_token()
+            }).then(
+                response => console.log(response.data)
+            ).catch(
+                error => console.log(error)
+            )
+        }
     },
     created() {
         getAPI.get('/departamento/',)
@@ -83,6 +106,7 @@ export default {
         sidebar1: sidebar1,
         formLogin: formLogin,
         Detalle1: Detalle1,
+        logout : logout
     }
 };
 </script>
@@ -98,6 +122,7 @@ const products = [
         price: '$35',
         color: 'Black',
     },
+
     // More products...
 ]
 </script>
