@@ -95,7 +95,9 @@ export default {
             )
         },
         ver_usuario : function(){
-            getAPI.post('publicacion_alquiler/',{'usuario':'usuario'},{
+            getAPI.post('publicacion_alquiler/',{
+                'usuario':'usuario'
+            },{
                 headers : user.get_header_authorization_token()
             })
         }
