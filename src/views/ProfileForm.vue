@@ -46,18 +46,30 @@
                                                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                                                 </div>
 
-                                                <div class="col-span-6 sm:col-span-3">
+                                                <div class="col-span-6 sm:col-span-4">
                                                     <label for="email-address"
                                                         class="block text-sm font-medium text-gray-700">Email
                                                         address</label>
-                                                    <input type="text" v-model.lazy="userData.password"
+                                                    <input type="text" v-model.lazy="userData.email"
                                                         id="email-address" autocomplete="email"
                                                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                                                 </div>
 
+                                                <div class="col-span-6 sm:col-span-2">
+                                                    <label for="genero"
+                                                        class="block text-sm font-medium text-gray-700">Genero</label>
+                                                    <select id="genero" v-model="userData.selectedGenero"
+                                                        autocomplete="genero-name"
+                                                        class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                                                        <option v-for="option in optionsGenero" :value="option.value">
+                                                            {{ option.text }}
+                                                        </option>
+                                                    </select>
+                                                </div>
 
 
-                                                <div class="col-span-6 sm:col-span-3">
+
+                                            <!--    <div class="col-span-6 sm:col-span-3">
                                                     <label for="country"
                                                         class="block text-sm font-medium text-gray-700">Country</label>
                                                     <select id="country" v-model="userData.selectedCountry"
@@ -67,7 +79,7 @@
                                                             {{ option.text }}
                                                         </option>
                                                     </select>
-                                                </div>
+                                                </div>-->
 
                                                 <div class="col-span-6 sm:col-span-4">
                                                     <label for="street-address"
@@ -89,10 +101,14 @@
 
                                                 <div class="col-span-6 sm:col-span-2 ">
                                                     <label for="city"
-                                                        class="block text-sm font-medium text-gray-700">City</label>
-                                                    <input type="text" v-model="userData.city" id="city"
-                                                        autocomplete="address-level2"
-                                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                                                        class="block text-sm font-medium text-gray-700">city</label>
+                                                    <select id="city" v-model="userData.selectedCity"
+                                                        autocomplete="city-name"
+                                                        class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                                                        <option v-for="option in optionsCity" :value="option.value">
+                                                            {{ option.text }}
+                                                        </option>
+                                                    </select>
                                                 </div>
 
                                                 <div class="col-span-6 sm:col-span-2">
@@ -151,8 +167,8 @@
                                             </div>
 
                                             <div>
-                                                <label class="block text-sm font-medium text-gray-700">Foto de
-                                                    Perfil</label>
+                                                <label class="block text-sm font-medium text-gray-700 text-left">Sube
+                                                    una foto de perfil</label>
                                                 <div
                                                     class="mt-1 flex justify-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-5 pb-6">
                                                     <div class="space-y-1 text-center">
@@ -162,18 +178,18 @@
                                                             <path
                                                                 d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
                                                                 stroke-width="2" stroke-linecap="round"
-                                                                stroke-linejoin="round"></path>
+                                                                stroke-linejoin="round" />
                                                         </svg>
                                                         <div class="flex text-sm text-gray-600">
-                                                            <label for="file-upload"
+                                                            <label for="file"
                                                                 class="relative cursor-pointer rounded-md bg-white font-medium text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500">
-                                                                <span>Upload a file</span>
-                                                                <input id="file-upload" name="file-upload" type="file"
-                                                                    @change="onFileChange" class="sr-only">
+                                                                <span>Sube una imagen</span>
+                                                                <input type="file" id="file" ref="file"
+                                                                    @change="onFileChange" required />
                                                             </label>
-                                                            <p class="pl-1">or drag and drop</p>
                                                         </div>
-                                                        <p class="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
+                                                        <p class="text-xs text-gray-500">PNG, JPG, GIF de hasta 10MB</p>
+                                                        <p class="pl-1">or drag and drop</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -239,7 +255,7 @@
                                                     <label for="instagram"
                                                         class="block text-sm font-medium text-gray-700">Instagram</label>
                                                     <input type="text" v-model="userData.instagram" id="instagram"
-                                                        autocomplete="email"
+                                                        autocomplete="instagram"
                                                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                                                 </div>
 
@@ -270,19 +286,19 @@
 </template>
 
 <script>
-import axios from 'axios'
+import { getAPI } from '../axios-api'
 export default {
     data() {
         return {
             data: {
-                image: ''
+                image: null
             },
             userData: {
                 firstname: '',
                 lastname: '',
                 email: '',
                 user: '',
-                selectedCountry: '',
+                selectedCity: '',
                 streetaddress: '',
                 age: '',
                 state: '',
@@ -293,42 +309,82 @@ export default {
                 facebook: '',
                 instagram: '',
                 twitter: '',
+                selectedGenero: '',
             },
-            optionsCountry: [
-                { text: 'One', value: 'A' },
-                { text: 'Two', value: 'B' },
-                { text: 'Three', value: 'C' }
+            optionsCity: [],
+            file: null,
+            optionsGenero: [
+                { text: 'Masculino', value: 1 },
+                { text: 'Femenino', value: 0 },
+                { text: 'Prefiero no Decirlo', value: 2 },
             ]
-
         }
     },
+    mounted() {
+        getAPI.get('http://127.0.0.1:8000/ciudad/')
+            .then(response => {
+                let data = response.data;
+                console.log(response.data)
+                data.forEach((value, index) => {
+                    console.log(value);
+                    this.optionsCity.push({ text: value.nombre_ciudad, value: value.ciudad_id });
+                });
+            })
+            .catch(error => {
+                console.log(error)
+                this.errored = true
+            })
+            .finally(() => this.loading = false)
+    },
     methods: {
+        //Agarrar la imagen subida y guardarla en 'file'
         onFileChange(e) {
-            var files = e.target.files || e.dataTransfer.files;
-            if (!files.length)
-                return;
-            this.createImage(files[0]);
+            this.file = e.target.files[0];
         },
-        createImage(file) {
-            var image = new Image();
-            var reader = new FileReader();
-            var vm = this;
-
-            reader.onload = (e) => {
-                vm.image = e.target.result;
-            };
-            reader.readAsDataURL(file);
-        },
-        removeImage: function (e) {
-            this.image = '';
+        //Enviar la imagen al servidor
+        uploadFile() {
+            const formData = new FormData();
+            //file corresponde a la imagen subida
+            formData.append('foto_lugar', this.file);
+            //Le paso el id de la publicacion recien creada en SubmitNewPublicacion
+            formData.append('publi_alquiler', this.publi_creada.publicacion_id);
+            getAPI.post('/foto/', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            }).then((res) => {
+                console.log("Subida exitosa");
+                console.log(res);
+            }).catch(err => {
+                console.log(err);
+            });
         },
         submit() {
             console.log(this.userData);
-            axios.post('/your-url', { name: this.name })
+            let request = { 
+                    email           : this.userData.email, 
+                    nombre_user     : this.userData.firstname,
+                    apellidos_user  : this.userData.lastname,
+                    edad            : this.userData.age,
+                    biografia       : this.userData.about,
+                    telefono        : this.userData.telefono,
+                    username        : this.userData.user,
+                    user_facebook   : this.userData.telefono,
+                    user_insta      : this.userData.instagram,
+                    user_twitter    : this.userData.twitter,
+                    genero          : this.userData.selectedGenero,
+                    ciudad_id       : this.userData.selectedCity,
+                    user_id         : 1,
+                    foto_perfil     : null
+                };
+            console.log(request);
+            getAPI.post('http://127.0.0.1:8000/perfil/', request)
                 .then(res => {
                     // do something with res
+                    console.log(res);
                 })
                 .catch(err => {
+                    console.log(err);
                     // catch error
                 });
         }
