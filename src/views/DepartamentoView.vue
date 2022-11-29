@@ -56,6 +56,10 @@
                 click para ver los amigos del usuario registrado
         </button>
     <logout/>
+
+    <button @click="ver_usuario()">
+        click par ver el usuario 
+    </button>
 </template>
 
 
@@ -89,6 +93,11 @@ export default {
             ).catch(
                 error => console.log(error)
             )
+        },
+        ver_usuario : function(){
+            getAPI.post('publicacion_alquiler/',{'usuario':'usuario'},{
+                headers : user.get_header_authorization_token()
+            })
         }
     },
     created() {
