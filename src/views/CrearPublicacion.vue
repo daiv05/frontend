@@ -250,13 +250,14 @@ import SimpleForm from '../components/SimpleForm.vue'
 import VueMultiselect from 'vue-multiselect'
 import sidebar1 from '../components/Sidebar1.vue'
 import { getAPI } from '../axios-api'
+import user from '../helper/user'
 
 export default {
     name: 'Publicacion',
     data() {
         return {
             //Datos a enviar al servidor para crear una nueva publicacion
-            perfil: 1,
+            perfil: null,
             titulo: "",
             descrip_lugar: "",
             coordenadas: "",
@@ -330,6 +331,8 @@ export default {
                 tiempo_contrato: this.tiempo_contrato,
                 fecha_publi: new Date().toISOString().slice(0, 10),
                 p_activa: this.p_activa,
+            },{
+                headers: user.get_header_authorization_token(),
             })
                 .then(response => {
                     console.log('Publicacion API has received data')
