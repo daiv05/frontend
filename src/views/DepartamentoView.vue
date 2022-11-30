@@ -35,7 +35,9 @@
                     </div>
                 </div>
             </div>
-
+            <a :href="this.$store.state.ruta_foto">
+              Aqui esta la prueba de la variable global para la ruta  
+            </a>
             <div class="w-full">
                 <p>Departamentos</p>
                 <div v-for="depa in API_Depa" :key="depa.departamento_id" class="flex">

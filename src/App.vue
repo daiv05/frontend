@@ -30,6 +30,9 @@ nav {
 <script>
 export default {
   name : "app",
+ mounted(){
+    console.log(this.$store.state.ruta_foto)
+ }
 }
 </script>
 
