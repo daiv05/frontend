@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import DepartamentoView from '../views/DepartamentoView.vue'
 import AlquilerView from '../views/CrearPublicacion.vue'
+import BusquedaClases from '../views/BusquedaClases.vue'
 import subir_foto from '../views/subir_foto.vue'
 
 const routes = [
@@ -14,6 +15,11 @@ const routes = [
     path: '/departamento',
     name: 'departamento',
     component: DepartamentoView
+  },
+  {
+    path: '/busqueda_clases',
+    name: 'busqueda_clases',
+    component: BusquedaClases
   },
   {
     path: '/edit_alquiler',
