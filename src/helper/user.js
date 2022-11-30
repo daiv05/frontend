@@ -20,5 +20,14 @@ export default {
         else{
             return "No existe un usuario loguiado"
         }
+    },
+    set_user_register(username){
+        Cookies.set("message_register",'Se creo correctamente el usuario ' + username )
+    },
+    get_user_register(){
+        return Cookies.get("message_register")
+    },
+    delete_user_register(){
+        Cookies.remove("message_register")
     }
 };

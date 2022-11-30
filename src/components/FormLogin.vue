@@ -1,8 +1,11 @@
 <template>
-  <div v-if ="verificar_errores" class="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800" role="alert">
+    <section class="h-screen">
+      <div class="p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-green-200 dark:text-green-800" role="alert" v-if="verificar_registro">
+        <span class="font-medium">{{is_register}}</span> 
+    </div>
+    <div v-if ="verificar_errores" class="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800" role="alert">
   <span class="font-medium">{{errors.wrong_credential}}</span> 
 </div>
-  <section class="h-screen">
   <div class="px-6 h-full text-gray-800">
     <div
       class="flex xl:justify-center lg:justify-between justify-center items-center flex-wrap h-full g-6"
@@ -76,12 +79,10 @@
             >
               Login
             </button>
-            <p class="text-sm font-semibold mt-2 pt-1 mb-0">
-              <a
-                href="#!"
-                class="text-red-600 hover:text-red-700 focus:text-red-700 transition duration-200 ease-in-out register-conf"
-                >Register</a
-              >
+            <p class="text-sm font-semibold mt-2 pt-1 mb-0">       
+              <router-link to="/register/" class="text-red-600 hover:text-red-700 focus:text-red-700 transition duration-200 ease-in-out register-conf">
+                Register
+              </router-link>
             </p>
           </div>
           <div class=" lg:text-left text-center flex flex-col items-center">
@@ -168,6 +169,7 @@ import { getAPI } from '../axios-api';
           username : "",
           password : "",
           token : "",
+          is_register : "",
           errors : {
             username : "",
             password : "",
@@ -175,10 +177,17 @@ import { getAPI } from '../axios-api';
           }
         }
       },
+      created () {
+        if (user.get_user_register()!= undefined){
+            this.is_register = user.get_user_register()
+        }
+      },  
       methods : {
         submitForm : function(){
           if(this.isValidForm()){
               const url = "/login-api/"
+              user.delete_user_register()
+              this.is_register = ""
               getAPI.post(url , {username : this.username, password: this.password} )
               .then(response => {
                 this.errors.wrong_credential
@@ -233,7 +242,15 @@ import { getAPI } from '../axios-api';
           else{
             return false
           }
+        },
+        verificar_registro : function(){
+        if(this.is_register){
+          return true
+        }
+        else{
+          false
         }
       }
+      },
   }
   </script>
