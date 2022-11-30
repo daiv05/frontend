@@ -58,53 +58,53 @@
                                         class="block text-left text-sm font-medium text-gray-700">Ubica tus
                                         roomates</label>
                                     <div class="mt-1 flex rounded-md shadow-sm">
-                                        <input type="text" v-model="titulo" required
-                                            class="block w-full flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
+                                        <input type="text" v-model="titulo" required class="block w-full flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />                                        
+                                        <button type="submit" class="inline-flex rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">Buscar</button>                                        
                                     </div>
                                 </div>
 
-                                <div class="col-span-3 sm:col-span-2">                                    
-                                    <label for="company-website" 
-                                        class="block text-left text-sm font-medium text-gray-700">Necesidad</label>
+                                <div class="col-span-3 sm:col-span-2">
+
                                     <div class="mt-1 flex rounded-md shadow-sm">
-                                        <input type="radio" id="tieneCuarto" value="True" v-model="picked" 
-                                        class="block border-gray-300 "/>
-                                        <label for="one">Tengo cuarto</label>
-                                    </div>                                    
-                                </div>
 
-                                <div class="col-span-3 sm:col-span-2">                                    
-                                    <label for="company-website" 
-                                        class="block text-left text-sm font-medium text-gray-700">Rango de Renta</label>
-                                    <div class="mt-1 flex rounded-md shadow-sm">
-                                        <select v-model="selected" class="block rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
-                                        <option disabled value="">Please select one</option>
-                                        <option>A</option>
-                                        <option>B</option>
-                                        <option>C</option>
-                                        </select>
+                                        <div>
+                                            <label for="company-website"
+                                                class="block text-left text-sm font-medium text-gray-700">Necesidad</label>
+                                            <select v-model="selected"
+                                                class="block rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                                                <option disabled value="">Please select one</option>
+                                                <option>A</option>
+                                                <option>B</option>
+                                                <option>C</option>
+                                            </select>
+                                        </div>
+                                        
+                                        <div>
+                                            <label for="company-website"
+                                                class="block text-left text-sm font-medium text-gray-700">Renta</label>
+                                            <select v-model="selected"
+                                                class="block rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                                                <option disabled value="">Please select one</option>
+                                                <option>A</option>
+                                                <option>B</option>
+                                                <option>C</option>
+                                            </select>
+                                        </div>
+
+                                        <div>
+                                            <label for="company-website"
+                                                class="block text-left text-sm font-medium text-gray-700">Departamento</label>
+                                            <select v-model="selected"
+                                                class="block rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                                                <option disabled value="">Please select one</option>
+                                                <option>A</option>
+                                                <option>B</option>
+                                                <option>C</option>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
 
-                                <div class="col-span-3 sm:col-span-2">                                    
-                                    <label for="company-website" 
-                                        class="block text-left text-sm font-medium text-gray-700">Departamento</label>
-                                    <div class="mt-1 flex rounded-md shadow-sm">                                        
-                                        <select v-model="selected" class="block rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
-                                        <option disabled value="">Please select one</option>
-                                        <option>A</option>
-                                        <option>B</option>
-                                        <option>C</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="col-span-3 sm:col-span-2">                                    
-                                    <div class="mt-1 flex rounded-md shadow-sm">
-                                        <button type="submit"
-                                            class="inline-flex rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">Buscar</button>
-                                    </div>
-                                </div>
                             </div>
 
 
