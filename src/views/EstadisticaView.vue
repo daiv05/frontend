@@ -1,18 +1,27 @@
 <template>
+
     <div>
         <navbar1></navbar1>
     </div>
 
-    <div class="grid grid-cols-3">
+ 
         <div>
             <sidebar1></sidebar1>
         </div>
-
-            <div class="bg-white">
-                <div class="mx-auto max-w-2xl py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
-                    <h2 class="text-2xl font-bold tracking-tight text-gray-900">Estadisticas</h2>
+      
+            <div class="bg-gray">
+                <div class="mx-auto max-w-2xl py-14 px-4 sm:py-20 sm:px-6 lg:max-w-7xl lg:px-8">
+                    <h2 class="text-4xl font-bold tracking-tight text-gray-900">Estadisticas</h2>
                 </div>
-                <div class="mx-auto max-w-2xl py-16 px-4 sm:py-5 sm:px-6 lg:max-w-7xl lg:px-8">
+                
+            </div>
+            <div class="mx-auto max-w-1xl py-16 px-2 sm:py-5 sm:px-1 lg:max-w-6xl lg:px-12">    
+                         
+<table >
+<tr>
+  <td >
+    <div class="space-y-6  px-12 pt-5 pb-6">
+                <div class="mx-auto max-w-2xl py-14 px-4 sm:py-5 sm:px-6 lg:max-w-7xl lg:px-8">
                     <h2 class="text-2xl font-bold tracking-tight text-gray-900">N° de ventas por mes</h2>
                 </div>
                 <Bar
@@ -26,7 +35,13 @@
                     :width="width"
                     :height="height"
                 />
-                <div class="mx-auto max-w-2xl py-16 px-4 sm:py-5 sm:px-6 lg:max-w-7xl lg:px-8">
+      </div>
+
+  </td>
+  <td1 ></td1>
+  <td >
+    <div class="space-y-6  px-12 pt-5 pb-6">
+      <div class="mx-auto max-w-2xl py-16 px-4 sm:py-5 sm:px-6 lg:max-w-7xl lg:px-8">
                     <h2 class="text-2xl font-bold tracking-tight text-gray-900">Total de ingresos por mes</h2>
                 </div>
                 <Bar
@@ -40,8 +55,15 @@
                     :width="width"
                     :height="height"
                 />
-            </div>
-    </div>
+      </div>
+
+  </td>
+</tr>
+
+</table>
+
+</div>
+
 </template>
 
 <script>
@@ -106,4 +128,18 @@ export default {
   }
 }
 </script>
-  
+<style>
+      td {
+  padding: 10px;
+ 
+  background: linear-gradient(#c9c8f7,#fcfdae);
+
+  border: rgb(122, 122, 122) 1px solid;
+}
+td1 {
+  padding: 10px;
+  background: linear-gradient(#ffffff,#ffffff);
+
+}
+</style> 
+    
