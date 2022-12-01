@@ -4,6 +4,7 @@ import './registerServiceWorker'
 import router from './router'
 import './assets/tailwind.css'
 import FontAwesomeIcon from "@/plugin/fontawesome"
+import "./assets/css/tailwind.css"
 // Vuesax Component Framework
 // import Vuesax from 'vuesax'
 // import 'material-icons/iconfont/material-icons.css' //Material Icons
