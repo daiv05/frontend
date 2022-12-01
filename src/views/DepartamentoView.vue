@@ -73,13 +73,22 @@ import Detalle1 from '../components/Detalle1.vue'
 import logout from '../components/logout.vue'
 
 import { getAPI } from '../axios-api'
+
+
+// SE NECESITA IMPORTAR ESTO PARA PODER PODER OBTENER EL USUARIO LOGUEADO
 import user from "@/helper/user"
+
+
+
 export default {
     name: 'Departamento',
     data() {
         return {
             API_Depa: [],
-            token : ""
+            token : "",
+
+            // AQUI SE GUARDA EL PERFIL DEL USUARIO LOGUEADO
+            Perfil_Logueado : [],
         };
     },
     methods : {
@@ -113,6 +122,20 @@ export default {
             .catch(error => {
                 console.log(error);
             });
+
+
+        // SE LLAMA A ESTA FUNCION PARA PODER OBTENER EL USUARIO LOGUEADO.
+        // EL PERFIL_USER SE GUARDA EN LA VARIABLE Perfil_Logueado
+        getAPI.get('/user_token/', {
+            headers : user.get_header_authorization_token()
+            }).then(response => {
+                    console.log('Perfil logueado obtenido')
+                    this.Perfil_Logueado = response.data;
+                    console.log(this.Perfil_Logueado)
+            }).catch(error => {
+                console.log(error);
+            });
+
     },
     components: {
         navbar1: navbar1,
