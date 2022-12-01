@@ -91,14 +91,6 @@
 
             </div>
 
-            <div class="w-full">
-                <p> </p>
-                <div v-for="depa in API_Depa" :key="depa.departamento_id" class="flex">
-                    {{ depa.departamento_id }}
-                    {{ depa.pais.nombre_pais }}
-                    {{ depa.nombre_depa }}
-                </div>
-            </div>
         </div>
 
     </div>
