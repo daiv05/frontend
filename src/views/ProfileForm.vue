@@ -50,8 +50,8 @@
                                                     <label for="email-address"
                                                         class="block text-sm font-medium text-gray-700">Email
                                                         address</label>
-                                                    <input type="text" v-model.lazy="userData.email"
-                                                        id="email-address" autocomplete="email"
+                                                    <input type="text" v-model.lazy="userData.email" id="email-address"
+                                                        autocomplete="email"
                                                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                                                 </div>
 
@@ -69,7 +69,7 @@
 
 
 
-                                            <!--    <div class="col-span-6 sm:col-span-3">
+                                                <!--    <div class="col-span-6 sm:col-span-3">
                                                     <label for="country"
                                                         class="block text-sm font-medium text-gray-700">Country</label>
                                                     <select id="country" v-model="userData.selectedCountry"
@@ -81,14 +81,14 @@
                                                     </select>
                                                 </div>-->
 
-                                                <div class="col-span-6 sm:col-span-4">
+                                                <!--<div class="col-span-6 sm:col-span-4">
                                                     <label for="street-address"
                                                         class="block text-sm font-medium text-gray-700">Street
                                                         address</label>
                                                     <input type="text" v-model="userData.streetaddress"
                                                         id="street-address" autocomplete="street-address"
                                                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
-                                                </div>
+                                                </div>-->
 
                                                 <div class="col-span-6 sm:col-span-2">
                                                     <label for="age"
@@ -111,23 +111,23 @@
                                                     </select>
                                                 </div>
 
-                                                <div class="col-span-6 sm:col-span-2">
+                                                <!--<div class="col-span-6 sm:col-span-2">
                                                     <label for="state"
                                                         class="block text-sm font-medium text-gray-700">State /
                                                         Province</label>
                                                     <input type="text" v-model="userData.state" id="state"
                                                         autocomplete="address-level1"
                                                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
-                                                </div>
+                                                </div>-->
 
-                                                <div class="col-span-6 sm:col-span-2">
+                                                <!--<div class="col-span-6 sm:col-span-2">
                                                     <label for="postal-code"
                                                         class="block text-sm font-medium text-gray-700">ZIP / Postal
                                                         code</label>
                                                     <input type="text" v-model="userData.postalcode" id="postal-code"
                                                         autocomplete="postal-code"
                                                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
-                                                </div>
+                                                </div> -->
                                             </div>
                                         </div>
                                     </div>
@@ -287,6 +287,8 @@
 
 <script>
 import { getAPI } from '../axios-api'
+import Cookies from "js-cookie";
+
 export default {
     data() {
         return {
@@ -317,16 +319,15 @@ export default {
                 { text: 'Masculino', value: 1 },
                 { text: 'Femenino', value: 0 },
                 { text: 'Prefiero no Decirlo', value: 2 },
-            ]
+            ],
+            perfil_creada: null,
         }
     },
     mounted() {
         getAPI.get('http://127.0.0.1:8000/ciudad/')
             .then(response => {
                 let data = response.data;
-                console.log(response.data)
                 data.forEach((value, index) => {
-                    console.log(value);
                     this.optionsCity.push({ text: value.nombre_ciudad, value: value.ciudad_id });
                 });
             })
@@ -341,14 +342,27 @@ export default {
         onFileChange(e) {
             this.file = e.target.files[0];
         },
-        //Enviar la imagen al servidor
-        uploadFile() {
-            const formData = new FormData();
+        submit() {
+            
+            let formData = new FormData();
             //file corresponde a la imagen subida
-            formData.append('foto_lugar', this.file);
-            //Le paso el id de la publicacion recien creada en SubmitNewPublicacion
-            formData.append('publi_alquiler', this.publi_creada.publicacion_id);
-            getAPI.post('/foto/', formData, {
+            console.log(this.file);
+            formData.append('foto_perfil', this.file);
+            formData.append('email', this.userData.email);
+            formData.append('nombre_user', this.userData.firstname);
+            formData.append('apellidos_user', this.userData.lastname);
+            formData.append('edad', this.userData.age);
+            formData.append('biografia', this.userData.about);
+            formData.append('telefono', this.userData.telefono);
+            formData.append('username', this.userData.user);
+            formData.append('user_facebook', this.userData.facebook);
+            formData.append('user_insta', this.userData.instagram);
+            formData.append('user_twitter', this.userData.twitter);
+            formData.append('ciudad', this.userData.selectedCity);
+            formData.append('genero', this.userData.selectedGenero);
+            formData.append('user', 1);
+          
+            getAPI.post(`http://127.0.0.1:8000/perfil/`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
@@ -359,35 +373,9 @@ export default {
                 console.log(err);
             });
         },
-        submit() {
-            console.log(this.userData);
-            let request = { 
-                    email           : this.userData.email, 
-                    nombre_user     : this.userData.firstname,
-                    apellidos_user  : this.userData.lastname,
-                    edad            : this.userData.age,
-                    biografia       : this.userData.about,
-                    telefono        : this.userData.telefono,
-                    username        : this.userData.user,
-                    user_facebook   : this.userData.telefono,
-                    user_insta      : this.userData.instagram,
-                    user_twitter    : this.userData.twitter,
-                    genero          : this.userData.selectedGenero,
-                    ciudad_id       : this.userData.selectedCity,
-                    user_id         : 1,
-                    foto_perfil     : null
-                };
-            console.log(request);
-            getAPI.post('http://127.0.0.1:8000/perfil/', request)
-                .then(res => {
-                    // do something with res
-                    console.log(res);
-                })
-                .catch(err => {
-                    console.log(err);
-                    // catch error
-                });
-        }
+        get_user_logged() {
+            return Cookies.get('userLogged')
+        },
     }
 }
 
