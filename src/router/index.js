@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-import DepartamentoView from '../views/DepartamentoView.vue'
+// import DepartamentoView from '../views/DepartamentoView.vue'
 import AlquilerView from '../views/CrearPublicacion.vue'
 import modificarPublicacion from '../views/modificarPublicacion.vue'
 import panelPublicacion from '../views/panel_miPublicacion.vue'
@@ -18,11 +18,11 @@ const routes = [
     name: 'vercard',
     component: VerCardAlquiler
   },
-  {
-    path: '/departamento',
-    name: 'departamento',
-    component: DepartamentoView
-  },
+  // {
+  //   path: '/departamento',
+  //   name: 'departamento',
+  //   component: DepartamentoView
+  // },
   {
     path: '/crear_publicacion',
     name: 'alquiler_edit',

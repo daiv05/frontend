@@ -56,7 +56,7 @@
                     <!-- Card 1 -->
                     <div tabindex="0" class="focus:outline-none mx-2 w-72 xl:mb-0 mb-8">
                         <div>
-                            <img alt="cuarto 1" :src=" 'http://localhost:8000/' + post.ruta_foto" tabindex="0" class="focus:outline-none w-full h-44" />
+                            <img alt="cuarto 1" :src=" 'http://localhost:8000' + post.ruta_foto" tabindex="0" class="focus:outline-none w-full h-44" />
                         </div>
                         <div class="bg-white">
                             <div class="flex items-center justify-between px-4 pt-4">
@@ -87,6 +87,14 @@
 import{getAPI} from '@/axios-api';
 import user from '@/helper/user';
 export default {
+    name: 'Detalle Alquiler',
+    setup() {
+    useMeta({
+      title: "rommies",
+      description: "Busca, filtra, conoce y comparte. CheroomSV es una plataforma que busca conectar a las personas en la busqueda de un roomate. Comparte, conoce, alquila y vive con tu compañero ideal.",
+      keywords: "alquilar, roommate, buscar, compañero, cheroomsv, cuarto, alquiler, chero, hotel, room, conocer, el salvador",
+    });
+  },
     data (){
         return {
             lista_alquileres:[],

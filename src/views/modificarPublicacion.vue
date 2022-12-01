@@ -227,13 +227,13 @@
                             <button type="submit"
                                 class="inline-flex rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white 
                                 shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Guardar</button>
+                            <button type="button" @click="regresar"
+                                class="inline-flex rounded-md border border-transparent bg-red-600 py-2 px-4 text-sm font-medium text-white 
+                                shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">Cancelar</button>
                         </div>
 
                     </div>
                 </form>
-                <button type="submit"
-                    class="inline-flex rounded-md border border-transparent bg-red-600 py-2 px-4 text-sm font-medium text-white 
-                    shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">Cancelar</button>
 
             </div>
             <!--/CONTENIDO-->
@@ -258,6 +258,13 @@ import user from '../helper/user'
 
 export default {
     name: 'Mod_Publicacion',
+    setup() {
+        useMeta({
+            title: "Cambios en el hogar...",
+            description: "CheroomSV es una plataforma que busca conectar a las personas en la busqueda de su roomate ideal.",
+            keywords: "alquilar, roommate, buscar, compañero, cheroomsv, cuarto, alquiler, chero, hotel, room, conocer, el salvador",
+        });
+    },
     data() {
         return {
             //INFO DE LA PUBLICACION TRAIDA
@@ -354,6 +361,9 @@ export default {
         this.obt_PubliUser();
     },
     methods: {
+        regresar() {
+            this.$router.push('/panel_publicacion');
+        },
         obt_PubliUser() {
             getAPI.get('/publicacion_alquiler/', {
                 headers: user.get_header_authorization_token()

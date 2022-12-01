@@ -163,7 +163,7 @@
 import user from "../helper/user"
 import { getAPI } from '../axios-api';
   export default {
-      name : "FormLogin",  
+      name : "FormLogin", 
       data(){
         return{
           username : "",

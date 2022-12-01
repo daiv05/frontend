@@ -1,5 +1,5 @@
 <template>
-	<div class="h-full p-3 space-y-2 w-60 dark:bg-gray-900 dark:text-gray-100">
+	<div class="h-full p-3 space-y-2 w-60 dark:bg-gray-900 dark:text-gray-100" style="min-height: 100vh;">
 		<div class="divide-y divide-gray-700">
 			<ul class="pt-2 pb-4 space-y-1 text-sm">
 				<li class="dark:bg-gray-800 dark:text-gray-50">
@@ -25,7 +25,7 @@
 					</a>
 				</li>
 				<li>
-					<a rel="noopener noreferrer" href="#" class="flex items-center p-2 space-x-3 rounded-md">
+					<router-link to="/panel_publicacion" class="flex items-center p-2 space-x-3 rounded-md">
 						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
 							class="w-5 h-5 fill-current dark:text-gray-400">
 							<path
@@ -36,10 +36,11 @@
 							</path>
 						</svg>
 						<span>Publicaciones</span>
-					</a>
+					</router-link>
 				</li>
 				<li>
-					<a rel="noopener noreferrer" href="#" class="flex items-center p-2 space-x-3 rounded-md">
+					<router-link to="/#" class="flex items-center p-2 space-x-3 rounded-md">
+					
 						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
 							class="w-5 h-5 fill-current dark:text-gray-400">
 							<path
@@ -53,7 +54,7 @@
 							</path>
 						</svg>
 						<span>Configuracion</span>
-					</a>
+					</router-link>
 				</li>
 				<li>
 					<a rel="noopener noreferrer" href="#" class="flex items-center p-2 space-x-3 rounded-md">
