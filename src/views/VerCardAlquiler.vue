@@ -1,5 +1,7 @@
 <template>
     
+<div>
+
     <div class="sticky z-10 top-0 h-16 border-transparent bg-gray-900 lg:py-2.5">
             <div class="px-6 flex justify-between space-x-4 2xl:container">
                 <div class="flex justify-left inline-block items-center content-center">
@@ -82,6 +84,7 @@
             </div>
             <!--- more free and premium Tailwind CSS components at https://tailwinduikit.com/ --->
         </div>
+    </div>
 </template>
 <script>
 import{getAPI} from '@/axios-api';
