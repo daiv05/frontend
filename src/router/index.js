@@ -3,12 +3,18 @@ import HomeView from '../views/HomeView.vue'
 import DepartamentoView from '../views/DepartamentoView.vue'
 import AlquilerView from '../views/CrearPublicacion.vue'
 import subir_foto from '../views/subir_foto.vue'
+import VerCardAlquiler from '../views/VerCardAlquiler.vue'
 
 const routes = [
   {
     path: '/',
     name: 'home',
     component: HomeView
+  },
+  {
+    path: '/vercard',
+    name: 'vercard',
+    component: VerCardAlquiler
   },
   {
     path: '/departamento',
