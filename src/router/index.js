@@ -4,14 +4,20 @@ import DepartamentoView from '../views/DepartamentoView.vue'
 import AlquilerView from '../views/CrearPublicacion.vue'
 import modificarPublicacion from '../views/modificarPublicacion.vue'
 import subir_foto from '../views/subir_foto.vue'
-import Alquiler from '../views/AlquilerView'
 
+
+import Alquiler from '../views/AlquilerView'
 const routes = [
   {
     path: '/',
     name: 'home',
     component: HomeView
   },
+  
+  
+  
+  
+  
   {
     path: '/departamento',
     name: 'departamento',
