@@ -170,6 +170,7 @@
 
 import sidebar1 from '../components/Sidebar1.vue'
 import {getAPI} from '../axios-api'
+import user from "../helper/user"
 
 export default{
 
@@ -178,7 +179,10 @@ export default{
 
         API_Perfil: [],
         API_Hobbies: [],
-        API_Preferencias: []
+        API_Preferencias: [],
+
+        token : "",
+        Perfil_logueado: [],
 
     };
 },
@@ -211,6 +215,16 @@ created(){
         .catch(error => {
                 console.log(error);
         });
+
+    getAPI.get('/user_token/',{
+        headers : user.get_header_authorization_token()
+    }).then(response => {
+            console.log('Perfil Logueado obtenido')
+            this.Perfil_logueado = response.data;
+            console.log(this.Perfil_logueado)
+    }).catch(error => {
+        console.log(error);
+    });
 },
 
 components: {
