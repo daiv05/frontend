@@ -4,6 +4,7 @@ import DepartamentoView from '../views/DepartamentoView.vue'
 import AlquilerView from '../views/CrearPublicacion.vue'
 import modificarPublicacion from '../views/modificarPublicacion.vue'
 import subir_foto from '../views/subir_foto.vue'
+import Alquiler from '../views/AlquilerView'
 
 const routes = [
   {
@@ -25,6 +26,11 @@ const routes = [
     path: '/modificar_publicacion',
     name: 'Mod_Publicacion',
     component: modificarPublicacion
+  },
+  {
+    path: '/alquiler',
+    name: 'alquiler',
+    component: Alquiler
   },
   {
     path: '/about',
