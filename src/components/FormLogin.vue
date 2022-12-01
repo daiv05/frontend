@@ -21,7 +21,7 @@
       </div>
       <div class="xl:ml-20 xl:w-5/12 lg:w-5/12 md:w-8/12 mb-12 md:mb-0">
         <p class="text-login">Login</p>
-        <form class="formulario" @submit.prevent="submitForm()">
+        <form class="formulario" @submit="submitForm()">
           <!-- Username input -->
           <div class="mb-6">
             <input
@@ -192,7 +192,7 @@ import { getAPI } from '../axios-api';
               .then(response => {
                 this.errors.wrong_credential
                 user.set_user_logged(response.data["token"])
-                  this.$router.push("/departamento/")
+                  this.$router.push("/panel_publicacion")
               })
               .catch(error => {
                 console.log("aqui se captura el error")
@@ -230,7 +230,7 @@ import { getAPI } from '../axios-api';
           return valid
         },
         setUserLogin : function (){
-          this.$router.push("/departamento/")
+          this.$router.push("/panel_publicacion/")
           //location.replace("/departamento/")
         }
       },

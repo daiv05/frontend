@@ -227,7 +227,7 @@ import modal1 from '../components/modal.vue'
 import { ref } from 'vue'
 import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
 import { ExclamationTriangleIcon } from '@heroicons/vue/24/outline'
-
+import { useMeta } from 'vue-meta'
 export default {
     name: "panel_miPublicacion",
     setup() {

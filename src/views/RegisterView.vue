@@ -11,7 +11,7 @@
         </div>
         <div class="xl:ml-20 xl:w-5/12 lg:w-5/12 md:w-8/12 mb-12 md:mb-0">
           <p class="text-login">Register</p>
-          <form class="formulario" @submit.prevent="submitForm()">
+          <form class="formulario" @submit="submitForm()">
             <!-- Username input -->
             <div class="mb-6">
               <input v-model="username" type="text"
@@ -223,6 +223,7 @@
 <script >
 import user from "../helper/user";
 import { getAPI } from '../axios-api';
+import { useMeta } from 'vue-meta'
 export default {
   name: "FormLogin",
   setup() {
@@ -330,7 +331,7 @@ export default {
       return valid
     },
     setUserLogin: function () {
-      this.$router.push("/departamento/")
+      this.$router.push("/panel_publicacion")
       //location.replace("/departamento/")
     },
     validar_email: function () {

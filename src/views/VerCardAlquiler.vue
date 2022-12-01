@@ -86,6 +86,7 @@
 <script>
 import{getAPI} from '@/axios-api';
 import user from '@/helper/user';
+import { useMeta } from 'vue-meta'
 export default {
     name: 'Detalle Alquiler',
     setup() {
