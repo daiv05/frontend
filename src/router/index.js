@@ -3,13 +3,21 @@ import HomeView from '../views/HomeView.vue'
 import DepartamentoView from '../views/DepartamentoView.vue'
 import ProfileForm from '../views/ProfileForm.vue'
 import AlquilerView from '../views/CrearPublicacion.vue'
+import modificarPublicacion from '../views/modificarPublicacion.vue'
+import panelPublicacion from '../views/panel_miPublicacion.vue'
 import subir_foto from '../views/subir_foto.vue'
+import VerCardAlquiler from '../views/VerCardAlquiler.vue'
 
 const routes = [
   {
     path: '/',
     name: 'home',
     component: HomeView
+  },
+  {
+    path: '/vercard',
+    name: 'vercard',
+    component: VerCardAlquiler
   },
   {
     path: '/departamento',
@@ -22,9 +30,19 @@ const routes = [
     component: ProfileForm
   },
   {
-    path: '/edit_alquiler',
+    path: '/crear_publicacion',
     name: 'alquiler_edit',
     component: AlquilerView
+  },
+  {
+    path: '/modificar_publicacion',
+    name: 'Mod_Publicacion',
+    component: modificarPublicacion
+  },
+  {
+    path: '/panel_publicacion',
+    name: 'panel_miPublicacion',
+    component: panelPublicacion
   },
   {
     path: '/about',
