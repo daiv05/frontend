@@ -6,20 +6,14 @@ import modificarPublicacion from '../views/modificarPublicacion.vue'
 import panelPublicacion from '../views/panel_miPublicacion.vue'
 import subir_foto from '../views/subir_foto.vue'
 import VerCardAlquiler from '../views/VerCardAlquiler.vue'
-
-
 import Alquiler from '../views/AlquilerView'
+
 const routes = [
   {
     path: '/',
     name: 'home',
     component: HomeView
   },
-  
-  
-  
-  
-  
   {
     path: '/vercard',
     name: 'vercard',

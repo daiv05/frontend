@@ -36,12 +36,12 @@
         </div>
         <div class="col-span-2">
             <div class="bg-white">
-                <div v-for="product in products" :key="product.id" class="group relative">
-                    <h2 class="mt-16 flex justify-center align-center text-2xl font-bold tracking-tight text-black">{{ product.name }}</h2> 
+                <div v-for="Alquiler in alquiler" :key="Alquiler.publicacion_id" class="group relative">
+                    <h2 class="mt-16 flex justify-center align-center text-2xl font-bold tracking-tight text-black">{{ Alquiler.titulo }}</h2> 
                         <div class="grid grid-cols-4 sm:py-16 sm:px-24 lg:max-w-24 lg:px-2">
                            <div class="col-span-3" align="left">         
                                 <h2 class="flex justify-left align-left font-bold tracking-tight text-gray-900">Descripcion del lugar</h2>
-                                <h3 class="justify-left text-sm text-gray-700" align="justify">{{ product.descripcion }}</h3>
+                                <h3 class="justify-left text-sm text-gray-700" align="justify">{{ Alquiler.descrip_lugar }}</h3>
                            </div>
                             <div class="mt-4 justify-between">              
                                 <div class="justify-between" align="center">
@@ -76,12 +76,12 @@
                                 </div>                                  
                                 <div>
                                     <h2 class="mt-16 flex justify-left align-left font-bold tracking-tight text-gray-900">Renta</h2> 
-                                    <h3 class="flex justify-left align-left text-sm text-gray-700">$ {{ product.depa }}</h3>
+                                    <h3 class="flex justify-left align-left text-sm text-gray-700">$ {{ Alquiler.precio }}</h3>
                                     <h2 class="mt-4 flex justify-left align-left font-bold tracking-tight text-gray-900">Max. Ocupantes</h2> 
-                                    <h3 class="flex justify-left align-left text-sm text-gray-700">{{ product.depa }}</h3>              
+                                    <h3 class="flex justify-left align-left text-sm text-gray-700">{{ Alquiler.num_ocupantes }}</h3>              
                                 </div>
                             </div>
-                                <a href="/departamento">
+                                <a href="#">
                                     <input type="button" class="group relative flex w-36 cursor-pointer justify-center rounded-md border border-transparent bg-blue-700 py-2 px-4 text-sm font-medium text-white hover:bg-blue-500 focus:outline-none focus:ring-offset-2" value="Contactar">
                                 </a>               
                         </div>
@@ -105,35 +105,39 @@ import user from '../helper/user'
 
 export default {
     
-    name: 'Publicacion',
+    name: 'alquiler',
     data() {
         return {
-            Perfil_Logueado: [],
-            
-            publi_ORIGIN: [],
-            perfil: null,
-            titulo: "",
-            descrip_lugar: "",
-          //  foto: [],
-          //  depa_seleccion: [],
-          //  ciu_seleccion: [],
-          //  listAmenis: [],
-            precio: 0,
-            num_ocupantes: 0,
-            API_Publicacion: [],
+            alquiler: [],            
+            foto: [],
+            ciu_seleccion: [],
+            depa_seleccion: [],            
+            listAmenis: [],
+           
         };
     },
     
     created() {
-        getAPI.get('/user_token/', {
-            headers: user.get_header_authorization_token()
-        }).then(response => {
-            console.log('Perfil logueado obtenido')
-            this.Perfil_Logueado = response.data;
-        }).catch(error => {
-            console.log(error);
-        });
 
+        let url = 'publicacion_alquiler/'
+        
+        getAPI.get(url, {headers: user.get_header_authorization_token()}).then(response=>{
+            this.alquiler = response.data
+           // console.log(response.data)
+           // console.log(this.alquiler["0"])
+        }).catch(error=>console.log(error))
+        
+        getAPI.get("ciudad/",{headers: user.get_header_authorization_token()}).then(response=>{
+            this.ciu_seleccion = response.data
+        }).catch(error=>console.log(error))
+        
+        getAPI.get("departamento/",{headers: user.get_header_authorization_token()}).then(response=>{
+            this.depa_seleccion = response.data
+        }).catch(error=>console.log(error))
+    },
+
+    methods: {
+        
         
     },
     components: {
@@ -145,6 +149,7 @@ export default {
 </script>
   
 <script setup>
+//Para prueba visual con datos random
 const products = [
     {
         id: 1,
@@ -152,12 +157,12 @@ const products = [
         href: '#',
         imageSrc: 'https://i.pinimg.com/736x/39/e9/7f/39e97f7e03ec3854a8fb45df0acb22b9.jpg',
         imageAlt: 'https://i.mydramalist.com/Xqmvx_5f.jpg',
-        ciudad: 'San Salavador',
+        ciudad: 'San Salvador',
         depa: 'Lula',
         color: 'Sunoo enhypen 4 ever loca flamenca Lopez',
         descripcion: 'Es una casa con 4 habitaciones, dos baños, una sala, una cocina, piscina y gym Hay varios tipos de encabezados, que se diferencian visualmente en el tamaño de la letra que utilizan. La etiqueta en concreto es la H1, para los encabezados más grandes, H2 para los de segundo nivel y así hasta H6 que es el encabezado más pequeño. Pero lo importante, insistimos es la estructura que denotan. Una página tendrá generalmente un encabezado de nivel 1 y dentro varios de nivel 2. Luego, dentro de los H2 encontraremos si acaso H3, etc. Nunca debemos usar los encabezados porque nos formateen el texto de una manera dada, sino porque nuestro documento lo requiera según su estructura.',
     },
-    // More products...
+    
 ]
 
 
