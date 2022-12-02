@@ -51,7 +51,8 @@
                                           <circle cx="12" cy="7" r="4" />
                                           <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
                                       </svg>
-                                      <span class="ml-2">My Profile</span>
+                                      <router-link to="/profileform"><span class="ml-2">My Profile</span></router-link>
+                                      
                                   </div>
                               </li>
                               <li class="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal mt-2 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none flex items-center">
