@@ -5,7 +5,8 @@
             <div class="px-6 flex justify-between space-x-4 2xl:container">
                 <div class="flex justify-left inline-block items-center content-center">
                     <img class="flex inline-block" src="../assets/icon.png" width="20%">
-                    <h5 hidden class="flex text-2xl text-gray-600 font-medium lg:inline-block font-bold">&nbsp;&nbsp;cheroomSV</h5>
+                    <h5 hidden class="flex text-2xl text-gray-600 font-medium lg:inline-block font-bold">
+                        &nbsp;&nbsp;cheroomSV</h5>
                 </div>
                 <div class="flex space-x-4">
                     <button aria-label="chat"
@@ -43,7 +44,7 @@
             <!--CONTENIDO-->
             <div class="mt-5 md:col-span-8 md:mt-0 border-transparent bg-gray-100">
 
-                <form @submit.prevent="onSubmit">
+                <form @submit="onSubmit">
                     <br>
                     <p class="font-sans text-2xl font-bold">¡Publica la informacion de tu alquiler!</p>
                     <br>
@@ -161,7 +162,7 @@
                                 <label for="activ" class="block text-left text-sm font-medium text-gray-700"></label>
                                 <div class="flex items-start">
                                     <div class="flex h-5">
-                                        <input id="comments" name="comments" type="checkbox" v-model="p_activa" required
+                                        <input id="comments" name="comments" type="checkbox" v-model="p_activa"
                                             class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" />
                                     </div>
                                     <div class="ml-3 text-sm">
@@ -208,14 +209,17 @@
                                             <label for="file"
                                                 class="relative cursor-pointer rounded-md bg-white font-medium text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500">
                                                 <span>Sube una imagen</span>
-                                                <input type="file" id="file" ref="file" @change="onFileChange"
-                                                    required />
+                                                <input type="file" id="file" ref="file" @change="onFileChange"/>
                                             </label>
                                         </div>
                                         <p class="text-xs text-gray-500">PNG, JPG, GIF de hasta 10MB</p>
                                         <p class="pl-1">or drag and drop</p>
                                     </div>
                                 </div>
+                                <div class="bg-black">
+                                    <img v-if="foto_ORIGIN" :src="'http://localhost:8000' + foto_ORIGIN.foto_lugar" width="100" height="100" alt="icon">
+                                </div>
+                                
                             </div>
                         </div>
 
@@ -253,9 +257,18 @@ import { getAPI } from '../axios-api'
 import user from '../helper/user'
 
 export default {
-    name: 'Publicacion',
+    name: 'Mod_Publicacion',
     data() {
         return {
+            //INFO DE LA PUBLICACION TRAIDA
+            publi_ORIGIN: [],
+            amenis_ORIGIN: [],
+            foto_ORIGIN: [],
+            listAmenis_ORIGIN: [],
+
+            fotito: '',
+            // AQUI SE GUARDA EL PERFIL DEL USUARIO LOGUEADO
+            Perfil_Logueado: [],
             //Datos a enviar al servidor para crear una nueva publicacion
             perfil: null,
             titulo: "",
@@ -276,9 +289,25 @@ export default {
             API_Depa: [],
             API_Ciudad: [],
             API_Amenidad: [],
+            API_Publicacion: [],
+            API_Foto: [],
+            API_List_Amenidad: [],
         };
     },
     created() {
+        // SE LLAMA A ESTA FUNCION PARA PODER OBTENER EL USUARIO LOGUEADO.
+        // EL PERFIL_USER SE GUARDA EN LA VARIABLE Perfil_Logueado
+        getAPI.get('/user_token/', {
+            headers: user.get_header_authorization_token()
+        }).then(response => {
+            console.log('Perfil logueado obtenido')
+            this.Perfil_Logueado = response.data;
+
+            //console.log(this.Perfil_Logueado)
+        }).catch(error => {
+            console.log(error);
+        });
+
         //API's para traer los datos del formulario
         getAPI.get('/departamento/',)
             .then(response => {
@@ -304,10 +333,95 @@ export default {
             .catch(error => {
                 console.log(error);
             });
+        getAPI.get('/lista_amenidad/',)
+            .then(response => {
+                console.log('Lista Amenidad API has received data')
+                this.API_List_Amenidad = response.data;
+            })
+            .catch(error => {
+                console.log(error);
+            });
+        getAPI.get('/foto/',)
+            .then(response => {
+                console.log('Foto API has received data')
+                this.API_Foto = response.data;
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    },
+    mounted() {
+        this.obt_PubliUser();
     },
     methods: {
+        obt_PubliUser() {
+            getAPI.get('/publicacion_alquiler/', {
+                headers: user.get_header_authorization_token()
+            })
+                .then(response => {
+                    console.log('Publicacion API has received data')
+                    this.API_Publicacion = response.data;
+                    // console.log(this.API_Publicacion[0].perfil.perfil_id)
+                    // console.log(this.Perfil_Logueado.perfil_id)
+                })
+                .then(_ => {
+                    this.getPublicacionFiltro();
+                })
+                .then(_ => {
+                    this.getFotoFiltro();
+                })
+                .then(_ => {
+                    this.getAmenidadFiltro();
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        },
+        getPublicacionFiltro() {
+            for (let i = 0; i < this.API_Publicacion.length; i++) {
+                if (this.API_Publicacion[i].perfil.perfil_id == this.Perfil_Logueado.perfil_id) {
+                    console.log("PUBLICACION A MOD " + this.API_Publicacion[i].titulo)
+
+                    this.publi_ORIGIN = this.API_Publicacion[i];
+
+                    this.perfil = this.Perfil_Logueado;
+                    this.publi_creada = this.API_Publicacion[i];
+                    this.titulo = this.API_Publicacion[i].titulo;
+                    this.descrip_lugar = this.API_Publicacion[i].descrip_lugar;
+                    this.coordenadas = this.API_Publicacion[i].coordenadas;
+                    this.num_ocupantes = this.API_Publicacion[i].num_ocupantes;
+                    this.precio = this.API_Publicacion[i].precio;
+                    this.tiempo_contrato = this.API_Publicacion[i].tiempo_contrato;
+                    this.p_activa = this.API_Publicacion[i].p_activa;
+                }
+            }
+            console.log("Datos obtenidos de la publicacion" + this.Perfil_Logueado.perfil_id + " --" + this.API_Publicacion[0].perfil.perfil_id)
+        },
+
+        getFotoFiltro() {
+            for (let i = 0; i < this.API_Foto.length; i++) {
+                if (this.API_Foto[i].publi_alquiler == this.publi_creada.publicacion_id) {
+                    this.foto_ORIGIN = this.API_Foto[i];
+                    console.log(this.foto_ORIGIN.foto_lugar)
+                }
+            }
+            console.log("Foto obtenida de la publicacion")
+        },
+        getAmenidadFiltro() {
+            this.amenis_ORIGIN = [];
+            this.amenis_seleccion = [];
+            for (let i = 0; i < this.API_List_Amenidad.length; i++) {
+                console.log("Amenidad " + this.API_List_Amenidad[i].publicacion.titulo)
+                if (this.API_List_Amenidad[i].publicacion.publicacion_id == this.publi_creada.publicacion_id) {
+                    this.amenis_seleccion.push(this.API_List_Amenidad[i].amenidad);
+                    this.listAmenis_ORIGIN.push(this.API_List_Amenidad[i]);
+                    this.amenis_ORIGIN.push(this.API_List_Amenidad[i].amenidad);
+                }
+            }
+            console.log("Amenidades obtenidas de la publicacion")
+        },
         onSubmit() {
-            this.submitNewPublicacion();
+            this.updatePublicacion();
         },
         //Filtro de ciudad segun seleccion de departamento
         getCiudadFiltro() {
@@ -318,6 +432,112 @@ export default {
                 }
             }
         },
+        updatePublicacion() {
+            getAPI.put('/publicacion_alquiler/' + this.publi_creada.publicacion_id + '/', {
+                titulo: this.titulo,
+                descrip_lugar: this.descrip_lugar,
+                coordenadas: this.coordenadas,
+                num_ocupantes: this.num_ocupantes,
+                precio: this.precio,
+                tiempo_contrato: this.tiempo_contrato,
+                p_activa: this.p_activa,
+                perfil: this.perfil.perfil_id,
+            }, {
+                headers: user.get_header_authorization_token()
+            })
+                .then(response => {
+                    console.log('Publicacion API has received data')
+                    console.log(response.data);
+                    //Guardo la publicacion creada para usar el id en el submit de las FOTOS
+                    this.publi_creada = response.data;
+                    //Llamo a la funcion que sube las fotos
+                    if(this.file != null){
+                        this.uploadFile();
+                    }
+                    //Llamo a la funcion que guarda las amenidades
+                    this.updateAmenidades();
+                })
+                .then(response => {
+                    console.log('Publicacion updated')
+                    console.log(response.data)
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        },
+        
+        updateAmenidades() {
+            for (let i = 0; i < this.listAmenis_ORIGIN.length; i++) {
+                getAPI.delete('/lista_amenidad/' + this.listAmenis_ORIGIN[i].listamenidad_id + '/', {
+                    headers: user.get_header_authorization_token()
+                })
+                    .then(response => {
+                        console.log('Amenidad deleted')
+                        console.log(response.data)
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    });
+            }
+            for (let i = 0; i < this.amenis_seleccion.length; i++) {
+                getAPI.post('/lista_amenidad/', {
+                    publicacion: this.publi_creada.publicacion_id,
+                    amenidad: this.amenis_seleccion[i].amenidad_id,
+                }, {
+                    headers: user.get_header_authorization_token()
+                })
+                    .then(response => {
+                        console.log('Amenidad created')
+                        console.log(response.data)
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    });
+            }
+        },
+
+        //Agarrar la imagen subida y guardarla en 'file'
+        onFileChange(e) {
+            this.file = e.target.files[0];
+        },
+        eliminarFoto() {
+            getAPI.delete('/foto/' + this.foto_ORIGIN.foto_id + '/', {
+                headers: user.get_header_authorization_token()
+            })
+                .then(response => {
+                    console.log('Foto deleted')
+                    console.log(response.data)
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        },
+        //Enviar la imagen al servidor
+        uploadFile() {
+            //Eliminamos la foto anterior
+            this.eliminarFoto();
+            const formData = new FormData();
+            //file corresponde a la imagen subida
+            formData.append('foto_lugar', this.file);
+            getAPI.post('/foto/', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            }).then((res) => {
+                console.log("Subida de foto exitosa");
+                console.log(res);
+            }).catch(err => {
+                console.log(err);
+            });
+        },
+
+
+
+
+
+
+
+
         //Funcion para POST de nueva publicacion
         submitNewPublicacion() {
             getAPI.post('/publicacion_alquiler/', {
@@ -331,7 +551,7 @@ export default {
                 tiempo_contrato: this.tiempo_contrato,
                 fecha_publi: new Date().toISOString().slice(0, 10),
                 p_activa: this.p_activa,
-            },{
+            }, {
                 headers: user.get_header_authorization_token(),
             })
                 .then(response => {
@@ -348,28 +568,7 @@ export default {
                     console.log(error);
                 });
         },
-        //Agarrar la imagen subida y guardarla en 'file'
-        onFileChange(e) {
-            this.file = e.target.files[0];
-        },
-        //Enviar la imagen al servidor
-        uploadFile() {
-            const formData = new FormData();
-            //file corresponde a la imagen subida
-            formData.append('foto_lugar', this.file);
-            //Le paso el id de la publicacion recien creada en SubmitNewPublicacion
-            formData.append('publi_alquiler', this.publi_creada.publicacion_id);
-            getAPI.post('/foto/', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-            }).then((res) => {
-                console.log("Subida exitosa");
-                console.log(res);
-            }).catch(err => {
-                console.log(err);
-            });
-        },
+        
         //Guardar las amenidades seleccionadas
         guadarAmenidades() {
             for (let i = 0; i < this.amenis_seleccion.length; i++) {

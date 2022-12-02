@@ -52,6 +52,14 @@
     <div class="flex justify-center">
         <Detalle1></Detalle1>
     </div>
+        <button @click="get_amigos()">
+                click para ver los amigos del usuario registrado
+        </button>
+    <logout/>
+
+    <button @click="ver_usuario()">
+        click par ver el usuario 
+    </button>
 </template>
 
 
@@ -60,13 +68,48 @@ import navbar1 from '../components/Navbar1.vue'
 import sidebar1 from '../components/Sidebar1.vue'
 import formLogin from '../components/FormLogin.vue'
 import Detalle1 from '../components/Detalle1.vue'
+import logout from '../components/logout.vue'
+
 import { getAPI } from '../axios-api'
+
+
+// SE NECESITA IMPORTAR ESTO PARA PODER PODER OBTENER EL USUARIO LOGUEADO
+import user from "@/helper/user"
+
+
+
 export default {
     name: 'Departamento',
     data() {
         return {
             API_Depa: [],
+            token : "",
+
+            // AQUI SE GUARDA EL PERFIL DEL USUARIO LOGUEADO
+            Perfil_Logueado : [],
         };
+    },
+    methods : {
+        obtener_cookie : function(){
+            console.log(user.get_user_logged())
+        },
+        get_amigos : function(){
+            let url = "/chero_list/"
+            getAPI.get(url, {
+                headers : user.get_header_authorization_token()
+            }).then(
+                response => console.log(response.data)
+            ).catch(
+                error => console.log(error)
+            )
+        },
+        ver_usuario : function(){
+            getAPI.post('publicacion_alquiler/',{
+                'usuario':'usuario'
+            },{
+                headers : user.get_header_authorization_token()
+            })
+        }
     },
     created() {
         getAPI.get('/departamento/',)
@@ -77,12 +120,27 @@ export default {
             .catch(error => {
                 console.log(error);
             });
+
+
+        // SE LLAMA A ESTA FUNCION PARA PODER OBTENER EL USUARIO LOGUEADO.
+        // EL PERFIL_USER SE GUARDA EN LA VARIABLE Perfil_Logueado
+        getAPI.get('/user_token/', {
+            headers : user.get_header_authorization_token()
+            }).then(response => {
+                    console.log('Perfil logueado obtenido')
+                    this.Perfil_Logueado = response.data;
+                    console.log(this.Perfil_Logueado)
+            }).catch(error => {
+                console.log(error);
+            });
+
     },
     components: {
         navbar1: navbar1,
         sidebar1: sidebar1,
         formLogin: formLogin,
         Detalle1: Detalle1,
+        logout : logout
     }
 };
 </script>
@@ -98,6 +156,7 @@ const products = [
         price: '$35',
         color: 'Black',
     },
+
     // More products...
 ]
 </script>
