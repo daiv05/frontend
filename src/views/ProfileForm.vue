@@ -194,6 +194,11 @@
                                                                         stroke-width="2" stroke-linecap="round"
                                                                         stroke-linejoin="round" />
                                                                 </svg>
+                                                                <div class="max-w-md-2">
+                                                                    <img v-if="src_image" :src="src_image"
+                                                                        :key="pointshover" class="h-48 w-48">
+                                                                </div>
+
                                                                 <div class="flex text-sm text-gray-600">
                                                                     <label for="file"
                                                                         class="relative cursor-pointer rounded-md bg-white font-medium text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500">
@@ -355,7 +360,9 @@ export default {
             perfil_creada: null,
             // AQUI SE GUARDA EL PERFIL DEL USUARIO LOGUEADO
             Perfil_Logueado: [],
-            id_user: null
+            id_user: null,
+            flagUpdate: false,
+            src_image: null
         }
     },
     mounted() {
@@ -372,18 +379,53 @@ export default {
             })
             .finally(() => this.loading = false)
 
+
+
+
         // SE LLAMA A ESTA FUNCION PARA PODER OBTENER EL USUARIO LOGUEADO.
         // EL PERFIL_USER SE GUARDA EN LA VARIABLE Perfil_Logueado
-        let formData = new FormData();
+
         let request = { 'token': user.get_header_authorization_token().Authorization.replace("Token ", "") };
+        console.log(request);
         getAPI.post('http://127.0.0.1:8000/user_token_admin/', request, {
             headers: user.get_header_authorization_token()
         }).then(response => {
             this.Perfil_Logueado = response.data;
             this.id_user = this.Perfil_Logueado.token;
+
+            getAPI.get("http://127.0.0.1:8000/perfil_user/" + this.id_user + "/")
+                .then(response => {
+                    this.flagUpdate = true
+                    let data = response.data;
+                    this.userData.firstname = data.nombre_user
+                    this.userData.lastname = data.apellidos_user
+                    this.userData.email = data.email
+                    this.userData.user = data.user
+                    this.userData.selectedCity = data.ciudad.ciudad_id
+                    this.userData.age = data.edad
+                    this.userData.about = data.biografia
+                    this.userData.telefono = data.telefono
+                    this.userData.whatsapp = data.telefono
+                    this.userData.facebook = data.user_facebook
+                    this.userData.instagram = data.user_insta
+                    this.userData.twitter = data.user_twitter
+                    this.userData.selectedGenero = data.genero
+                    this.src_image = "http://127.0.0.1:8000/" + data.foto_perfil
+                })
+                .catch(error => {
+                    this.flagUpdate = false
+                    console.log(error)
+                    this.errored = true
+                })
+                .finally(() => this.loading = false)
+
         }).catch(error => {
             console.log(error);
         });
+
+
+
+
     },
     methods: {
         //Agarrar la imagen subida y guardarla en 'file'
@@ -416,6 +458,7 @@ export default {
             }).then((res) => {
                 console.log("Subida exitosa");
                 console.log(res);
+                location.reload();
             }).catch(err => {
                 console.log(err);
             });
