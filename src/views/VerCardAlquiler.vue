@@ -56,7 +56,7 @@
                     <!-- Card 1 -->
                     <div tabindex="0" class="focus:outline-none mx-2 w-72 xl:mb-0 mb-8">
                         <div>
-                            <img alt="cuarto 1" :src=" 'http://cheroomsv.com/api' + post.ruta_foto" tabindex="0" class="focus:outline-none w-full h-44" />
+                            <img alt="cuarto 1" :src=" 'http://cheroomsv.com' + post.ruta_foto" tabindex="0" class="focus:outline-none w-full h-44" />
                         </div>
                         <div class="bg-white">
                             <div class="flex items-center justify-between px-4 pt-4">

@@ -44,7 +44,7 @@
             <!--CONTENIDO-->
             <div class="mt-5 md:col-span-8 md:mt-0 border-transparent bg-gray-100">
 
-                <form @submit="onSubmit">
+                <form @submit.prevent="onSubmit">
                     <br>
                     <p class="font-sans text-2xl font-bold">¡Publica la informacion de tu alquiler!</p>
                     <br>
@@ -217,7 +217,7 @@
                                     </div>
                                 </div>
                                 <div class="bg-black">
-                                    <img v-if="foto_ORIGIN" :src="'http://cheroomsv.com/api' + foto_ORIGIN.foto_lugar" width="100" height="100" alt="icon">
+                                    <img v-if="foto_ORIGIN" :src="'http://cheroomsv.com' + foto_ORIGIN.foto_lugar" width="100" height="100" alt="icon">
                                 </div>
                                 
                             </div>

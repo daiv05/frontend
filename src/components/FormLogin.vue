@@ -21,7 +21,7 @@
       </div>
       <div class="xl:ml-20 xl:w-5/12 lg:w-5/12 md:w-8/12 mb-12 md:mb-0">
         <p class="text-login">Login</p>
-        <form class="formulario" @submit="submitForm()">
+        <form class="formulario" @submit.prevent="submitForm()">
           <!-- Username input -->
           <div class="mb-6">
             <input
