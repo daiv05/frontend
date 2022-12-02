@@ -7,6 +7,7 @@ import modificarPublicacion from '../views/modificarPublicacion.vue'
 import panelPublicacion from '../views/panel_miPublicacion.vue'
 import subir_foto from '../views/subir_foto.vue'
 import VerCardAlquiler from '../views/VerCardAlquiler.vue'
+import Perfil from '../views/Perfil.vue'
 
 const routes = [
   {
@@ -61,7 +62,12 @@ const routes = [
     path : "/register",
     name : "register",
     component : () => import("../views/RegisterView.vue")
-  }
+  },
+  {
+    path : "/perfil",
+    name : "perfil",
+    component: Perfil
+  },
 ]
 
 const router = createRouter({
