@@ -87,11 +87,11 @@
                             <div
                                 class="mt-4 md:mt-6 flex flex-col md:flex-row justify-start items-start md:items-center md:space-x-6 xl:space-x-8 w-full">
                                 <div class="pb-4 md:pb-8 w-full md:w-40">
-                                    <iframe class="w-full hidden md:block"
+                                    <img class="w-full hidden md:block"
                                         :src="'https://www.cheroomsv.com' + foto_publi.foto_lugar"
-                                        v-if="foto_publi.foto_lugar"></iframe>
-                                    <iframe class="w-full md:hidden" :src="'https://www.cheroomsv.com' + foto_publi.foto_lugar"
-                                        v-if="foto_publi.foto_lugar"></iframe>
+                                        v-if="foto_publi.foto_lugar">
+                                    <img class="w-full md:hidden" :src="'https://www.cheroomsv.com' + foto_publi.foto_lugar"
+                                        v-if="foto_publi.foto_lugar">
                                 </div>
                                 <div
                                     class="border-b border-gray-200 md:flex-row flex-col flex justify-between items-start w-full pb-8 space-y-4 md:space-y-0">
