@@ -122,9 +122,18 @@
               </div>
   
             </div>
-              <div>
-                
-              </div>
+            
+          <!--prueba buttons-->
+          <div class="flex items-center">
+    <input checked id="default-radio-2" type="radio" value="necesito_cuarto" name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" v-model="tipo_usuario">
+    <label for="default-radio-2" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Necesito Cuarto</label>
+</div>
+          <div class="flex items-center mb-4">
+    <input id="default-radio-1" type="radio" value="tengo_cuarto" name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" v-model="tipo_usuario">
+    <label for="default-radio-1" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Tengo Cuarto</label>
+</div>
+          <!--fin prueba buttons-->
+
   
             <div class=" lg:text-left text-center flex flex-col items-center">
               <button
@@ -215,6 +224,8 @@
             email : "",
             password : "",
             token : "",
+            tipo_usuario : "necesito_cuarto",
+            necesito_cuarto : null,
             errors : {
               username : "",
               name : "",
@@ -237,11 +248,11 @@
                     email : this.email,
                     sexo : this.genero,
                     password: this.password,
+                    necesita_cuarto : this.necesito_cuarto
                 },
                 )
                 .then(response => {
                   user.set_user_register(this.username)
-                  
                   this.$router.push('/login')
                   this.errors.wrong_credential 
                 })
@@ -301,6 +312,10 @@
             if(this.errors.username || this.errors.password || this.errors.lastName || this.errors.genero || this.errors.email || this.errors.password){
               valid = false
             }
+            if(this.tipo_usuario == "necesito_cuarto")
+              this.necesito_cuarto = true
+            else if(this.tipo_usuario == "tengo_cuarto")
+              this.necesito_cuarto = false
             return valid
           },
           setUserLogin : function (){
@@ -321,6 +336,6 @@
               return false
             }
           }
-        }
+        },
     }
     </script>

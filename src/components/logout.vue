@@ -20,7 +20,7 @@ export default{
             getAPI.get(url)
             .then(response => {
                 user.logout()
-                this.$router.push("/login/")
+                this.$router.push("/login/");
             })
             .catch(
                 error =>{

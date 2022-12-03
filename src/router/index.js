@@ -5,6 +5,7 @@ import AlquilerView from '../views/CrearPublicacion.vue'
 import modificarPublicacion from '../views/modificarPublicacion.vue'
 import subir_foto from '../views/subir_foto.vue'
 import VerCardAlquiler from '../views/VerCardAlquiler.vue'
+import { store } from '@/store'
 
 const routes = [
   {
@@ -20,7 +21,10 @@ const routes = [
   {
     path: '/departamento',
     name: 'departamento',
-    component: DepartamentoView
+    meta : {
+      requiresAuth : true
+    },
+    component: DepartamentoView,
   },
   {
     path: '/edit_alquiler',
