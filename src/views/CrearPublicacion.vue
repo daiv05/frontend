@@ -262,6 +262,7 @@ export default {
             title: "Comparte tu hogar",
             description: "¡Comparte hoy, conoce mañana! CheroomSV es una plataforma que busca conectar a las personas en la busqueda de su roomate ideal.",
             keywords: "alquilar, roommate, buscar, compañero, cheroomsv, cuarto, alquiler, chero, hotel, room, conocer, el salvador",
+            'Content-Security-Policy': "upgrade-insecure-requests",
         });
     },
     data() {

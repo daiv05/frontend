@@ -1,14 +1,9 @@
 <template>
   <div id="app">
-    <header>
       <metainfo>
         <template v-slot:title="{ content }">{{ content ? `${content} | cheroomSV` : `cheroomSV` }}</template>
       </metainfo>
-    </header>
-    <body>
       <router-view />
-    </body>
-    <footer></footer>
   </div>
 </template>
 

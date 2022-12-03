@@ -58,6 +58,9 @@ app.use(router)
         keywords: {
             tag: "meta",
         },
+        'Content-Security-Policy': {
+            tag: "meta",
+        }
         })) // add this line
     .component('font-awesome-icon', FontAwesomeIcon)
     .mount('#app')

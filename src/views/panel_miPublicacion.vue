@@ -88,9 +88,9 @@
                                 class="mt-4 md:mt-6 flex flex-col md:flex-row justify-start items-start md:items-center md:space-x-6 xl:space-x-8 w-full">
                                 <div class="pb-4 md:pb-8 w-full md:w-40">
                                     <img class="w-full hidden md:block"
-                                        :src="'http://cheroomsv.com' + foto_publi.foto_lugar"
+                                        :src="'https://www.cheroomsv.com' + foto_publi.foto_lugar"
                                         v-if="foto_publi.foto_lugar">
-                                    <img class="w-full md:hidden" :src="'http://cheroomsv.com' + foto_publi.foto_lugar"
+                                    <img class="w-full md:hidden" :src="'https://www.cheroomsv.com' + foto_publi.foto_lugar"
                                         v-if="foto_publi.foto_lugar">
                                 </div>
                                 <div
@@ -235,6 +235,7 @@ export default {
             title: "Panel Roomies",
             description: "¡Crea, publica y conoce! CheroomSV es una plataforma que busca conectar a las personas en la busqueda de su roomate ideal.",
             keywords: "alquilar, roommate, buscar, compañero, cheroomsv, cuarto, alquiler, chero, hotel, rooms, conocer, el salvador, rommie",
+            'Content-Security-Policy': "upgrade-insecure-requests",
         });
     },
     data() {

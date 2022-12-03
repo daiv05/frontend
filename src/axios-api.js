@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const getAPI = axios.create({ 
-    baseURL: 'http://cheroomsv.com',
+    baseURL: 'https://www.cheroomsv.com',
 });
 
 export { getAPI };
