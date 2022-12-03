@@ -14,7 +14,6 @@ export default {
             let header = {
                 "Content-type" :"application/json; charset=UTF-8",
                 "Authorization" :"Token " + Cookies.get('userLogged'),
-                "Access-Control-Allow-Origin": "*",
             }      
             return header
         }
