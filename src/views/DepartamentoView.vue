@@ -54,6 +54,7 @@
     <div class="flex justify-center">
         <Detalle1></Detalle1>
     </div>
+    {{this.$store.state.token}}
         <button @click="get_amigos()">
                 click para ver los amigos del usuario registrado
         </button>

@@ -16,17 +16,8 @@ export default{
     },
     methods : {
         logout : function(){
-            let url = "logout/?token="+user.get_user_logged()
-            getAPI.get(url)
-            .then(response => {
-                user.logout()
-                this.$router.push("/login/");
-            })
-            .catch(
-                error =>{
-                    console.log(error)
-                }
-            )
+            {{this.$store.state.token}}
+            this.$store.dispatch('logout')
         }
     }
 }
