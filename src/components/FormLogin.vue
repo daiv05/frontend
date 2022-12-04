@@ -163,7 +163,7 @@
 import user from "../helper/user"
 import { getAPI } from '../axios-api';
   export default {
-      name : "FormLogin",  
+      name : "FormLogin", 
       data(){
         return{
           username : "",
@@ -183,21 +183,17 @@ import { getAPI } from '../axios-api';
         }
       },  
       methods : {
-        submitForm : function(){
+        submitForm :  async function(){
           if(this.isValidForm()){
-              const url = "/login-api/"
-              user.delete_user_register()
-              this.is_register = ""
-              getAPI.post(url , {username : this.username, password: this.password} )
-              .then(response => {
-                this.errors.wrong_credential
-                user.set_user_logged(response.data["token"])
-                  this.$router.push("/departamento/")
-              })
-              .catch(error => {
-                console.log("aqui se captura el error")
-                this.errors.wrong_credential = error["response"]["data"]['error']
-              })
+            let credentials = {
+              username : this.username,
+              password : this.password,
+            }
+               this.errors.wrong_credential =  this.$store.dispatch('login',credentials)
+               if (this.errors.wrong_credential)
+               {
+                this.errors.wrong_credential = "El usuario o la contraseña son incorrectos";
+               }
           }
           else{
             console.log("Form no valid")
@@ -230,7 +226,7 @@ import { getAPI } from '../axios-api';
           return valid
         },
         setUserLogin : function (){
-          this.$router.push("/departamento/")
+          this.$router.push("/panel_publicacion/")
           //location.replace("/departamento/")
         }
       },

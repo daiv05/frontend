@@ -1,9 +1,9 @@
 <template>
-	<div class="h-full p-3 space-y-2 w-60 dark:bg-gray-900 dark:text-gray-100">
+	<div class="h-full p-3 space-y-2 w-60 dark:bg-gray-900 dark:text-gray-100" style="min-height: 100vh;">
 		<div class="divide-y divide-gray-700">
 			<ul class="pt-2 pb-4 space-y-1 text-sm">
 				<li class="dark:bg-gray-800 dark:text-gray-50">
-					<a rel="noopener noreferrer" href="#" class="flex items-center p-2 space-x-3 rounded-md">
+					<RouterLink to="/" class="flex items-center p-2 space-x-3 rounded-md">
 						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
 							class="w-5 h-5 fill-current dark:text-gray-400">
 							<path
@@ -11,10 +11,10 @@
 							</path>
 						</svg>
 						<span>Inicio</span>
-					</a>
+					</RouterLink>
 				</li>
 				<li>
-					<a rel="noopener noreferrer" href="#" class="flex items-center p-2 space-x-3 rounded-md">
+					<RouterLink to="/vercard" class="flex items-center p-2 space-x-3 rounded-md">
 						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
 							class="w-5 h-5 fill-current dark:text-gray-400">
 							<path
@@ -22,10 +22,10 @@
 							</path>
 						</svg>
 						<span>roomates</span>
-					</a>
+					</RouterLink>
 				</li>
 				<li>
-					<a rel="noopener noreferrer" href="#" class="flex items-center p-2 space-x-3 rounded-md">
+					<router-link to="/panel_publicacion" class="flex items-center p-2 space-x-3 rounded-md">
 						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
 							class="w-5 h-5 fill-current dark:text-gray-400">
 							<path
@@ -35,11 +35,12 @@
 								d="M60.185,317.476a220.491,220.491,0,0,0,34.808-63.023l4.22-11.975-9.207-7.066C62.918,214.626,48,186.728,48,156.857,48,96.833,109.009,48,184,48c55.168,0,102.767,26.43,124.077,64.3,3.957-.192,7.931-.3,11.923-.3q12.027,0,23.834,1.167c-8.235-21.335-22.537-40.811-42.2-56.961C270.072,30.279,228.3,16,184,16S97.928,30.279,66.364,56.206C33.886,82.885,16,118.63,16,156.857c0,35.8,16.352,70.295,45.25,96.243a188.4,188.4,0,0,1-40.563,60.729L16,318.515V352H32a190.643,190.643,0,0,0,85.231-20.125,157.3,157.3,0,0,1-5.071-33.645A158.729,158.729,0,0,1,60.185,317.476Z">
 							</path>
 						</svg>
-						<span>Publicaciones</span>
-					</a>
+						<span>Mi Cuarto</span>
+					</router-link>
 				</li>
 				<li>
-					<a rel="noopener noreferrer" href="#" class="flex items-center p-2 space-x-3 rounded-md">
+					<router-link to="/#" class="flex items-center p-2 space-x-3 rounded-md">
+					
 						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
 							class="w-5 h-5 fill-current dark:text-gray-400">
 							<path
@@ -53,7 +54,7 @@
 							</path>
 						</svg>
 						<span>Configuracion</span>
-					</a>
+					</router-link>
 				</li>
 				<li>
 					<a rel="noopener noreferrer" href="#" class="flex items-center p-2 space-x-3 rounded-md">
@@ -63,19 +64,20 @@
 								d="M453.122,79.012a128,128,0,0,0-181.087.068l-15.511,15.7L241.142,79.114l-.1-.1a128,128,0,0,0-181.02,0l-6.91,6.91a128,128,0,0,0,0,181.019L235.485,449.314l20.595,21.578.491-.492.533.533L276.4,450.574,460.032,266.94a128.147,128.147,0,0,0,0-181.019ZM437.4,244.313,256.571,425.146,75.738,244.313a96,96,0,0,1,0-135.764l6.911-6.91a96,96,0,0,1,135.713-.051l38.093,38.787,38.274-38.736a96,96,0,0,1,135.765,0l6.91,6.909A96.11,96.11,0,0,1,437.4,244.313Z">
 							</path>
 						</svg>
-						<span>Mensajes</span>
+						<span>Estadisticas</span>
 					</a>
 				</li>
 			</ul>
 			<ul class="pt-4 pb-2 space-y-1 text-sm">
 				<li>
 					<div class="flex items-center p-2 space-x-4 pb-2">
-						<img src="../assets/punpun2.jpg" alt="" class="w-12 h-12 rounded-full dark:bg-gray-500">
+						<img :src="perfil_log.foto64" alt="" class="w-12 h-12 rounded-full dark:bg-gray-500">
 						<div>
 							<h2 class="text-lg font-semibold">David Deras</h2>
 							<span class="flex items-center space-x-1">
-								<a rel="noopener noreferrer" href="#"
-									class="text-xs hover:underline dark:text-gray-400">Ver Perfil</a>
+								<RouterLink to="/perfil" class="text-xs hover:underline dark:text-gray-400">
+									Mi Perfil
+								</RouterLink>
 							</span>
 						</div>
 					</div>
@@ -97,3 +99,30 @@
 		</div>
 	</div>
 </template>
+
+<script>
+import { getAPI } from '../axios-api'
+import user from '../helper/user'
+export default {
+	name: 'Sidebar',
+	data() {
+		return {
+			perfil_log: [],
+		}
+	},
+	created() {
+        // SE LLAMA A ESTA FUNCION PARA PODER OBTENER EL USUARIO LOGUEADO.
+        // EL PERFIL_USER SE GUARDA EN LA VARIABLE Perfil_Logueado
+        getAPI.get('/user_token/', {
+            headers: user.get_header_authorization_token()
+        }).then(response => {
+            console.log('Perfil logueado obtenido')
+            this.perfil_log = response.data;
+
+            //console.log(this.Perfil_Logueado)
+        }).catch(error => {
+            console.log(error);
+        });
+	},
+}
+</script>

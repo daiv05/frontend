@@ -1,6 +1,9 @@
 <template>
   <div id="app">
-    <router-view></router-view>
+      <metainfo>
+        <template v-slot:title="{ content }">{{ content ? `${content} | cheroomSV` : `cheroomSV` }}</template>
+      </metainfo>
+      <router-view />
   </div>
 </template>
 
@@ -28,8 +31,23 @@ nav {
 </style>
 
 <script>
+
+import { useMeta } from 'vue-meta'
+
 export default {
-  name : "app",
+  name: "app",
+  setup() {
+    useMeta({
+      title: 'Home',
+      htmlAttrs: { lang: 'es', amp: true },
+      description: "CheroomSV es una plataforma que busca conectar a las personas en la busqueda de un roomate. Comparte, conoce, alquila y vive con tu compañero ideal.",
+      keywords: "alquilar, roommate, buscar, compañero, cheroomsv, cuarto, alquiler, chero, hotel, room, conocer, el salvador",
+    });
+  },
+ mounted(){
+    console.log(this.$store.state.ruta_foto)
+    console.log(this.$store.state.username)
+ }
 }
 </script>
 
