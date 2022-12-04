@@ -13,7 +13,7 @@ import { store } from './store'
 
 import { plugin as vueMetaPlugin, createMetaManager, defaultConfig, resolveOption, useMeta } from 'vue-meta'
 
-store.dispatch('getLogin')
+store.dispatch('setLogin')
 
 const app = createApp(App)
 

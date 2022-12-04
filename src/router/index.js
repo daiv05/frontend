@@ -104,9 +104,10 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
 })
+export default router
 
 router.beforeEach((to,from,next) =>{
-  if (to.matched.some(record => record.meta.requiresAuth)){
+  if (to.matched.some(record => record.meta.requiresAuth)){ 
       if(store.state.auth){
           next()
       }
@@ -118,4 +119,3 @@ router.beforeEach((to,from,next) =>{
     next()
   }
 })
-export default router
