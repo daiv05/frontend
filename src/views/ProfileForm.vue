@@ -319,9 +319,17 @@ import { getAPI } from '../axios-api'
 import Cookies from "js-cookie";
 // SE NECESITA IMPORTAR ESTO PARA PODER PODER OBTENER EL USUARIO LOGUEADO
 import user from "@/helper/user"
-
+import { useMeta } from 'vue-meta'
 export default {
     name: 'ProfileForm',
+    setup() {
+        useMeta({
+            title: "Perfil",
+            description: "CheroomSV es una plataforma que busca conectar a las personas en la busqueda de un roomate. Comparte, conoce, alquila y vive con tu compañero ideal.",
+            keywords: "alquilar, roommate, buscar, compañero, cheroomsv, cuarto, alquiler, chero, hotel, room, conocer, el salvador",
+            'Content-Security-Policy': "upgrade-insecure-requests",
+        });
+    },
     data() {
         return {
             data: {

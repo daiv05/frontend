@@ -114,7 +114,17 @@ import { getAPI } from "@/axios-api";
 import user from "@/helper/user";
 import BusquedaClases from "@/views/BusquedaClases.vue";
 import sidebar1 from "../components/Sidebar1.vue";
+import { useMeta } from 'vue-meta'
 export default {
+    name: 'Detalle Alquiler',
+    setup() {
+    useMeta({
+      title: "rommies",
+      description: "Busca, filtra, conoce y comparte. CheroomSV es una plataforma que busca conectar a las personas en la busqueda de un roomate. Comparte, conoce, alquila y vive con tu compañero ideal.",
+      keywords: "alquilar, roommate, buscar, compañero, cheroomsv, cuarto, alquiler, chero, hotel, room, conocer, el salvador",
+      'Content-Security-Policy': "upgrade-insecure-requests",
+    });
+  },
   data() {
     return {
       fotos: [],

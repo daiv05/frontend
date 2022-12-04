@@ -163,7 +163,7 @@
 import user from "../helper/user"
 import { getAPI } from '../axios-api';
   export default {
-      name : "FormLogin",  
+      name : "FormLogin", 
       data(){
         return{
           username : "",
@@ -226,7 +226,7 @@ import { getAPI } from '../axios-api';
           return valid
         },
         setUserLogin : function (){
-          this.$router.push("/departamento/")
+          this.$router.push("/panel_publicacion/")
           //location.replace("/departamento/")
         }
       },

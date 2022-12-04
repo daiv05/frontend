@@ -5,7 +5,8 @@
             <div class="px-6 flex justify-between space-x-4 2xl:container">
                 <div class="flex justify-left inline-block items-center content-center">
                     <img class="flex inline-block" src="../assets/icon.png" width="20%">
-                    <h5 hidden class="flex text-2xl text-gray-600 font-medium lg:inline-block font-bold">&nbsp;&nbsp;cheroomSV</h5>
+                    <h5 hidden class="flex text-2xl text-gray-600 font-medium lg:inline-block font-bold">
+                        &nbsp;&nbsp;cheroomSV</h5>
                 </div>
                 <div class="flex space-x-4">
                     <button aria-label="chat"
@@ -252,8 +253,18 @@ import sidebar1 from '../components/Sidebar1.vue'
 import { getAPI } from '../axios-api'
 import user from '../helper/user'
 
+import { useMeta } from 'vue-meta'
+
 export default {
     name: 'Publicacion',
+    setup() {
+        useMeta({
+            title: "Comparte tu hogar",
+            description: "¡Comparte hoy, conoce mañana! CheroomSV es una plataforma que busca conectar a las personas en la busqueda de su roomate ideal.",
+            keywords: "alquilar, roommate, buscar, compañero, cheroomsv, cuarto, alquiler, chero, hotel, room, conocer, el salvador",
+            'Content-Security-Policy': "upgrade-insecure-requests",
+        });
+    },
     data() {
         return {
             //Datos a enviar al servidor para crear una nueva publicacion
@@ -331,7 +342,7 @@ export default {
                 tiempo_contrato: this.tiempo_contrato,
                 fecha_publi: new Date().toISOString().slice(0, 10),
                 p_activa: this.p_activa,
-            },{
+            }, {
                 headers: user.get_header_authorization_token(),
             })
                 .then(response => {
