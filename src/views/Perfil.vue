@@ -35,104 +35,87 @@
 
     <sidebar2></sidebar2>
 
-    <div class="profile-page">
-        <section class="relative block h-500-px">
-            <div class="absolute top-0 w-full h-full bg-center bg-cover"
-                style="background-image: url('https://vojislavd.com/ta-template-demo/assets/img/profile-background.jpg');">
+    <div class="h-full bg-gray-200 p-8">
+        <div class="bg-white rounded-lg shadow-xl pb-8">
+            <div class="w-full h-[250px]">
+                <img src="https://vojislavd.com/ta-template-demo/assets/img/profile-background.jpg" class="w-full h-full rounded-tl-lg rounded-tr-lg">
             </div>
-            <div class="top-auto bottom-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden h-70-px"
-                style="transform: translateZ(0px)">
-                <svg class="absolute bottom-0 overflow-hidden" xmlns="http://www.w3.org/2000/svg"
-                    preserveAspectRatio="none" version="1.1" viewBox="0 0 2560 100" x="0" y="0">
-                    <polygon class="text-blueGray-200 fill-current" points="2560 0 2560 100 0 100"></polygon>
-                </svg>
-            </div>
-        </section>
-
-        <section class="relative py-16 bg-blueGray-200">
-            <div class=" mx-auto px-4">
-                <div
-                    class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg -mt-64">
-                    <div class="px-6">
-                        <div class="flex flex-wrap justify-center">
-                            <div class="w-full lg:w-3/12 px-4 lg:order-2 flex justify-center">
-                                <div class="relative">
-                                    <img alt="..." :src="Perfil_Logueado.foto64"
-                                        class="shadow-xl rounded-full w-100 align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-200-px">
-                                </div>
-                            </div>
-                            <!-- BOTON PARA AÑADIR 
-                            <div class="w-full lg:w-4/12 px-4 lg:order-3 lg:text-right lg:self-center">
-                                <div class="py-6 px-3 mt-32 sm:mt-0">
-                                    <button class="bg-pink-500 active:bg-pink-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150" type="button">
-                                    Añadir
-                                    </button>
-                                </div>
-                            </div>
-                            -->
-                            <div class="w-full lg:w-4/12 px-4 lg:order-1">
-                                <div class="flex justify-center py-4 lg:pt-4 pt-8">
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="text-center mt-12">
-                            <h3 class="text-4xl font-semibold leading-normal mb-2 text-blueGray-700 mb-2">
+            <div class="flex flex-col items-center -mt-20">
+                <img :src="Perfil_Logueado.foto64" class="w-40 border-4 border-white rounded-full">
+                <div class="flex items-center space-x-2 mt-2">
+                    <h3 class="text-4xl font-semibold leading-normal mb-2 text-blueGray-700 mb-2">
                                 {{ Perfil_Logueado.nombre_user }} {{ Perfil_Logueado.apellidos_user }} </h3>
-                            <div class="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold uppercase">
-                                <i class="fas fa-map-marker-alt mr-2 text-lg text-blueGray-400">{{}}, {{}}</i>
-                            </div>
-                            <div class="mb-2 text-blueGray-600 mt-10">
-                                <i class="fas fa-user mr-2 text-lg text-blueGray-400"></i> {{ Perfil_Logueado.edad }}
-                                Años
-                            </div>
-                            <div class="mb-2 text-blueGray-600">
-                                <i class="fas fa-phone mr-2 text-lg text-blueGray-400"></i> {{ Perfil_Logueado.telefono
-                                }}
-                            </div>
-                        </div>
-                        <div class="mt-10 py-10 border-t border-blueGray-200 text-center">
-                            <div class="flex flex-wrap justify-center">
-                                <div class="w-full lg:w-9/12 px-4">
-                                    <h1>Biografia</h1>
-                                    <p class="mb-4 text-lg leading-relaxed text-blueGray-700">
+                    <span class="bg-blue-500 rounded-full p-1" title="Verified">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="text-gray-100 h-2.5 w-2.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                    </span>
+                </div>
+               
+                <div class="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold uppercase">
+                    <i class="fas fa-map-marker-alt mr-2 text-lg text-blueGray-400">{{}}, {{}}</i>
+                </div>
+
+                <div class="mb-2 text-blueGray-600 mt-10">
+                    <i class="fas fa-user mr-2 text-lg text-blueGray-400"></i> {{ Perfil_Logueado.edad }} Años
+                </div>
+
+                <div class="mb-2 text-blueGray-600">
+                    <i class="fas fa-phone mr-2 text-lg text-blueGray-400"></i> {{ Perfil_Logueado.telefono}}
+                </div>
+
+                <div class="mb-2 text-blueGray-600">
+                    <i class="fas fa-envelope mr-2 text-lg text-blueGray-400"></i> {{ Perfil_Logueado.email}}
+                </div>               
+                
+            </div>
+
+            <div class="mt-10 py-10 border-t border-blueGray-200 text-center">
+                <div class="flex flex-wrap justify-center">
+                    <div class="w-full lg:w-9/12 px-4">
+                        <h1 class="text-2xl font-semibold leading-normal" >Biografia</h1>
+
+                        <p class="mb-4 text-lg leading-relaxed text-blueGray-700">
                                         {{ Perfil_Logueado.biografia }}
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
+                        </p>
 
-                        <div class="mt-10 py-10 border-t border-blueGray-200 text-center">
-                            <div class="grid h-52 grid-cols-2 bg-white  shadow-lg">
-                                <div class="border pl-4 pt-4 ">
-                                    <h2 class="font-semibold">Preferencias:</h2>
-                                    <ul
-                                        class="space-y-1 max-w-md list-disc list-inside text-gray-500 dark:text-gray-400 mt-5">
-                                        <li v-for="prefer in filtroPref" :key="prefer.listapref_id"
-                                            v-bind:value="prefer">
-                                            {{ prefer.preferencia.nombre_preferencia }}
-                                        </li>
+                    </div>
+                </div>
+            </div>
 
-                                    </ul>
-                                </div>
+            <div class="mt-10 py-10 border-t border-blueGray-200 text-center">
+                <div class="grid h-52 grid-cols-2 bg-white  shadow-lg">
+                    <div class="border pl-0 pt-4 ">
+                        <h2 class="font-semibold leading-normal">Preferencias:</h2>
+                        <ul 
 
-                                <div class="border pl-4 pt-4 ">
-                                    <h2 class="font-semibold">Hobbies: </h2>
-                                    <ul
-                                        class="space-y-1 max-w-md list-disc list-inside text-gray-500 dark:text-gray-400 mt-5">
-                                        <li v-for="hobbie in filtroHob" :key="hobbie.listhobbies_id"
-                                            v-bind:value="hobbie">
-                                            {{ hobbie.hobbie.nombre_hobbie }}
-                                        </li>
+                            class="border border-gray-200 rounded overflow-hidden shadow-md mt-4 ml-3 mr-4">
+                            <li v-for="prefer in filtroPref" :key="prefer.listapref_id" class="px-4 py-2 bg-white hover:bg-sky-100 hover:text-sky-900 border-b last:border-none border-gray-200 transition-all duration-300 ease-in-out"
+                                v-bind:value="prefer">
+                                {{ prefer.preferencia.nombre_preferencia }}
+                            </li>
 
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
+                        </ul>
+                    </div>
 
-                        <div class="mt-10 py-10 border-t border-blueGray-200 text-center space-x-4 align-center">
-                            <h2 class="py-4">Redes Sociales: </h2>
-                            <a :href="('https://www.facebook.com/' + Perfil_Logueado.user_facebook)">
+                    <div class="border pl-0 pt-4 ">
+                        <h2 class="font-semibold leading-normal">Hobbies: </h2>
+                        <ul
+                            class="border border-gray-200 rounded overflow-hidden shadow-md mt-4 ml-3 mr-4">
+                            <li v-for="hobbie in filtroHob" :key="hobbie.listhobbies_id" class="px-4 py-2 bg-white hover:bg-sky-100 hover:text-sky-900 border-b last:border-none border-gray-200 transition-all duration-300 ease-in-out"
+                                v-bind:value="hobbie">
+                                {{ hobbie.hobbie.nombre_hobbie }}
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-10 py-10 border-t border-blueGray-200 text-center space-x-4 align-center">
+                <h2 class="py-4 text-2xl font-semibold leading-normal">Redes Sociales: </h2>
+                <a :href="('https://www.facebook.com/' + Perfil_Logueado.user_facebook)">
+
                                 <button
                                     class="bg-blue-500 px-4 py-2 font-semibold text-white inline-flex items-center space-x-2 rounded">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="w-4 h-4">
@@ -165,22 +148,10 @@
                                 </button>
                             </a>
 
-                        </div>
-
-                    </div>
-                </div>
             </div>
+            
+        </div>
 
-            <footer class="relative bg-blueGray-200 pt-8 pb-6 mt-8">
-                <div class="container mx-auto px-4">
-                    <div class="flex flex-wrap items-center md:justify-between justify-center">
-                        <div class="w-full md:w-6/12 px-4 mx-auto text-center">
-
-                        </div>
-                    </div>
-                </div>
-            </footer>
-        </section>
     </div>
 
 </template>
