@@ -86,6 +86,23 @@
               <svg id ="flechita" class="fill-current h-6 w-6 text-red-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
               </span>
               </div>
+
+              <!--Ciudad Input-->
+
+              <div class="mb-6" v-if="lista_ciudades">
+            <select id="countries" class = " bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 genero"
+            v-model="ciudad">
+            <option selected value="Seleccione su ciudad">Seleccione su ciudad</option>
+            <option  v-for="ciudad in lista_ciudades" :key="ciudad.ciudad_id" :value="ciudad.ciudad_id">{{ciudad.nombre_ciudad}}</option>
+            </select>
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert" id="alert" v-if="errors.ciudad">
+              <strong class="font-bold">{{errors.ciudad}}</strong>
+              <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+              <svg id ="flechita" class="fill-current h-6 w-6 text-red-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
+              </span>
+              </div>
+            </div>
+
               <!-- Email input -->
               <div class="mb-6">
                 <input
@@ -103,6 +120,7 @@
               </div>
             </div>
 
+           
 
             <!-- Password input -->
             <div class="mb-6">
@@ -120,9 +138,7 @@
               <svg class="fill-current h-6 w-6 text-red-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
               </span>
               </div>
-  
-            </div>
-            
+              </div>
           <!--prueba buttons-->
           <div class="flex items-center">
     <input checked id="default-radio-2" type="radio" value="necesito_cuarto" name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" v-model="tipo_usuario">
@@ -142,7 +158,6 @@
               >
                 Registrarse
               </button>
-
             </div>
           </form>
         </div>
@@ -226,6 +241,8 @@
             token : "",
             tipo_usuario : "necesito_cuarto",
             necesito_cuarto : null,
+            ciudad : "Seleccione su ciudad",
+            lista_ciudades : [],
             errors : {
               username : "",
               name : "",
@@ -233,6 +250,7 @@
               email : "",
               password : "",
               genero : "",
+              ciudad : "",
               wrong_credential : "",
             }
           }
@@ -248,7 +266,8 @@
                     email : this.email,
                     sexo : this.genero,
                     password: this.password,
-                    necesita_cuarto : this.necesito_cuarto
+                    necesita_cuarto : this.necesito_cuarto,
+                    ciudad : this.ciudad
                 },
                 )
                 .then(response => {
@@ -297,6 +316,12 @@
             else{
               this.errors.genero = "";
             }
+            if(this.ciudad === "Seleccione su ciudad"){
+                this.errors.ciudad = "Necesita seleccionar una ciudad"
+            }
+            else{
+              this.errors.ciudad = ""
+            }
             if(this.validar_email()){
                 this.errors.email = ""
             }
@@ -309,7 +334,7 @@
             else{
               this.errors.password = ""
             }
-            if(this.errors.username || this.errors.password || this.errors.lastName || this.errors.genero || this.errors.email || this.errors.password){
+            if(this.errors.username || this.errors.password || this.errors.lastName || this.errors.genero || this.errors.email || this.errors.password || this.errors.ciudad ){
               valid = false
             }
             if(this.tipo_usuario == "necesito_cuarto")
@@ -326,6 +351,14 @@
             let expRegularEmail = new RegExp("^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$");
             return expRegularEmail.test(this.email)
           }
+        },
+        created(){
+          let url = 'ciudad'
+          getAPI.get(url).then(response =>{
+            this.lista_ciudades = response.data
+          }).catch(
+            console.log("No hay ciudades en la base de datos")
+          )
         },
         computed : {
           verificar_errores : function(){
