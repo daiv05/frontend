@@ -36,19 +36,19 @@
         </div>
         <div class="col-span-2">
             <div class="bg-white">
-                <div v-for="Alquiler in alquiler" :key="Alquiler.publicacion_id" class="group relative">
-                    <h2 class="mt-16 flex justify-center align-center text-2xl font-bold tracking-tight text-black">{{ Alquiler.titulo }}</h2> 
+                <div class="group relative">
+                    <h2 class="mt-16 flex justify-center align-center text-2xl font-bold tracking-tight text-black">{{ publicacion.titulo }}</h2> 
                         <div class="grid grid-cols-4 sm:py-16 sm:px-24 lg:max-w-24 lg:px-2">
                            <div class="col-span-3" align="left">         
                                 <h2 class="flex justify-left align-left font-bold tracking-tight text-gray-900">Descripcion del lugar</h2>
-                                <h3 class="justify-left text-sm text-gray-700" align="justify">{{ Alquiler.descrip_lugar }}</h3>
+                                <h3 class="justify-left text-sm text-gray-700" align="justify">{{ publicacion.descrip_lugar }}</h3>
                            </div>
                             <div class="mt-4 justify-between">              
                                 <div class="justify-between" align="center">
                                    <div class="min-h-50 aspect-w-1 aspect-h-1 w-32 cursor-pointer text-sm border-2 border-transparent rounded rounded-circle focus:outline-none focus:border-white transition duration-150 ease-in-out">
-                                        <img class="rounded-full h-full w-full object-cover lg:h-full lg:w-full text-align-center" :src="product.imageSrc" alt="logo"  />                                             
+                                        <img class="rounded-full h-full w-full object-cover lg:h-full lg:w-full text-align-center" :src="'http://localhost:8000/' + perfil.foto_perfil" alt="logo"  />                                             
                                     </div>
-                                    <p class="mt-2 text-sm text-gray-700">{{ product.color }}</p> 
+                                    <p class="mt-2 text-sm text-gray-700">{{ perfil.username }}</p> 
                                 </div>                                
                                     <a href="#" class="flex justify-center mt-2">
                                         <button type="button" class="group relative flex w-36 justify-center rounded-md border border-transparent bg-black py-2 px-4 text-sm font-medium text-white hover:bg-gray-600 focus:outline-none focus:ring-offset-2">Ver Perfil</button>
@@ -59,26 +59,26 @@
                         <div class="grid grid-cols-2">
                             <div align="justify">
                                 <h2 class="flex justify-left align-left font-bold tracking-tight text-gray-900">Ciudad</h2>
-                                <h3 class="flex justify-left align-left text-sm text-gray-700">{{ product.ciudad }}</h3>
+                                <h3 class="flex justify-left align-left text-sm text-gray-700">{{ ciudad.nombre_ciudad }}</h3>
                                 <h2 class="mt-4 flex justify-left align-left font-bold tracking-tight text-gray-900">Departamento</h2> 
-                                <h3 class="flex justify-left align-left text-sm text-gray-700">{{ product.depa }}</h3>       
+                                <h3 class="flex justify-left align-left text-sm text-gray-700">{{ departamento.nombre_depa }}</h3>       
                                 <h2 class="mt-4 flex justify-left align-left font-bold tracking-tight text-gray-900">Como llegar</h2> 
                                 <h3 class="flex justify-left align-left">MAPA</h3>  
                                 <h2 class="mt-4 flex justify-left align-left font-bold tracking-tight text-gray-900">Amenidades</h2> 
-                                <h3 class="flex justify-left align-left text-sm text-gray-700">{{ product.depa }}</h3>   
+                                <h3 class="flex justify-left align-left text-sm text-gray-700" v-for="amenidad in listAmenidades" :key="amenidad.amenidad_id">{{ amenidad }}</h3>   
                             </div>
                                  
                             <div class="grid grid-rows-2">  
                                 
                                 <div class="min-h-80 aspect-w-1 aspect-h-1 w-80 cursor-pointer border-transparent focus:outline-none focus:border-white transition duration-150 ease-in-out">
                                     <h2 class="flex justify-left align-left font-bold tracking-tight text-gray-900">Fotos del lugar</h2>
-                                    <img  class="h-full w-full object-cover lg:h-full lg:w-full" :src="product.imageSrc" alt="imagen"/>      
+                                    <img  class="h-full w-full object-cover lg:h-full lg:w-full" :src="'http://localhost:8000/'+ foto.foto_lugar" alt="imagen"/>      
                                 </div>                                  
                                 <div>
                                     <h2 class="mt-16 flex justify-left align-left font-bold tracking-tight text-gray-900">Renta</h2> 
-                                    <h3 class="flex justify-left align-left text-sm text-gray-700">$ {{ Alquiler.precio }}</h3>
+                                    <h3 class="flex justify-left align-left text-sm text-gray-700">$ {{ publicacion.precio }}</h3>
                                     <h2 class="mt-4 flex justify-left align-left font-bold tracking-tight text-gray-900">Max. Ocupantes</h2> 
-                                    <h3 class="flex justify-left align-left text-sm text-gray-700">{{ Alquiler.num_ocupantes }}</h3>              
+                                    <h3 class="flex justify-left align-left text-sm text-gray-700">{{ publicacion.num_ocupantes }}</h3>              
                                 </div>
                             </div>
                                 <a href="#">
@@ -108,32 +108,30 @@ export default {
     name: 'alquiler',
     data() {
         return {
-            alquiler: [],            
-            foto: [],
-            ciu_seleccion: [],
-            depa_seleccion: [],            
-            listAmenis: [],
-           
+            publicacion: [], 
+            perfil:[],           
+            ciudad: [],
+            departamento: [], 
+            listAmenidades: [], 
+            foto: []          
         };
     },
     
     created() {
 
-        let url = 'publicacion_alquiler/'
+        let url = 'publicacion/'+this.$route.params.id_publicacion
         
-        getAPI.get(url, {headers: user.get_header_authorization_token()}).then(response=>{
-            this.alquiler = response.data
-           // console.log(response.data)
-           // console.log(this.alquiler["0"])
+        getAPI.get(url).then(response=>{
+            this.publicacion=response.data.publicacion,
+            this.perfil=response.data.perfil,
+            this.ciudad=response.data.ciudad,
+            this.departamento=response.data.departamento,
+            this.listAmenidades=response.data.amenidades,
+            this.foto=response.data.foto
         }).catch(error=>console.log(error))
         
-        getAPI.get("ciudad/",{headers: user.get_header_authorization_token()}).then(response=>{
-            this.ciu_seleccion = response.data
-        }).catch(error=>console.log(error))
+                     
         
-        getAPI.get("departamento/",{headers: user.get_header_authorization_token()}).then(response=>{
-            this.depa_seleccion = response.data
-        }).catch(error=>console.log(error))
     },
 
     methods: {

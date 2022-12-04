@@ -36,7 +36,7 @@ const routes = [
   },
   {
 
-    path: '/alquiler',
+    path: '/publicacion/id_publicacion',
     name: 'alquiler',
     component: Alquiler
   },
