@@ -395,7 +395,7 @@ export default {
     }
   },
   created(){
-          let url = 'ciudad'
+          let url = '/ciudad/'
           getAPI.get(url).then(response =>{
             this.lista_ciudades = response.data
           }).catch(
