@@ -44,6 +44,10 @@ export default {
       keywords: "alquilar, roommate, buscar, compañero, cheroomsv, cuarto, alquiler, chero, hotel, room, conocer, el salvador",
     });
   },
+ mounted(){
+    console.log(this.$store.state.ruta_foto)
+    console.log(this.$store.state.username)
+ }
 }
 </script>
 

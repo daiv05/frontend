@@ -4,7 +4,7 @@ import './registerServiceWorker'
 import router from './router'
 import './assets/tailwind.css'
 import FontAwesomeIcon from "@/plugin/fontawesome"
-import "./assets/css/tailwind.css"
+import { store } from './store'
 // Vuesax Component Framework
 // import Vuesax from 'vuesax'
 // import 'material-icons/iconfont/material-icons.css' //Material Icons
@@ -13,9 +13,12 @@ import "./assets/css/tailwind.css"
 
 import { plugin as vueMetaPlugin, createMetaManager, defaultConfig, resolveOption, useMeta } from 'vue-meta'
 
+store.dispatch('getLogin')
+
 const app = createApp(App)
 
 app.use(router)
+    .use(store)
     .use(createMetaManager(false, {
         body: {
             tag: "script",

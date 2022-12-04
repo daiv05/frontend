@@ -417,7 +417,7 @@ export default {
             formData.append('genero', this.userData.selectedGenero);
             formData.append('user', this.id_user);
 
-            getAPI.post(`http://127.0.0.1:8000/perfil/`, formData, {
+            getAPI.post(`/perfil/`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }

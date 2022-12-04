@@ -7,6 +7,8 @@ import modificarPublicacion from '../views/modificarPublicacion.vue'
 import panelPublicacion from '../views/panel_miPublicacion.vue'
 import subir_foto from '../views/subir_foto.vue'
 import VerCardAlquiler from '../views/VerCardAlquiler.vue'
+import { store } from '@/store'
+import Perfil from '../views/Perfil.vue'
 
 const routes = [
   {
@@ -17,26 +19,41 @@ const routes = [
   {
     path: '/vercard',
     name: 'vercard',
+    meta : {
+      requiresAuth : true
+    },
     component: VerCardAlquiler
+    
   },
-  // {
-  //   path: '/departamento',
-  //   name: 'departamento',
-  //   component: DepartamentoView
-  // },
+  {
+    path: '/departamento',
+    name: 'departamento',
+    meta : {
+      requiresAuth : true
+    },
+    component: DepartamentoView,
+  },
+
   {
     path: '/profileform',
     name: 'profileform',
     component: ProfileForm
   },
+  
   {
     path: '/crear_publicacion',
     name: 'alquiler_edit',
+    meta : {
+      requiresAuth : true
+    },
     component: AlquilerView
   },
   {
     path: '/modificar_publicacion',
     name: 'Mod_Publicacion',
+    meta : {
+      requiresAuth : true
+    },
     component: modificarPublicacion
   },
   {
@@ -61,7 +78,20 @@ const routes = [
     path : "/register",
     name : "register",
     component : () => import("../views/RegisterView.vue")
-  }
+  },
+  {
+    path : "/room",
+    name : "room",
+    meta : {
+      requiresAuth : true
+    },
+    component : () => import("../views/home.vue")
+  },
+  {
+    path : "/perfil",
+    name : "perfil",
+    component: Perfil
+  },
 ]
 
 const router = createRouter({
@@ -69,4 +99,17 @@ const router = createRouter({
   routes
 })
 
+router.beforeEach((to,from,next) =>{
+  if (to.matched.some(record => record.meta.requiresAuth)){
+      if(store.state.auth){
+          next()
+      }
+      else{
+        next({name:"login"})
+      }
+  }
+  else{
+    next()
+  }
+})
 export default router
