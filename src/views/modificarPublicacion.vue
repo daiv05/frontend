@@ -217,7 +217,7 @@
                                     </div>
                                 </div>
                                 <div class="bg-black">
-                                    <img v-if="foto_ORIGIN" :src="'https://www.cheroomsv.com' + foto_ORIGIN.foto_lugar" width="100" height="100" alt="icon">
+                                    <img v-if="foto_ORIGIN" :src="foto_ORIGIN.foto64" width="100" height="100" alt="icon">
                                 </div>
                                 
                             </div>

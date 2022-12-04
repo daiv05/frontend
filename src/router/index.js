@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-// import DepartamentoView from '../views/DepartamentoView.vue'
+import DepartamentoView from '../views/DepartamentoView.vue'
 import ProfileForm from '../views/ProfileForm.vue'
 import AlquilerView from '../views/CrearPublicacion.vue'
 import modificarPublicacion from '../views/modificarPublicacion.vue'
