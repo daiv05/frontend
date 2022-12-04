@@ -16,7 +16,11 @@ const routes = [
   {
     path: '/vercard',
     name: 'vercard',
+    meta : {
+      requiresAuth : true
+    },
     component: VerCardAlquiler
+    
   },
   {
     path: '/departamento',
