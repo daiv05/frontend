@@ -123,6 +123,18 @@
                                                             </select>
                                                         </div>
 
+                                                        <div class="col-span-6 sm:col-span-2 ">
+                                                            <label for="city"
+                                                                class="block text-sm font-medium text-gray-700">Hobbies</label>
+
+                                                            <VueMultiselect class="text-sm" v-model="userData.selectedHobbie"
+                                                                :options="optionsHobbie" :multiple="true"
+                                                                :close-on-select="false"
+                                                                placeholder="Seleccione sus hobbies..."
+                                                                label="name" track-by="id"
+                                                                required />
+                                                        </div>
+
                                                         <!--<div class="col-span-6 sm:col-span-2">
                                                     <label for="state"
                                                         class="block text-sm font-medium text-gray-700">State /
@@ -320,6 +332,7 @@ import sidebar1 from '../components/Sidebar1.vue'
 import formLogin from '../components/FormLogin.vue'
 import Detalle1 from '../components/Detalle1.vue'
 import logout from '../components/logout.vue'
+import VueMultiselect from 'vue-multiselect'
 import { getAPI } from '../axios-api'
 import Cookies from "js-cookie";
 // SE NECESITA IMPORTAR ESTO PARA PODER PODER OBTENER EL USUARIO LOGUEADO
@@ -346,6 +359,7 @@ export default {
                 email: '',
                 user: '',
                 selectedCity: '',
+                selectedHobbie: '',
                 streetaddress: '',
                 age: '',
                 state: '',
@@ -359,6 +373,7 @@ export default {
                 selectedGenero: '',
             },
             optionsCity: [],
+            optionsHobbie: [],
             file: null,
             optionsGenero: [
                 { text: 'Masculino', value: 1 },
@@ -388,6 +403,20 @@ export default {
             .finally(() => this.loading = false)
 
 
+        getAPI.get('http://127.0.0.1:8000/hobbie/')
+            .then(response => {
+                let data = response.data;
+                data.forEach((value, index) => {
+                    this.optionsHobbie.push({ name: value.nombre_hobbie, id: value.hobbie_id });
+                });
+            })
+            .catch(error => {
+                console.log(error)
+                this.errored = true
+            })
+            .finally(() => this.loading = false)
+
+
 
 
         // SE LLAMA A ESTA FUNCION PARA PODER OBTENER EL USUARIO LOGUEADO.
@@ -400,11 +429,14 @@ export default {
         }).then(response => {
             this.Perfil_Logueado = response.data;
             this.id_user = this.Perfil_Logueado.token;
-
+            console.log("ID USEer")
+            console.log(this.id_user);
             getAPI.get("http://127.0.0.1:8000/perfil_user/" + this.id_user + "/")
                 .then(response => {
+                    console.log(response.data)
                     this.flagUpdate = true
                     let data = response.data;
+                    this.userData.perfil_id = data.perfil_id
                     this.userData.firstname = data.nombre_user
                     this.userData.lastname = data.apellidos_user
                     this.userData.email = data.email
@@ -459,20 +491,58 @@ export default {
             formData.append('genero', this.userData.selectedGenero);
             formData.append('user', this.id_user);
 
-            getAPI.post(`/perfil/`, formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-            }).then((res) => {
-                console.log("Subida exitosa");
-                console.log(res);
-                location.reload();
-            }).catch(err => {
-                console.log(err);
-            });
+
+            if (this.flagUpdate == true) {
+                let id = this.userData.perfil_id
+                getAPI.put(`/perfil/${id}/`, formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                }).then((res) => {
+                    console.log("Subida exitosa");
+                    console.log(res);
+                    //guardare hobbies
+                    this.guadarHobbies();
+
+                    location.reload();
+                }).catch(err => {
+                    console.log(err);
+                });
+            } else {
+
+                getAPI.post(`/perfil/`, formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                }).then((res) => {
+                    console.log("Subida exitosa");
+                    console.log(res);
+                    location.reload();
+                }).catch(err => {
+                    console.log(err);
+                });
+
+            }
+
         },
         get_user_logged() {
             return Cookies.get('userLogged')
+        },
+        //Guardar las hobbies seleccionadaos
+        guadarHobbies() {
+            for (let i = 0; i < this.userData.selectedHobbie.length; i++) {
+                getAPI.post('/listadodehobbies/', {
+                    perfil: this.userData.perfil_id,
+                    hobbie: this.userData.selectedHobbie[i].id,
+                })
+                    .then(response => {
+                        console.log('Hobbies guardados')
+                        console.log(response.data);
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    });
+            }
         },
 
     },
@@ -481,7 +551,8 @@ export default {
         sidebar1: sidebar1,
         formLogin: formLogin,
         Detalle1: Detalle1,
-        logout: logout
+        logout: logout,
+        VueMultiselect,
     }
 }
 
