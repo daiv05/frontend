@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import DepartamentoView from '../views/DepartamentoView.vue'
+import EstadisticaView from '../views/EstadisticaView.vue'
 import ProfileForm from '../views/ProfileForm.vue'
 import AlquilerView from '../views/CrearPublicacion.vue'
 import modificarPublicacion from '../views/modificarPublicacion.vue'
@@ -60,6 +61,11 @@ const routes = [
     path: '/panel_publicacion',
     name: 'panel_miPublicacion',
     component: panelPublicacion
+  },
+  {
+    path: '/estadistica',
+    name: 'estadistica',
+    component: EstadisticaView
   },
   {
     path: '/about',
