@@ -10,9 +10,10 @@ import { store } from './store'
 // import 'material-icons/iconfont/material-icons.css' //Material Icons
 // import 'vuesax/dist/vuesax.css' // Vuesax
 // Vue.use(Vuesax)
-store.dispatch('getLogin')
+store.dispatch('setLogin')
 const app = createApp(App)
 app.component("font-awesome-icon",FontAwesomeIcon)
-app.use(router)
 app.use(store)
+app.use(router)
 app.mount('#app')
+

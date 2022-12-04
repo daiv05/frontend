@@ -23,6 +23,15 @@ export const store = createStore({
       state.username = null,
       state.token = ""
       state.auth = false
+    },
+    REFRESH_LOGIN(state,token){
+      state.auth = true
+      state.token = token
+    },
+    SET_LOGOUT_REFRESH(state,params){
+      state.auth = false
+      state.username = params.username
+      state.token = params.token
     }
   },
   actions : {
@@ -36,9 +45,7 @@ export const store = createStore({
                   return   dispatch('doLogin',params)
               })
               .catch(error => {
-                console.log("aqui se captura el error")
-                console.log(error["response"]["data"]['error'])
-                return error["response"]["data"]['error']
+                return error
               })
     },
     logout({dispatch}){
@@ -57,8 +64,6 @@ export const store = createStore({
       )
     },
     doLogin({commit},params){
-      console.log(params.username)
-      console.log(params.token)
       if (params.username && params.token){
         commit('SET_LOGIN',params)
         router.push("/departamento/")
@@ -72,20 +77,29 @@ export const store = createStore({
       router.push("/login/");
     },
     getLogin({commit}){
-      let url = "obtener_usuario/?token="+user.get_user_logged()
       getAPI.get(
-        url,{
+        "obtener_usuario/?token="+user.get_user_logged(),{
           headers : user.get_header_authorization_token()
         }
       ).then(response => {
-          let params = {username : response.data['user']['username'], token : response.data['token']}
-          commit('SET_LOGIN',params)        
+          console.log("llegamos al metodo")
+          commit('REFRESH_LOGIN',response.data.token)       
       }).catch(
        error =>{
+        user.delete_user_register()
         let param = {'username': null,token : null}
-        commit("SET_LOGIN",param)
+        commit("SET_LOGOUT_REFRESH",param)
        }
       )
+    },
+    setLogin({commit}){
+      if (user.get_user_logged()){
+          commit("REFRESH_LOGIN",user.get_user_logged())
+          this.dispatch("getLogin")
+      }
+      else {
+        commit("SET_LOGOUT")
+      }
     }
   },
 })
