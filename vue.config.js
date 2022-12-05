@@ -9,7 +9,7 @@ if (process.env.NODE_ENV === 'production') {
   plugins.unshift(
     new PrerenderPlugin({
       staticDir: join(__dirname, 'dist'),
-      routes: ['/profileform', '/vercard', '/crear_publicacion', '/modificar_publicacion', '/panel_publicacion', "/login", "/register", '/home', '/'], //the page route you want to prerender
+      routes: ['/profileform', '/vercard', '/crear_publicacion', '/modificar_publicacion', '/panel_publicacion', "/login", "/register", '/home', '/', '/perfil', '/estadistica'], //the page route you want to prerender
     })
   );
 }
