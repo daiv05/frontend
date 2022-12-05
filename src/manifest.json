@@ -11,25 +11,25 @@
   "orientation": "any",
   "icons": [
     {
-      "src": "frontend/public/icons_pwa/manifest-icon-192.maskable.png",
+      "src": "/icons_pwa/manifest-icon-192.maskable.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "frontend/public/icons_pwa/manifest-icon-192.maskable.png",
+      "src": "/icons_pwa/manifest-icon-192.maskable.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "maskable"
     },
     {
-      "src": "frontend/public/icons_pwa/manifest-icon-512.maskable.png",
+      "src": "/icons_pwa/manifest-icon-512.maskable.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "frontend/public/icons_pwa/manifest-icon-512.maskable.png",
+      "src": "/icons_pwa/manifest-icon-512.maskable.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
@@ -37,7 +37,7 @@
   ],
   "screenshots": [
     {
-      "src": "https://www.pwabuilder.com/assets/screenshots/screen1.png",
+      "src": "/icons_pwa/home.png",
       "sizes": "2880x1800",
       "type": "image/png",
       "description": "A screenshot of the home page"

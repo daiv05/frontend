@@ -101,7 +101,6 @@ export default {
         site_name: "CheroomSV",
         type: "website",
         locale: "es_ES",
-        'Content-Security-Policy': "upgrade-insecure-requests",
       },
     });
   },
