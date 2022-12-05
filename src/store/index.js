@@ -7,7 +7,7 @@ import router from '@/router';
 export const store = createStore({
   state () {
     return {
-      ruta_foto: "http://localhost:8000",
+      ruta_foto: "https://www.cheroomsv.com",
       username : null,
       token : null,
       auth : false,
