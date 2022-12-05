@@ -26,3 +26,10 @@ nav {
   }
 }
 </style>
+
+<script>
+export default {
+  name : "app",
+}
+</script>
+
