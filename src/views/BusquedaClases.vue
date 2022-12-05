@@ -16,7 +16,7 @@
                 <div class="col-span-3 sm:col-span-2 ajuste-input">
                     <label for="company-website"
                         class="block text-left text-sm font-medium text-gray-700">
-                        Ubica los roometaes de tu ciudad
+                        Ubica los roommates de donde desees
                     </label>
                         <div>
                         <input type="text" v-model="param_ciudad" required class="block w-full flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm "
@@ -156,7 +156,7 @@ export default {
         },
         obtener_datos_filtrados : function(){
             if (this.validar_filtros()){
-                let parametros_url = "publicacion_alquiler?departamento="+this.departamento+"&tipo_usuario="+this.tipo_usuario+"&monto_renta="+this.monto_renta+"&ciudad="+this.param_ciudad+"&es_filtro=true"
+                let parametros_url = "/publicacion_alquiler?departamento="+this.departamento+"&tipo_usuario="+this.tipo_usuario+"&monto_renta="+this.monto_renta+"&ciudad="+this.param_ciudad+"&es_filtro=true"
             getAPI.get(parametros_url,
             {
                 headers : user.get_header_authorization_token()

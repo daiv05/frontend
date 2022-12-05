@@ -95,7 +95,7 @@ export default {
   name: 'Detalle Alquiler',
   setup() {
     useMeta({
-      title: "rommies",
+      title: "Buscar rommies",
       description: "Busca, filtra, conoce y comparte. CheroomSV es una plataforma que busca conectar a las personas en la busqueda de un roomate. Comparte, conoce, alquila y vive con tu compañero ideal.",
       keywords: "alquilar, roommate, buscar, compañero, cheroomsv, cuarto, alquiler, chero, hotel, room, conocer, el salvador",
       'Content-Security-Policy': "upgrade-insecure-requests",
@@ -132,9 +132,14 @@ export default {
   methods: {
     emparejar_fotos: function () {
       for (let i = 0; i < this.fotos.length; i++) {
-        if (this.fotos[i].publi_alquiler == this.alquileres[i].publicacion_id) {
-          this.alquileres[i].ruta_foto = this.fotos[i].foto64;
+        if (this.alquileres[i]?.publicacion_id) {
+          if (this.fotos[i].publi_alquiler == this.alquileres[i].publicacion_id) {
+            if (this.alquileres[i].ruta_foto) {
+              this.alquileres[i].ruta_foto = this.fotos[i].foto64;
+            }
+          }
         }
+
       }
     },
     obtenerBusquedaFiltrada: function (busqueda_filtrada) {
