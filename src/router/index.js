@@ -10,6 +10,7 @@ import subir_foto from '../views/subir_foto.vue'
 import VerCardAlquiler from '../views/VerCardAlquiler.vue'
 import { store } from '@/store'
 import Perfil from '../views/Perfil.vue'
+import UserLocationView from '../views/UserLocationView.vue'
 
 const routes = [
   {
@@ -25,6 +26,11 @@ const routes = [
     },
     component: VerCardAlquiler
     
+  },
+  {
+    path: '/Locacion',
+    name: 'Locacion',
+    component: UserLocationView
   },
   {
     path: '/departamento',
