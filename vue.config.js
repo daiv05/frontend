@@ -30,7 +30,4 @@ module.exports = defineConfig({
       "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept, Authorization"
     }
   },
-  publicPath: process.env.NODE_ENV === 'production'
-    ? '/public/'
-    : '/'
 })
