@@ -389,7 +389,7 @@ export default {
         }
     },
     mounted() {
-        getAPI.get('http://127.0.0.1:8000/ciudad/')
+        getAPI.get('/ciudad/')
             .then(response => {
                 let data = response.data;
                 data.forEach((value, index) => {
@@ -403,7 +403,7 @@ export default {
             .finally(() => this.loading = false)
 
 
-        getAPI.get('http://127.0.0.1:8000/hobbie/')
+        getAPI.get('/hobbie/')
             .then(response => {
                 let data = response.data;
                 data.forEach((value, index) => {
@@ -424,14 +424,14 @@ export default {
 
         let request = { 'token': user.get_header_authorization_token().Authorization.replace("Token ", "") };
         console.log(request);
-        getAPI.post('http://127.0.0.1:8000/user_token_admin/', request, {
+        getAPI.post('/user_token_admin/', request, {
             headers: user.get_header_authorization_token()
         }).then(response => {
             this.Perfil_Logueado = response.data;
             this.id_user = this.Perfil_Logueado.token;
             console.log("ID USEer")
             console.log(this.id_user);
-            getAPI.get("http://127.0.0.1:8000/perfil_user/" + this.id_user + "/")
+            getAPI.get("/perfil/" + this.id_user + "/")
                 .then(response => {
                     console.log(response.data)
                     this.flagUpdate = true
@@ -441,7 +441,7 @@ export default {
                     this.userData.lastname = data.apellidos_user
                     this.userData.email = data.email
                     this.userData.user = data.user
-                    this.userData.selectedCity = data.ciudad.ciudad_id
+                    this.userData.selectedCity = data.ciudad
                     this.userData.age = data.edad
                     this.userData.about = data.biografia
                     this.userData.telefono = data.telefono
@@ -490,6 +490,7 @@ export default {
             formData.append('ciudad', this.userData.selectedCity);
             formData.append('genero', this.userData.selectedGenero);
             formData.append('user', this.id_user);
+            formData.append('foto64', null);
 
 
             if (this.flagUpdate == true) {

@@ -71,9 +71,10 @@
 			<ul class="pt-4 pb-2 space-y-1 text-sm">
 				<li>
 					<div class="flex items-center p-2 space-x-4 pb-2">
-						<img :src="perfil_log.foto64" alt="" class="w-12 h-12 rounded-full dark:bg-gray-500">
+						<img v-if="perfil_log.foto_perfil" :src="perfil_log.foto64" alt="" class="w-12 h-12 rounded-full dark:bg-gray-500">
+						<img v-if="!perfil_log.foto_perfil" src="../../public/img/icons/favicon-96x96.png" alt="" class="w-12 h-12 rounded-full dark:bg-gray-500">
 						<div>
-							<h2 class="text-lg font-semibold">David Deras</h2>
+							<h2 class="text-lg font-semibold">{{ perfil_log.nombre_user }}</h2>
 							<span class="flex items-center space-x-1">
 								<RouterLink to="/perfil" class="text-xs hover:underline dark:text-gray-400">
 									Mi Perfil
@@ -83,7 +84,7 @@
 					</div>
 				</li>
 				<li>
-					<a rel="noopener noreferrer" href="#" class="flex items-center p-2 space-x-3 rounded-md">
+					<button  :onClick="salirSesion" class="flex items-center p-2 space-x-3 rounded-md">
 						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
 							class="w-5 h-5 fill-current dark:text-gray-400">
 							<path
@@ -92,7 +93,7 @@
 							<rect width="32" height="64" x="256" y="232"></rect>
 						</svg>
 						<span>Salir</span>
-					</a>
+					</button>
 				</li>
 			</ul>
 
@@ -124,5 +125,11 @@ export default {
             console.log(error);
         });
 	},
+	methods: {
+		salirSesion() {
+			user.logout();
+			this.$router.push('/login');
+		}
+	}
 }
 </script>

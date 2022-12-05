@@ -228,7 +228,7 @@
 
                     </div>
                 </form>
-                <button type="submit"
+                <button type="button" @click="$router.go(-1)"
                     class="inline-flex rounded-md border border-transparent bg-red-600 py-2 px-4 text-sm font-medium text-white 
                     shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">Cancelar</button>
 
@@ -354,6 +354,10 @@ export default {
                     this.uploadFile();
                     //Llamo a la funcion que guarda las amenidades
                     this.guadarAmenidades();
+                }).then(_ => {
+                    this.$router.push('/panel_publicacion');
+                    //Redirecciono a la pagina de la publicacion creada
+                    //this.$router.push({ name: 'Publicacion', params: { id: this.publi_creada.id } })
                 })
                 .catch(error => {
                     console.log(error);

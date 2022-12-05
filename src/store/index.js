@@ -66,7 +66,7 @@ export const store = createStore({
     doLogin({commit},params){
       if (params.username && params.token){
         commit('SET_LOGIN',params)
-        router.push("/departamento/")
+        router.push("/panel_publicacion/")
       }
         else{
           commit('SET_LOGIN',"","")

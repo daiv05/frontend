@@ -55,7 +55,7 @@
                     class="mt-10 flex flex-col xl:flex-row justify-center items-stretch w-full xl:space-x-8 space-y-4 md:space-y-6 xl:space-y-0">
                     <div class="flex flex-col justify-start items-start w-full space-y-4 md:space-y-6 xl:space-y-8">
 
-                        <div v-if="tiene_publicacion = false"
+                        <div v-if="!tiene_publicacion"
                             class="flex flex-col justify-center items-center dark:bg-gray-800 bg-gray-50 px-4 py-4 md:py-6 md:p-6 xl:p-8 w-full">
                             <h2 class="text-xl font-bold text-white py-1">
                                 ¡Publica tu cuarto!
@@ -74,7 +74,7 @@
 
 
 
-                        <div v-if="tiene_publicacion = true"
+                        <div v-if="tiene_publicacion"
                             class="flex flex-col justify-start items-start dark:bg-gray-800 bg-gray-50 px-4 py-4 md:py-6 md:p-6 xl:p-8 w-full">
                             <p v-if="publicacion.p_activa == true"
                                 class="text-lg md:text-lg dark:text-white font-semibold leading-6 lg:leading-5 text-gray-800">
@@ -246,7 +246,7 @@ export default {
             publicacion: [],
             foto_publi: [],
             eliminar: false,
-            tiene_publicacion: false,
+            tiene_publicacion: true,
         };
     },
     created() {
@@ -254,12 +254,13 @@ export default {
     },
     methods: {
         si_elimina() {
-            getAPI.delete('/publicacion_alquiler/' + this.publicacion.publicacion_id)
+            getAPI.delete('/publicacion_alquiler/' + this.publicacion.publicacion_id + '/')
                 .then(response => {
                     console.log(response.data);
                 })
                 .then(_ => {
                     this.eliminar = false;
+                    this.$router.go(0)
                 })
                 .catch(error => {
                     console.log(error);
@@ -330,10 +331,9 @@ export default {
                     this.publicacion = this.API_Publicacion[i];
                 }
             }
-            if (this.publicacion.length == 0) {
+            if (Object.keys(this.publicacion).length === 0) {
                 this.tiene_publicacion = false;
-            } else {
-                this.tiene_publicacion = true;
+                console.log("aaaaaaaaaaaaaaa")
             }
         },
     },
