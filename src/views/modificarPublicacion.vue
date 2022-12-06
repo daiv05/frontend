@@ -378,10 +378,11 @@ export default {
                 .then(_ => {
                     this.getPublicacionFiltro();
                 })
-                .then(_ => {
+                .then(__ => {
                     this.getFotoFiltro();
+                    console.log("ostiaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
                 })
-                .then(_ => {
+                .then(___ => {
                     this.getAmenidadFiltro();
                 })
                 .catch(error => {
@@ -406,23 +407,24 @@ export default {
                     this.p_activa = this.API_Publicacion[i].p_activa;
                 }
             }
-            console.log("Datos obtenidos de la publicacion" + this.Perfil_Logueado.perfil_id + " --" + this.API_Publicacion[0].perfil.perfil_id)
+            // console.log("Datos obtenidos de la publicacion" + this.Perfil_Logueado.perfil_id + " --" + this.API_Publicacion[0].perfil.perfil_id)
         },
 
         getFotoFiltro() {
             for (let i = 0; i < this.API_Foto.length; i++) {
+                console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBBB" + this.API_Foto[i].publi_alquiler + "LOLA" + this.publi_creada.publicacion_id)
                 if (this.API_Foto[i].publi_alquiler == this.publi_creada.publicacion_id) {
                     this.foto_ORIGIN = this.API_Foto[i];
-                    console.log(this.foto_ORIGIN.foto_lugar)
+                    console.log(this.foto_ORIGIN.foto_lugar);
                 }
             }
-            console.log("Foto obtenida de la publicacion")
+            // console.log("Foto obtenida de la publicacion")
         },
         getAmenidadFiltro() {
             this.amenis_ORIGIN = [];
             this.amenis_seleccion = [];
             for (let i = 0; i < this.API_List_Amenidad.length; i++) {
-                console.log("Amenidad " + this.API_List_Amenidad[i].publicacion.titulo)
+                // console.log("Amenidad " + this.API_List_Amenidad[i].publicacion.titulo)
                 if (this.API_List_Amenidad[i].publicacion.publicacion_id == this.publi_creada.publicacion_id) {
                     this.amenis_seleccion.push(this.API_List_Amenidad[i].amenidad);
                     this.listAmenis_ORIGIN.push(this.API_List_Amenidad[i]);
@@ -468,9 +470,11 @@ export default {
                     //Llamo a la funcion que guarda las amenidades
                     this.updateAmenidades();
                 })
-                .then(response => {
+                .then(_ => {
                     console.log('Publicacion updated')
-                    console.log(response.data)
+                })
+                .then(response => {
+                    this.$router.push('/panel_publicacion')
                 })
                 .catch(error => {
                     console.log(error);
@@ -512,16 +516,19 @@ export default {
             this.file = e.target.files[0];
         },
         eliminarFoto() {
-            getAPI.delete('/foto/' + this.foto_ORIGIN.foto_id + '/', {
+            if (this.foto_ORIGIN == null) {
+                return;
+            } else {
+                getAPI.delete('/foto/' + this.foto_ORIGIN.foto_id + '/', {
                 headers: user.get_header_authorization_token()
-            })
-                .then(response => {
+                }).then(response => {
                     console.log('Foto deleted')
                     console.log(response.data)
-                })
-                .catch(error => {
+                }).catch(error => {
                     console.log(error);
                 });
+            }
+            
         },
         //Enviar la imagen al servidor
         uploadFile() {
@@ -530,9 +537,12 @@ export default {
             const formData = new FormData();
             //file corresponde a la imagen subida
             formData.append('foto_lugar', this.file);
+            formData.append('publi_alquiler', this.publi_creada.publicacion_id);
+            formData.append('foto64', "a");
             getAPI.post('/foto/', formData, {
                 headers: {
-                    'Content-Type': 'multipart/form-data'
+                    'Content-Type': 'multipart/form-data',
+                    'Authorization' :'Token ' + Cookies.get('userLogged'),
                 }
             }).then((res) => {
                 console.log("Subida de foto exitosa");
