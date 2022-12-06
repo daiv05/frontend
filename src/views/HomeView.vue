@@ -96,7 +96,7 @@ export default {
       og: {
         title: "Home | CheroomSV",
         description: "CheroomSV es una plataforma que busca conectar a las personas en la busqueda de un roomate. Comparte, conoce, alquila y vive con tu compañero ideal.",
-        image: "https://i.ibb.co/LSxy7fy/Rectangle-9.png",
+        image: "/img/renta1.png",
         url: "https://cheroomsv.com/",
         site_name: "CheroomSV",
         type: "website",
