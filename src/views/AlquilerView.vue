@@ -1,11 +1,12 @@
 <template>
     <div>
-         <!--NAVBAR SUPERIOR-->
+        <!--NAVBAR SUPERIOR-->
         <div class="sticky z-10 top-0 h-16 border-transparent bg-gray-900 lg:py-2.5">
             <div class="px-6 flex justify-between space-x-4 2xl:container">
                 <div class="flex justify-left inline-block items-center content-center">
                     <img class="flex inline-block  rounded-full" src="../assets/icon.png" width="20%">
-                    <h5 hidden class="flex text-2xl text-gray-600 font-medium lg:inline-block font-bold">&nbsp;&nbsp;cheroomSV</h5>
+                    <h5 hidden class="flex text-2xl text-gray-600 font-medium lg:inline-block font-bold">
+                        &nbsp;&nbsp;cheroomSV</h5>
                 </div>
                 <div class="flex space-x-4">
                     <button aria-label="chat"
@@ -30,90 +31,121 @@
         <!--/NAVBAR SUPERIOR-->
 
         <div class="grid grid-cols-3">
-        <div>
-            <sidebar1></sidebar1>
-        </div>
-        <div class="col-span-2">
-            <div class="bg-white">
-                <div class="group relative">
-                    <h2 class="mt-16 flex justify-center align-center text-2xl font-bold tracking-tight text-black">{{ publicacion.titulo }}</h2> 
+            <div>
+                <sidebar1></sidebar1>
+            </div>
+            <div class="col-span-2">
+                <div class="bg-white">
+                    <div class="group relative">
+                        <h2 class="mt-16 flex justify-center align-center text-2xl font-bold tracking-tight text-black">
+                            {{ publicacion.titulo }}</h2>
                         <div class="grid grid-cols-4 sm:py-16 sm:px-24 lg:max-w-24 lg:px-2">
-                           <div class="col-span-3" align="left">         
-                                <h2 class="flex justify-left align-left font-bold tracking-tight text-gray-900">Descripcion del lugar</h2>
-                                <h3 class="justify-left text-sm text-gray-700" align="justify">{{publicacion.descrip_lugar}}</h3>
-                           </div>
-                            <div class="mt-4 justify-between">              
+                            <div class="col-span-3" align="left">
+                                <h2 class="flex justify-left align-left font-bold tracking-tight text-gray-900">
+                                    Descripcion del lugar</h2>
+                                <h3 class="justify-left text-sm text-gray-700" align="justify">
+                                    {{ publicacion.descrip_lugar }}</h3>
+                            </div>
+                            <div class="mt-4 justify-between">
                                 <div class="justify-between" align="center">
-                                   <div class="min-h-50 aspect-w-1 aspect-h-1 w-28 cursor-pointer text-sm border-2 border-transparent rounded rounded-circle focus:outline-none focus:border-white transition duration-150 ease-in-out">
-                                        <img class="h-full w-full object-cover lg:h-full lg:w-full text-align-center  rounded-full" :src=" 'http://localhost:8000' + perfil.foto_perfil" alt="logo"  />                                             
+                                    <div
+                                        class="min-h-50 aspect-w-1 aspect-h-1 w-28 cursor-pointer text-sm border-2 border-transparent rounded rounded-circle focus:outline-none focus:border-white transition duration-150 ease-in-out">
+                                        <img class="h-full w-full object-cover lg:h-full lg:w-full text-align-center  rounded-full"
+                                            :src="perfil.foto64" alt="logo" />
                                     </div>
-                                    <p class="mt-2 text-sm text-gray-700">{{ perfil.nombre_user }}</p> 
-                                    <p class="mt-2 text-sm text-gray-700">{{ perfil.email }}</p> 
-                                    <p class="mt-2 text-sm text-gray-700">{{ perfil.genero }}</p> 
-                                </div>                                
-                                    <a href="#" class="flex justify-center mt-2">
-                                        <button type="button" class="group relative flex w-36 justify-center rounded-md border border-transparent bg-black py-2 px-4 text-sm font-medium text-white hover:bg-gray-600 focus:outline-none focus:ring-offset-2">Ver Perfil</button>
-                                    </a>
-                                    <!-- descomentar cuando la vista del perfil este lista
-                                              <router-link :to="{name :'vercard', params :{id_perfil:perfil.perfil_id}}">
-                                            <button type="button" class="group relative flex w-36 justify-center rounded-md border border-transparent bg-black py-2 px-4 text-sm font-medium text-white hover:bg-gray-600 focus:outline-none focus:ring-offset-2">Ver Perfil</button>
-                                    </router-link>  
-                                    -->
-                                                             
-                                    <b><p class="mt-2 text-sm text-black">¡Visita su perfil para conocer más sobre la persona y encontrar a tu roomate ideal!</p></b>
+                                    <p class="mt-2 text-sm text-gray-700">{{ perfil.nombre_user }}</p>
+                                    <p class="mt-2 text-sm text-gray-700">{{ perfil.email }}</p>
+                                    <p class="mt-2 text-sm text-gray-700">{{ perfil.genero }}</p>
+                                </div>
+                                <a href="#" class="flex justify-center mt-2">
+                                    <button type="button"
+                                        class="group relative flex w-36 justify-center rounded-md border border-transparent bg-black py-2 px-4 text-sm font-medium text-white hover:bg-gray-600 focus:outline-none focus:ring-offset-2">Ver
+                                        Perfil</button>
+                                </a>
+
+                                <router-link :to="{ name: 'Perfil_Unico', params: { id_perfil: perfil.perfil_id } }">
+                                    <button type="button"
+                                        class="group relative flex w-36 justify-center rounded-md border border-transparent bg-black py-2 px-4 text-sm font-medium text-white hover:bg-gray-600 focus:outline-none focus:ring-offset-2">Ver
+                                        Perfil</button>
+                                </router-link>
+
+
+                                <b>
+                                    <p class="mt-2 text-sm text-black">¡Visita su perfil para conocer más sobre la
+                                        persona y encontrar a tu roomate ideal!</p>
+                                </b>
                             </div>
                         </div>
                         <div class="grid grid-cols-2">
                             <div align="justify">
-                                <h2 class="flex justify-left align-left font-bold tracking-tight text-gray-900">Precio</h2>
-                                <h3 class="flex justify-left align-left text-sm text-gray-700">{{ publicacion.precio }}</h3>
-                                <h2 class="mt-4 flex justify-left align-left font-bold tracking-tight text-gray-900">Tiempo de contrato</h2> 
-                                <h3 class="flex justify-left align-left text-sm text-gray-700">{{ publicacion.tiempo_contrato }}</h3>       
-                                <h2 class="mt-4 flex justify-left align-left font-bold tracking-tight text-gray-900">Numero Ocupante</h2> 
-                                <h3 class="flex justify-left align-left">{{publicacion.num_ocupantes}}</h3>  
-                                <h2 class="mt-4 flex justify-left align-left font-bold tracking-tight text-gray-900">Amenidades</h2> 
-                                <h3 v-for="amenidad in lista_amenidades" :key="amenidad.amenidad_id" class="flex justify-left align-left text-sm text-gray-700">{{ amenidad.nombre_amenidad }}</h3>   
+                                <h2 class="flex justify-left align-left font-bold tracking-tight text-gray-900">Precio
+                                </h2>
+                                <h3 class="flex justify-left align-left text-sm text-gray-700">{{ publicacion.precio }}
+                                </h3>
+                                <h2 class="mt-4 flex justify-left align-left font-bold tracking-tight text-gray-900">
+                                    Tiempo de contrato</h2>
+                                <h3 class="flex justify-left align-left text-sm text-gray-700">{{
+                                        publicacion.tiempo_contrato
+                                }}</h3>
+                                <h2 class="mt-4 flex justify-left align-left font-bold tracking-tight text-gray-900">
+                                    Numero Ocupante</h2>
+                                <h3 class="flex justify-left align-left">{{ publicacion.num_ocupantes }}</h3>
+                                <h2 class="mt-4 flex justify-left align-left font-bold tracking-tight text-gray-900">
+                                    Amenidades</h2>
+                                <h3 v-for="amenidad in lista_amenidades" :key="amenidad.amenidad_id"
+                                    class="flex justify-left align-left text-sm text-gray-700">{{
+                                            amenidad.nombre_amenidad
+                                    }}</h3>
                             </div>
-                                 
-                            <div class="grid grid-rows-2">  
-                                
-                                <div class="min-h-80 aspect-w-1 aspect-h-1 w-80 cursor-pointer border-transparent focus:outline-none focus:border-white transition duration-150 ease-in-out">
-                                    <h2 class="flex justify-left align-left font-bold tracking-tight text-gray-900">Foto del lugar</h2>
-                                    <img  class="h-full w-full object-cover lg:h-full lg:w-full" :src="( 'http://localhost:8000' + foto.foto_lugar)" alt="imagen"/>      
-                                </div>                                  
+
+                            <div class="grid grid-rows-2">
+
+                                <div
+                                    class="min-h-80 aspect-w-1 aspect-h-1 w-80 cursor-pointer border-transparent focus:outline-none focus:border-white transition duration-150 ease-in-out">
+                                    <h2 class="flex justify-left align-left font-bold tracking-tight text-gray-900">Foto
+                                        del lugar</h2>
+                                    <img class="h-full w-full object-cover lg:h-full lg:w-full" :src="foto.foto64"
+                                        alt="imagen" />
+                                </div>
                                 <div>
-                                    <h2 class="mt-16 flex justify-left align-left font-bold tracking-tight text-gray-900">Renta</h2> 
+                                    <h2
+                                        class="mt-16 flex justify-left align-left font-bold tracking-tight text-gray-900">
+                                        Renta</h2>
                                     <h3 class="flex justify-left align-left text-sm text-gray-700">$</h3>
-                                    <h2 class="mt-4 flex justify-left align-left font-bold tracking-tight text-gray-900">Max. Ocupantes</h2> 
-                                    <h3 class="flex justify-left align-left text-sm text-gray-700"></h3>              
+                                    <h2
+                                        class="mt-4 flex justify-left align-left font-bold tracking-tight text-gray-900">
+                                        Max. Ocupantes</h2>
+                                    <h3 class="flex justify-left align-left text-sm text-gray-700"></h3>
                                 </div>
                             </div>
-                                <a href="/departamento">
-                                    <input type="button" class="group relative flex w-36 cursor-pointer justify-center rounded-md border border-transparent bg-blue-700 py-2 px-4 text-sm font-medium text-white hover:bg-blue-500 focus:outline-none focus:ring-offset-2" value="Contactar">
-                                </a>               
+                            <a href="/departamento">
+                                <input type="button"
+                                    class="group relative flex w-36 cursor-pointer justify-center rounded-md border border-transparent bg-blue-700 py-2 px-4 text-sm font-medium text-white hover:bg-blue-500 focus:outline-none focus:ring-offset-2"
+                                    value="Contactar">
+                            </a>
                         </div>
-                
+
+                    </div>
+
+
                 </div>
 
-
-            </div>
-
-            <div class="w-full">
-                <p> </p>
-                <div v-for="depa in API_Depa" :key="depa.departamento_id" class="flex">
-                    {{ depa.departamento_id }}
-                    {{ depa.pais.nombre_pais }}
-                    {{ depa.nombre_depa }}
+                <div class="w-full">
+                    <p> </p>
+                    <div v-for="depa in API_Depa" :key="depa.departamento_id" class="flex">
+                        {{ depa.departamento_id }}
+                        {{ depa.pais.nombre_pais }}
+                        {{ depa.nombre_depa }}
+                    </div>
                 </div>
             </div>
+
         </div>
 
+
+
     </div>
 
-
-
-    </div>
-   
 </template>
 
 
@@ -123,27 +155,27 @@ import sidebar1 from '../components/Sidebar1.vue'
 import { getAPI } from '../axios-api'
 import user from '@/helper/user'
 export default {
-    
+
     name: 'Publicacion',
     data() {
         return {
-            publicacion : null,
-            perfil : null,
-            ciudad : null,
-            departamento : null,
-            lista_amenidades : [],
-            foto : null,
+            publicacion: null,
+            perfil: null,
+            ciudad: null,
+            departamento: null,
+            lista_amenidades: [],
+            foto: null,
         };
     },
-    
+
     created() {
         const id_publicacion = this.$route.params.id_publicacion;
-        const url = "publicacion/"+id_publicacion;
+        const url = "publicacion/" + id_publicacion;
         console.log(id_publicacion)
-        getAPI.get(url,{
-            headers : user.get_header_authorization_token()
+        getAPI.get(url, {
+            headers: user.get_header_authorization_token()
         }).then(
-            (response) =>{
+            (response) => {
                 this.publicacion = response.data.publicacion
                 this.perfil = response.data.perfil
                 this.ciudad = response.data.ciudad
@@ -152,14 +184,14 @@ export default {
                 this.foto = response.data.foto
             }
         ).catch(
-                (error) => {
-                    console.log(error)
-                }
+            (error) => {
+                console.log(error)
+            }
         )
     },
     components: {
         navbar1: navbar1,
-        sidebar1: sidebar1,   
+        sidebar1: sidebar1,
     }
 };
 </script>

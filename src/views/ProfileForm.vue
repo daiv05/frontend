@@ -354,14 +354,15 @@ export default {
                 image: null
             },
             userData: {
+                perfil_id: null,
                 firstname: '',
                 lastname: '',
                 email: '',
                 user: '',
-                selectedCity: '',
-                selectedHobbie: '',
-                streetaddress: '',
-                age: '',
+                selectedCity: null,
+                selectedHobbie: null,
+                streetaddress: null,
+                age: null,
                 state: '',
                 postalcode: '',
                 about: '',
@@ -378,7 +379,6 @@ export default {
             optionsGenero: [
                 { text: 'Masculino', value: 1 },
                 { text: 'Femenino', value: 0 },
-                { text: 'Prefiero no Decirlo', value: 2 },
             ],
             perfil_creada: null,
             // AQUI SE GUARDA EL PERFIL DEL USUARIO LOGUEADO
@@ -422,50 +422,35 @@ export default {
         // SE LLAMA A ESTA FUNCION PARA PODER OBTENER EL USUARIO LOGUEADO.
         // EL PERFIL_USER SE GUARDA EN LA VARIABLE Perfil_Logueado
 
-        let request = { 'token': user.get_header_authorization_token().Authorization.replace("Token ", "") };
-        console.log(request);
-        getAPI.post('/user_token_admin/', request, {
+        getAPI.get('/user_token/', {
             headers: user.get_header_authorization_token()
         }).then(response => {
             this.Perfil_Logueado = response.data;
-            this.id_user = this.Perfil_Logueado.token;
-            console.log("ID USEer")
-            console.log(this.id_user);
-            getAPI.get("/perfil/" + this.id_user + "/")
-                .then(response => {
-                    console.log(response.data)
-                    this.flagUpdate = true
-                    let data = response.data;
-                    this.userData.perfil_id = data.perfil_id
-                    this.userData.firstname = data.nombre_user
-                    this.userData.lastname = data.apellidos_user
-                    this.userData.email = data.email
-                    this.userData.user = data.user
-                    this.userData.selectedCity = data.ciudad
-                    this.userData.age = data.edad
-                    this.userData.about = data.biografia
-                    this.userData.telefono = data.telefono
-                    this.userData.whatsapp = data.telefono
-                    this.userData.facebook = data.user_facebook
-                    this.userData.instagram = data.user_insta
-                    this.userData.twitter = data.user_twitter
-                    this.userData.selectedGenero = data.genero
-                    this.src_image = "http://127.0.0.1:8000/" + data.foto_perfil
-                })
-                .catch(error => {
-                    this.flagUpdate = false
-                    console.log(error)
-                    this.errored = true
-                })
-                .finally(() => this.loading = false)
-
-        }).catch(error => {
-            console.log(error);
-        });
-
-
-
-
+            console.log(response.data)
+            this.flagUpdate = true
+            let data = response.data;
+            this.userData.perfil_id = data.perfil_id
+            this.userData.firstname = data.nombre_user
+            this.userData.lastname = data.apellidos_user
+            this.userData.email = data.email
+            this.userData.user = data.user
+            this.userData.selectedCity = data.ciudad
+            this.userData.age = data.edad
+            this.userData.about = data.biografia
+            this.userData.telefono = data.telefono
+            this.userData.whatsapp = data.telefono
+            this.userData.facebook = data.user_facebook
+            this.userData.instagram = data.user_insta
+            this.userData.twitter = data.user_twitter
+            this.userData.selectedGenero = data.genero
+            this.src_image = data.foto64
+        })
+        .catch(error => {
+            this.flagUpdate = false
+            console.log(error)
+            this.errored = true
+        })
+        .finally(() => this.loading = false)
     },
     methods: {
         //Agarrar la imagen subida y guardarla en 'file'
@@ -476,6 +461,7 @@ export default {
 
             let formData = new FormData();
             //file corresponde a la imagen subida
+            formData.append('perfil_id', this.userData.perfil_id);
             formData.append('foto_perfil', this.file);
             formData.append('email', this.userData.email);
             formData.append('nombre_user', this.userData.firstname);
@@ -488,16 +474,18 @@ export default {
             formData.append('user_insta', this.userData.instagram);
             formData.append('user_twitter', this.userData.twitter);
             formData.append('ciudad', this.userData.selectedCity);
-            formData.append('genero', this.userData.selectedGenero);
-            formData.append('user', this.id_user);
-            formData.append('foto64', null);
+            formData.append('genero', 'Hombre');
+            formData.append('foto64', 'null');
+            formData.append('user', this.Perfil_Logueado.user);
+            formData.append('necesita_cuarto', false);
 
 
             if (this.flagUpdate == true) {
                 let id = this.userData.perfil_id
-                getAPI.put(`/perfil/${id}/`, formData, {
+                getAPI.put('/perfil/' + id, formData, {
                     headers: {
-                        'Content-Type': 'multipart/form-data'
+                        'Content-Type': 'multipart/form-data',
+                        "Authorization" :"Token " + Cookies.get('userLogged'),
                     }
                 }).then((res) => {
                     console.log("Subida exitosa");
