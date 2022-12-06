@@ -189,11 +189,12 @@ import { getAPI } from '../axios-api';
               username : this.username,
               password : this.password,
             }
-               this.errors.wrong_credential =  this.$store.dispatch('login',credentials)
-               if (this.errors.wrong_credential)
-               {
-                this.errors.wrong_credential = "El usuario o la contraseña son incorrectos";
-               }
+               this.$store.dispatch('login',credentials)
+               setTimeout(()=>{
+                  if(this.$store.state.auth == false){
+                      this.errors.wrong_credential = "El usuario o la contraseña son incorrectas"
+                  }
+               },1500)                
           }
           else{
             console.log("Form no valid")

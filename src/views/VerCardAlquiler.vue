@@ -119,7 +119,6 @@ export default {
       .get(url, { headers: user.get_header_authorization_token() })
       .then((response) => {
         this.alquileres = response.data;
-        console.log(response.data);
       })
       .catch((error) => console.log(error));
     getAPI
@@ -145,8 +144,6 @@ export default {
     obtenerBusquedaFiltrada: function (busqueda_filtrada) {
       this.fotos = busqueda_filtrada.fotos
       this.alquileres = busqueda_filtrada.publicaciones;
-      console.log(this.fotos)
-      console.log(this.alquileres)
     },
   },
   watch: {
@@ -156,9 +153,8 @@ export default {
   },
   computed: {
     verificar_consultas: function () {
-      if (this.fotos && this.alquileres) {
-        this.emparejar_fotos();
-        console.log("se ejecuta esto cuando se actualiza")
+      if (this.fotos!=[] && this.alquileres!=[]) {
+        setTimeout(this.emparejar_fotos(),1500);
         return true;
       } else {
         return false;

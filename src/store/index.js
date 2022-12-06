@@ -45,7 +45,7 @@ export const store = createStore({
                   return   dispatch('doLogin',params)
               })
               .catch(error => {
-                return error
+                  return error.response.data.error
               })
     },
     logout({dispatch}){
