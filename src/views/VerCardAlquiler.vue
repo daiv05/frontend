@@ -162,8 +162,8 @@ export default {
   },
   computed: {
     verificar_consultas: function () {
-      if (this.fotos && this.alquileres) {
-        this.emparejar_fotos();
+      if (this.fotos!=[] && this.alquileres!=[]) {
+        setTimeout(this.emparejar_fotos(),1500);
         return true;
       } else {
         return false;
