@@ -114,7 +114,7 @@
 
             <div class="mt-10 py-10 border-t border-blueGray-200 text-center space-x-4 align-center">
                 <h2 class="py-4 text-2xl font-semibold leading-normal">Redes Sociales: </h2>
-                <a :href="('https://www.facebook.com/' + Perfil_Logueado.user_facebook)">
+                <a :href="('https://www.facebook.com/' + Perfil_Logueado.user_facebook)" target="_blank">
 
                                 <button
                                     class="bg-blue-500 px-4 py-2 font-semibold text-white inline-flex items-center space-x-2 rounded">
@@ -126,7 +126,7 @@
                                 </button>
                             </a>
 
-                            <a :href="('https://www.twitter.com/' + Perfil_Logueado.user_twitter)">
+                            <a :href="('https://www.twitter.com/' + Perfil_Logueado.user_twitter)" target="_blank">
                                 <button
                                     class="bg-blue-300 px-4 py-2 font-semibold text-white inline-flex items-center space-x-2 rounded">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-4 h-4">
@@ -137,7 +137,7 @@
                                 </button>
                             </a>
 
-                            <a :href="('https://www.instagram.com/' + Perfil_Logueado.user_insta)">
+                            <a :href="('https://www.instagram.com/' + Perfil_Logueado.user_insta)" target="_blank">
                                 <button
                                     class="bg-red-500 px-4 py-2 font-semibold text-white inline-flex items-center space-x-2 rounded">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="w-4 h-4">

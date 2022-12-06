@@ -30,122 +30,102 @@
         </div>
         <!--/NAVBAR SUPERIOR-->
 
-        <div class="grid grid-cols-3">
-            <div>
+        <div class="md:grid md:grid-cols-12 bg-gray-100">
+
+            <div class="md:col-span-3">
                 <sidebar1></sidebar1>
             </div>
-            <div class="col-span-2">
-                <div class="bg-white">
-                    <div class="group relative">
-                        <h2 class="mt-16 flex justify-center align-center text-2xl font-bold tracking-tight text-black">
-                            {{ publicacion.titulo }}</h2>
-                        <div class="grid grid-cols-4 sm:py-16 sm:px-24 lg:max-w-24 lg:px-2">
-                            <div class="col-span-3" align="left">
-                                <h2 class="flex justify-left align-left font-bold tracking-tight text-gray-900">
-                                    Descripcion del lugar</h2>
-                                <h3 class="justify-left text-sm text-gray-700" align="justify">
-                                    {{ publicacion.descrip_lugar }}</h3>
-                            </div>
-                            <div class="mt-4 justify-between">
-                                <div class="justify-between" align="center">
-                                    <div
-                                        class="min-h-50 aspect-w-1 aspect-h-1 w-28 cursor-pointer text-sm border-2 border-transparent rounded rounded-circle focus:outline-none focus:border-white transition duration-150 ease-in-out">
-                                        <img class="h-full w-full object-cover lg:h-full lg:w-full text-align-center  rounded-full"
-                                            :src="perfil.foto64" alt="logo" />
+
+            <div class="mt-5 md:col-span-8 md:mt-0 border-transparent bg-gray-100">
+                <div class="shadow sm:overflow-hidden sm:rounded-md">
+                    <div class="space-y-6 bg-white px-4 py-5 sm:p-6">
+                        <div class="group relative">
+                            <h2
+                                class="mt-16 flex justify-center align-center text-2xl font-bold tracking-tight text-black">
+                                {{ publicacion.titulo }}</h2>
+                            <div class="grid grid-cols-4 sm:py-16 sm:px-24 lg:max-w-24 lg:px-2">
+                                <div class="col-span-3" align="left">
+                                    <h2 class="flex justify-left align-left font-bold tracking-tight text-gray-900">
+                                        Descripcion del lugar</h2>
+                                    <h3 class="justify-left text-sm text-gray-700" align="justify">
+                                        {{ publicacion.descrip_lugar }}</h3>
+                                </div>
+                                <div class="mt-4 justify-between">
+                                    <div class="justify-between" align="center">
+                                        <div
+                                            class="min-h-50 aspect-w-1 aspect-h-1 w-28 cursor-pointer text-sm border-2 border-transparent rounded rounded-circle focus:outline-none focus:border-white transition duration-150 ease-in-out">
+                                            <img class="h-full w-full object-cover lg:h-full lg:w-full text-align-center  rounded-full"
+                                                :src="perfil.foto64" alt="logo" />
+                                        </div>
+                                        <p class="mt-2 text-sm text-gray-700">{{ perfil.nombre_user }}</p>
+                                        <p class="mt-2 text-sm text-gray-700">{{ perfil.email }}</p>
+                                        <p class="mt-2 text-sm text-gray-700">{{ perfil.genero }}</p>
                                     </div>
-                                    <p class="mt-2 text-sm text-gray-700">{{ perfil.nombre_user }}</p>
-                                    <p class="mt-2 text-sm text-gray-700">{{ perfil.email }}</p>
-                                    <p class="mt-2 text-sm text-gray-700">{{ perfil.genero }}</p>
+
+                                    <router-link :to="{ name: 'Perfil_Unico', params: { id_perfil: perfilID } }"
+                                    class="group relative flex w-36 justify-center rounded-md border border-transparent bg-black py-2 px-4 text-sm font-medium text-white hover:bg-gray-600 focus:outline-none focus:ring-offset-2">
+                                        Ver Perfil
+                                    </router-link>
+                                    <b>
+                                        <p class="mt-2 text-sm text-black">¡Visita su perfil para conocer más sobre la
+                                            persona y contactar a tu roomate ideal!</p>
+                                    </b>
                                 </div>
-                                <a href="#" class="flex justify-center mt-2">
-                                    <button type="button"
-                                        class="group relative flex w-36 justify-center rounded-md border border-transparent bg-black py-2 px-4 text-sm font-medium text-white hover:bg-gray-600 focus:outline-none focus:ring-offset-2">Ver
-                                        Perfil</button>
-                                </a>
-
-                                <router-link :to="{ name: 'Perfil_Unico', params: { id_perfil: perfil.perfil_id } }">
-                                    <button type="button"
-                                        class="group relative flex w-36 justify-center rounded-md border border-transparent bg-black py-2 px-4 text-sm font-medium text-white hover:bg-gray-600 focus:outline-none focus:ring-offset-2">Ver
-                                        Perfil</button>
-                                </router-link>
-
-
-                                <b>
-                                    <p class="mt-2 text-sm text-black">¡Visita su perfil para conocer más sobre la
-                                        persona y encontrar a tu roomate ideal!</p>
-                                </b>
                             </div>
-                        </div>
-                        <div class="grid grid-cols-2">
-                            <div align="justify">
-                                <h2 class="flex justify-left align-left font-bold tracking-tight text-gray-900">Precio
-                                </h2>
-                                <h3 class="flex justify-left align-left text-sm text-gray-700">{{ publicacion.precio }}
-                                </h3>
-                                <h2 class="mt-4 flex justify-left align-left font-bold tracking-tight text-gray-900">
-                                    Tiempo de contrato</h2>
-                                <h3 class="flex justify-left align-left text-sm text-gray-700">{{
-                                        publicacion.tiempo_contrato
-                                }}</h3>
-                                <h2 class="mt-4 flex justify-left align-left font-bold tracking-tight text-gray-900">
-                                    Numero Ocupante</h2>
-                                <h3 class="flex justify-left align-left">{{ publicacion.num_ocupantes }}</h3>
-                                <h2 class="mt-4 flex justify-left align-left font-bold tracking-tight text-gray-900">
-                                    Amenidades</h2>
-                                <h3 v-for="amenidad in lista_amenidades" :key="amenidad.amenidad_id"
-                                    class="flex justify-left align-left text-sm text-gray-700">{{
-                                            amenidad.nombre_amenidad
-                                    }}</h3>
-                            </div>
-
-                            <div class="grid grid-rows-2">
-
-                                <div
-                                    class="min-h-80 aspect-w-1 aspect-h-1 w-80 cursor-pointer border-transparent focus:outline-none focus:border-white transition duration-150 ease-in-out">
-                                    <h2 class="flex justify-left align-left font-bold tracking-tight text-gray-900">Foto
-                                        del lugar</h2>
-                                    <img class="h-full w-full object-cover lg:h-full lg:w-full" :src="foto.foto64"
-                                        alt="imagen" />
-                                </div>
-                                <div>
-                                    <h2
-                                        class="mt-16 flex justify-left align-left font-bold tracking-tight text-gray-900">
-                                        Renta</h2>
-                                    <h3 class="flex justify-left align-left text-sm text-gray-700">$</h3>
+                            <div class="grid grid-cols-2">
+                                <div align="justify">
+                                    <h2 class="flex justify-left align-left font-bold tracking-tight text-gray-900">
+                                        Precio
+                                    </h2>
+                                    <h3 class="flex justify-left align-left text-sm text-gray-700">{{ publicacion.precio
+                                    }}
+                                    </h3>
                                     <h2
                                         class="mt-4 flex justify-left align-left font-bold tracking-tight text-gray-900">
-                                        Max. Ocupantes</h2>
-                                    <h3 class="flex justify-left align-left text-sm text-gray-700"></h3>
+                                        Tiempo de contrato</h2>
+                                    <h3 class="flex justify-left align-left text-sm text-gray-700">{{
+                                            publicacion.tiempo_contrato
+                                    }}</h3>
+                                    <h2
+                                        class="mt-4 flex justify-left align-left font-bold tracking-tight text-gray-900">
+                                        Numero Ocupante</h2>
+                                    <h3 class="flex justify-left align-left">{{ publicacion.num_ocupantes }}</h3>
+                                    <h2
+                                        class="mt-4 flex justify-left align-left font-bold tracking-tight text-gray-900">
+                                        Amenidades</h2>
+                                    <h3 v-for="amenidad in filtro_ameni" :key="amenidad.amenidad_id"
+                                        class="flex justify-left align-left text-sm text-gray-700">{{
+                                                amenidad.nombre_amenidad
+                                        }}</h3>
                                 </div>
+
+                                <div class="grid grid-rows-2">
+
+                                    <div
+                                        class="min-h-80 aspect-w-1 aspect-h-1 w-80 cursor-pointer border-transparent focus:outline-none focus:border-white transition duration-150 ease-in-out">
+                                        <h2 class="flex justify-left align-left font-bold tracking-tight text-gray-900">
+                                            Foto
+                                            del lugar</h2>
+                                        <img class="h-full w-full object-cover lg:h-full lg:w-full" :src="foto"
+                                            alt="imagen" />
+                                    </div>
+
+                                </div>
+                                <a :href="'https://wa.me/' + perfil.telefono">
+                                    <input type="button"
+                                        class="group relative flex w-36 cursor-pointer justify-center rounded-md border border-transparent bg-blue-700 py-2 px-4 text-sm font-medium text-white hover:bg-blue-500 focus:outline-none focus:ring-offset-2"
+                                        value="Contactar">
+                                </a>
                             </div>
-                            <a href="/departamento">
-                                <input type="button"
-                                    class="group relative flex w-36 cursor-pointer justify-center rounded-md border border-transparent bg-blue-700 py-2 px-4 text-sm font-medium text-white hover:bg-blue-500 focus:outline-none focus:ring-offset-2"
-                                    value="Contactar">
-                            </a>
+
                         </div>
 
-                    </div>
 
-
-                </div>
-
-                <div class="w-full">
-                    <p> </p>
-                    <div v-for="depa in API_Depa" :key="depa.departamento_id" class="flex">
-                        {{ depa.departamento_id }}
-                        {{ depa.pais.nombre_pais }}
-                        {{ depa.nombre_depa }}
                     </div>
                 </div>
             </div>
-
         </div>
-
-
-
     </div>
-
 </template>
 
 
@@ -156,61 +136,132 @@ import { getAPI } from '../axios-api'
 import user from '@/helper/user'
 export default {
 
-    name: 'Publicacion',
+    name: 'PublicacionUnica',
     data() {
         return {
-            publicacion: null,
-            perfil: null,
-            ciudad: null,
-            departamento: null,
+            publicacion: [],
+            perfil: [],
+            API_Foto: [],
             lista_amenidades: [],
-            foto: null,
+            filtro_ameni: [],
+            foto: "",
+
+            perfilID: 0,
         };
     },
 
     created() {
         const id_publicacion = this.$route.params.id_publicacion;
-        const url = "publicacion/" + id_publicacion;
+        const url = "/publicacion_alquiler/" + id_publicacion + "/";
         console.log(id_publicacion)
+
         getAPI.get(url, {
             headers: user.get_header_authorization_token()
-        }).then(
-            (response) => {
-                this.publicacion = response.data.publicacion
-                this.perfil = response.data.perfil
-                this.ciudad = response.data.ciudad
-                this.departamento = response.data.departamento
-                this.lista_amenidades = response.data.amenidades
-                this.foto = response.data.foto
-            }
-        ).catch(
-            (error) => {
-                console.log(error)
-            }
+        }).then((response) => {
+            this.publicacion = response.data;
+        }).then(_ => {
+            this.obtenerListadoAmenidad();
+            this.obtenerPerfil();
+        }).catch((error) => {
+            console.log(error)
+        }
         )
+    },
+
+    methods: {
+        obtenerPerfil() {
+            getAPI.get('/user_token/', {
+                headers: user.get_header_authorization_token()
+            }).then((response) => {
+                this.perfil = response.data;
+                this.perfilID = this.perfil.perfil_id;
+            }).then(_ => {
+                this.obtenerFotos();
+            })
+                .catch((error) => {
+                    console.log(error)
+                }
+                )
+        },
+        obtenerListadoAmenidad() {
+            getAPI.get('/lista_amenidad/', {
+                headers: user.get_header_authorization_token()
+            }).then(
+                (response) => {
+                    this.lista_amenidades = response.data;
+                }
+            ).then(_ => {
+                this.filtroAmenidad(this.publicacion.publicacion_id);
+            })
+                .catch(
+                    (error) => {
+                        console.log(error)
+                    }
+                )
+        },
+
+        filtroAmenidad(id_publicacion) {
+            for (let i = 0; i < this.lista_amenidades.length; i++) {
+                if (this.lista_amenidades[i].publicacion.publicacion_id == id_publicacion) {
+                    this.filtro_ameni.push(this.lista_amenidades[i].amenidad);
+                }
+            }
+        },
+
+        obtenerFotos() {
+            getAPI.get('/foto/', {
+                headers: user.get_header_authorization_token()
+            }).then(response => {
+                console.log(response.data);
+                this.API_Foto = response.data;
+            }).then(_ => {
+                this.getFoto(this.publicacion.publicacion_id);
+            }).catch((error) => {
+                console.log(error)
+            });
+        },
+
+        getFoto(id_publicacion) {
+            console.log("AAAAAAAAAAAAA: " + id_publicacion)
+            for (let i = 0; i < this.API_Foto.length; i++) {
+                if (this.API_Foto[i].publi_alquiler == id_publicacion) {
+                    this.foto = this.API_Foto[i].foto64;
+                }
+            }
+        },
+
+
+
+        // getCiudad(id_ciudad) {
+        //     getAPI.get('/ciudad/' + id_ciudad, {
+        //         headers: user.get_header_authorization_token()
+        //     }).then(
+        //         (response) => {
+        //             this.ciudad = response.data;
+        //         }
+        //     ).catch(
+        //         (error) => {
+        //             console.log(error)
+        //         }
+        //     )
+        // },
+        // getDepartamento(id_departamento) {
+        //     getAPI.get('/departamento/' + id_departamento, {
+        //         headers: user.get_header_authorization_token()
+        //     }).then(
+        //         (response) => {
+        //             this.departamento = response.data;
+        //         }
+        //     ).catch(
+        //         (error) => {
+        //             console.log(error)
+        //         }
+        //     )
+        // },
     },
     components: {
         navbar1: navbar1,
         sidebar1: sidebar1,
     }
 };
-</script>
-  
-<script setup>
-const products = [
-    {
-        id: 1,
-        name: 'Av los Heroes, las Lomas',
-        href: '#',
-        imageSrc: 'https://i.pinimg.com/736x/39/e9/7f/39e97f7e03ec3854a8fb45df0acb22b9.jpg',
-        imageAlt: 'https://i.mydramalist.com/Xqmvx_5f.jpg',
-        ciudad: 'San Salavador',
-        depa: 'Lula',
-        color: 'Sunoo enhypen 4 ever loca flamenca Lopez',
-        descripcion: 'Es una casa con 4 habitaciones, dos baños, una sala, una cocina, piscina y gym Hay varios tipos de encabezados, que se diferencian visualmente en el tamaño de la letra que utilizan. La etiqueta en concreto es la H1, para los encabezados más grandes, H2 para los de segundo nivel y así hasta H6 que es el encabezado más pequeño. Pero lo importante, insistimos es la estructura que denotan. Una página tendrá generalmente un encabezado de nivel 1 y dentro varios de nivel 2. Luego, dentro de los H2 encontraremos si acaso H3, etc. Nunca debemos usar los encabezados porque nos formateen el texto de una manera dada, sino porque nuestro documento lo requiera según su estructura.',
-    },
-    // More products...
-]
-
-
 </script>

@@ -1,6 +1,34 @@
 <template>
     <div>
-        <navbar1></navbar1>
+        <!--NAVBAR SUPERIOR-->
+        <div class="sticky z-10 top-0 h-16 border-transparent bg-gray-900 lg:py-2.5">
+            <div class="px-6 flex justify-between space-x-4 2xl:container">
+                <div class="flex justify-left inline-block items-center content-center">
+                    <img class="flex inline-block" src="../assets/icon.png" width="20%">
+                    <h5 hidden class="flex text-2xl text-gray-600 font-medium lg:inline-block font-bold">
+                        &nbsp;&nbsp;cheroomSV</h5>
+                </div>
+                <div class="flex space-x-4">
+                    <button aria-label="chat"
+                        class="w-10 h-10 rounded-xl border bg-gray-100 focus:bg-gray-100 active:bg-gray-200">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 m-auto text-gray-600" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
+                        </svg>
+                    </button>
+                    <button aria-label="notification"
+                        class="w-10 h-10 rounded-xl border bg-gray-100 focus:bg-gray-100 active:bg-gray-200">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 m-auto text-gray-600" viewBox="0 0 20 20"
+                            fill="currentColor">
+                            <path
+                                d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!--/NAVBAR SUPERIOR-->
     </div>
 
     <div class="grid md:grid-cols-6">
@@ -18,7 +46,8 @@
                                     <div class="md:grid md:grid-cols-4 md:gap-6">
                                         <div class="md:col-span-1">
                                             <div class="px-4 sm:px-0">
-                                                <h3 class="text-lg font-medium leading-6 text-gray-900">Informacion Personal
+                                                <h3 class="text-lg font-medium leading-6 text-gray-900">Informacion
+                                                    Personal
                                                 </h3>
                                                 <p class="mt-1 text-sm text-gray-600">Por favor complete sus datos.</p>
                                             </div>
@@ -31,7 +60,7 @@
                                                         <div class="col-span-6 sm:col-span-2">
                                                             <label for="first-name"
                                                                 class="block text-sm font-medium text-gray-700">Nombre</label>
-                                                            <input type="text" v-model.lazy="userData.firstname"
+                                                            <input type="text" v-model="Perfil_Logueado.nombre_user"
                                                                 id="first-name" autocomplete="given-name"
                                                                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                                                         </div>
@@ -39,7 +68,7 @@
                                                         <div class="col-span-6 sm:col-span-2">
                                                             <label for="last-name"
                                                                 class="block text-sm font-medium text-gray-700">Apellido</label>
-                                                            <input type="text" v-model.lazy="userData.lastname"
+                                                            <input type="text" v-model="Perfil_Logueado.apellidos_user"
                                                                 id="last-name" autocomplete="family-name"
                                                                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                                                         </div>
@@ -47,15 +76,16 @@
                                                         <div class="col-span-6 sm:col-span-2">
                                                             <label for="user"
                                                                 class="block text-sm font-medium text-gray-700">Username</label>
-                                                            <input type="text" v-model.lazy="userData.user" id="user"
-                                                                autocomplete="family-name"
+                                                            <input type="text" v-model="Perfil_Logueado.username"
+                                                                id="user" autocomplete="family-name"
                                                                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                                                         </div>
 
                                                         <div class="col-span-6 sm:col-span-4">
                                                             <label for="email-address"
-                                                                class="block text-sm font-medium text-gray-700">Correo Electr&oacute;nico</label>
-                                                            <input type="text" v-model.lazy="userData.email"
+                                                                class="block text-sm font-medium text-gray-700">Correo
+                                                                Electr&oacute;nico</label>
+                                                            <input type="text" v-model="Perfil_Logueado.email"
                                                                 id="email-address" autocomplete="email"
                                                                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                                                         </div>
@@ -63,7 +93,7 @@
                                                         <div class="col-span-6 sm:col-span-2">
                                                             <label for="genero"
                                                                 class="block text-sm font-medium text-gray-700">G&eacute;nero</label>
-                                                            <select id="genero" v-model="userData.selectedGenero"
+                                                            <select id="genero" v-model="Perfil_Logueado.genero"
                                                                 autocomplete="genero-name"
                                                                 class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
                                                                 <option value="Masculino">Masculino</option>
@@ -97,7 +127,7 @@
                                                         <div class="col-span-6 sm:col-span-2">
                                                             <label for="age"
                                                                 class="block text-sm font-medium text-gray-700">Edad</label>
-                                                            <input type="number" v-model="userData.age" id="age"
+                                                            <input type="number" v-model="Perfil_Logueado.edad" id="age"
                                                                 autocomplete="age" min="18"
                                                                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                                                         </div>
@@ -105,26 +135,28 @@
 
                                                         <div class="col-span-6 sm:col-span-2 ">
                                                             <label for="city"
-                                                                class="block text-sm font-medium text-gray-700">Ciudad de Residencia</label>
-                                                            <select id="city" v-model="userData.selectedCity"
+                                                                class="block text-sm font-medium text-gray-700">Ciudad
+                                                                de Residencia</label>
+                                                            <select id="city" v-model="Perfil_Logueado.ciudad"
                                                                 autocomplete="city-name"
                                                                 class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
-                                                                <option v-for="option in optionsCity"
-                                                                    :value="option.value">
-                                                                    {{ option.text }}
+                                                                <option v-for="ciudad in API_Ciudad" :value="ciudad"
+                                                                    :key="ciudad.ciudad_id">
+                                                                    {{ ciudad.nombre_ciudad }}
                                                                 </option>
                                                             </select>
                                                         </div>
+
 
                                                         <div class="col-span-6 sm:col-span-2 ">
                                                             <label for="hobbie"
                                                                 class="block text-sm font-medium text-gray-700">Hobbies</label>
 
-                                                            <VueMultiselect class="text-sm" v-model="userData.selectedHobbie"
-                                                                :options="optionsHobbie" :multiple="true"
+                                                            <VueMultiselect class="text-sm" v-model="selectedHobbie"
+                                                                :options="API_Hobbie" :multiple="true"
                                                                 :close-on-select="false"
                                                                 placeholder="Seleccione sus hobbies..."
-                                                                label="name" track-by="id"
+                                                                label="nombre_hobbie" track-by="nombre_hobbie"
                                                                 required />
                                                         </div>
 
@@ -135,31 +167,13 @@
                                                             <label for="pref"
                                                                 class="block text-sm font-medium text-gray-700">Preferencias</label>
 
-                                                            <VueMultiselect class="text-sm" v-model="userData.selectedHobbie"
-                                                                :options="optionsHobbie" :multiple="true"
-                                                                :close-on-select="false"
-                                                                placeholder="Seleccione sus hobbies..."
-                                                                label="name" track-by="id"
+                                                            <VueMultiselect class="text-sm"
+                                                                v-model="selectedPreferencia" :options="API_Pref"
+                                                                :multiple="true" :close-on-select="false"
+                                                                placeholder="Seleccione sus preferencias..."
+                                                                label="nombre_preferencia" track-by="nombre_preferencia"
                                                                 required />
                                                         </div>
-
-                                                        <!--<div class="col-span-6 sm:col-span-2">
-                                                    <label for="state"
-                                                        class="block text-sm font-medium text-gray-700">State /
-                                                        Province</label>
-                                                    <input type="text" v-model="userData.state" id="state"
-                                                        autocomplete="address-level1"
-                                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
-                                                </div>-->
-
-                                                        <!--<div class="col-span-6 sm:col-span-2">
-                                                    <label for="postal-code"
-                                                        class="block text-sm font-medium text-gray-700">ZIP / Postal
-                                                        code</label>
-                                                    <input type="text" v-model="userData.postalcode" id="postal-code"
-                                                        autocomplete="postal-code"
-                                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
-                                                </div> -->
                                                     </div>
                                                 </div>
                                             </div>
@@ -191,7 +205,8 @@
                                                             class="block text-sm font-medium text-gray-700">Añade
                                                             una descripción sobre ti</label>
                                                         <div class="mt-1">
-                                                            <textarea id="about" v-model="userData.about" rows="3"
+                                                            <textarea id="about" v-model="Perfil_Logueado.biografia"
+                                                                rows="3"
                                                                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                                                 placeholder="A mi me gusta compartir..."></textarea>
                                                         </div>
@@ -215,8 +230,9 @@
                                                                         stroke-linejoin="round" />
                                                                 </svg>
                                                                 <div class="max-w-md-2">
-                                                                    <img v-if="src_image" :src="src_image"
-                                                                        :key="pointshover" class="h-48 w-48">
+                                                                    <img v-if="Perfil_Logueado.foto64"
+                                                                        :src="Perfil_Logueado.foto64" :key="pointshover"
+                                                                        class="h-48 w-48">
                                                                 </div>
 
                                                                 <div class="flex text-sm text-gray-600">
@@ -224,7 +240,7 @@
                                                                         class="relative cursor-pointer rounded-md bg-white font-medium text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500">
                                                                         <span>Sube una imagen</span>
                                                                         <input type="file" id="file" ref="file"
-                                                                            @change="onFileChange" required />
+                                                                            @change="onFileChange" />
                                                                     </label>
                                                                 </div>
                                                                 <p class="text-xs text-gray-500">PNG, JPG, GIF de hasta
@@ -271,16 +287,8 @@
                                                                 class="block text-sm font-medium text-gray-700">Ingrese
                                                                 número
                                                                 de telefono</label>
-                                                            <input type="text" v-model="userData.telefono" id="telefono"
-                                                                autocomplete="given-name"
-                                                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
-                                                        </div>
-
-                                                        <div class="col-span-6 sm:col-span-3">
-                                                            <label for="whatsapp"
-                                                                class="block text-sm font-medium text-gray-700">WhatsApp</label>
-                                                            <input type="text" v-model="userData.whatsapp" id="whatsapp"
-                                                                autocomplete="family-name"
+                                                            <input type="text" v-model="Perfil_Logueado.telefono"
+                                                                id="telefono" autocomplete="given-name"
                                                                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                                                         </div>
 
@@ -291,15 +299,15 @@
                                                         <div class="col-span-6 sm:col-span-3">
                                                             <label for="facebook"
                                                                 class="block text-sm font-medium text-gray-700">Facebook</label>
-                                                            <input type="text" v-model="userData.facebook" id="facebook"
-                                                                autocomplete="family-name"
+                                                            <input type="text" v-model="Perfil_Logueado.user_facebook"
+                                                                id="facebook" autocomplete="family-name"
                                                                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                                                         </div>
 
                                                         <div class="col-span-6 sm:col-span-3">
                                                             <label for="instagram"
                                                                 class="block text-sm font-medium text-gray-700">Instagram</label>
-                                                            <input type="text" v-model="userData.instagram"
+                                                            <input type="text" v-model="Perfil_Logueado.user_insta"
                                                                 id="instagram" autocomplete="instagram"
                                                                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                                                         </div>
@@ -309,8 +317,8 @@
                                                         <div class="col-span-6">
                                                             <label for="twitter"
                                                                 class="block text-sm font-medium text-gray-700">Twitter</label>
-                                                            <input type="text" v-model="userData.twitter" id="twitter"
-                                                                autocomplete="twitter"
+                                                            <input type="text" v-model="Perfil_Logueado.user_twitter"
+                                                                id="twitter" autocomplete="twitter"
                                                                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                                                         </div>
                                                     </div>
@@ -347,7 +355,7 @@ import Cookies from "js-cookie";
 import user from "@/helper/user"
 import { useMeta } from 'vue-meta'
 export default {
-    name: 'ProfileForm',
+    name: 'CompletaPerfil',
     setup() {
         useMeta({
             title: "Perfil",
@@ -358,37 +366,25 @@ export default {
     },
     data() {
         return {
-            data: {
-                image: null
-            },
-            userData: {
-                perfil_id: null,
-                firstname: '',
-                lastname: '',
-                email: '',
-                user: '',
-                selectedCity: null,
-                selectedHobbie: null,
-                streetaddress: null,
-                age: null,
-                state: '',
-                postalcode: '',
-                about: '',
-                telefono: '',
-                whatsapp: '',
-                facebook: '',
-                instagram: '',
-                twitter: '',
-                selectedGenero: '',
-            },
-            optionsCity: [],
-            optionsHobbie: [],
-            optionsPref: [],
+            imagen: null,
+            userData: [],
+
+            selectedHobbie: [],
+            selectedPreferencia: [],
+
+            API_Ciudad: [],
+            API_Hobbie: [],
+            API_Pref: [],
+            API_ListHobbie: [],
+            API_ListPref: [],
+
+            anteriorHobbie: [],
+            anteriorPref: [],
+
+            anteriorListaHobbie: [],
+            anteriorListaPref: [],
+
             file: null,
-            optionsGenero: [
-                { text: 'Masculino', value: 1 },
-                { text: 'Femenino', value: 0 },
-            ],
             perfil_creada: null,
             // AQUI SE GUARDA EL PERFIL DEL USUARIO LOGUEADO
             Perfil_Logueado: [],
@@ -397,40 +393,20 @@ export default {
             src_image: null
         }
     },
-    mounted() {
+    created() {
         getAPI.get('/ciudad/')
             .then(response => {
-                let data = response.data;
-                data.forEach((value, index) => {
-                    this.optionsCity.push({ text: value.nombre_ciudad, value: value.ciudad_id });
-                });
+                this.API_Ciudad = response.data
             })
             .catch(error => {
                 console.log(error)
                 this.errored = true
             })
             .finally(() => this.loading = false)
-
 
         getAPI.get('/hobbie/')
             .then(response => {
-                let data = response.data;
-                data.forEach((value, index) => {
-                    this.optionsHobbie.push({ name: value.nombre_hobbie, id: value.hobbie_id });
-                });
-            })
-            .catch(error => {
-                console.log(error)
-                this.errored = true
-            })
-            .finally(() => this.loading = false)
-        
-        getAPI.get('/preferencia/')
-            .then(response => {
-                let data = response.data;
-                data.forEach((value, index) => {
-                    this.optionsPref.push({ name: value.nombre_preferencia, id: value.preferencia_id });
-                });
+                this.API_Hobbie = response.data
             })
             .catch(error => {
                 console.log(error)
@@ -438,113 +414,186 @@ export default {
             })
             .finally(() => this.loading = false)
 
-        // SE LLAMA A ESTA FUNCION PARA PODER OBTENER EL USUARIO LOGUEADO.
-        // EL PERFIL_USER SE GUARDA EN LA VARIABLE Perfil_Logueado
+        getAPI.get('/preferencia/')
+            .then(response => {
+                this.API_Pref = response.data
+            })
+            .catch(error => {
+                console.log(error)
+                this.errored = true
+            })
+            .finally(() => this.loading = false)
 
         getAPI.get('/user_token/', {
             headers: user.get_header_authorization_token()
         }).then(response => {
             this.Perfil_Logueado = response.data;
             console.log(response.data)
-            this.flagUpdate = true
-            let data = response.data;
-            this.userData.perfil_id = data.perfil_id
-            this.userData.firstname = data.nombre_user
-            this.userData.lastname = data.apellidos_user
-            this.userData.email = data.email
-            this.userData.user = data.user
-            this.userData.selectedCity = data.ciudad
-            this.userData.age = data.edad
-            this.userData.about = data.biografia
-            this.userData.telefono = data.telefono
-            this.userData.whatsapp = data.telefono
-            this.userData.facebook = data.user_facebook
-            this.userData.instagram = data.user_insta
-            this.userData.twitter = data.user_twitter
-            this.userData.selectedGenero = data.genero
-            this.src_image = data.foto64
+            this.flagUpdate = true;
+        }).then(_ => {
+            this.getListaP();
+            this.getListaH();
         })
-        .catch(error => {
-            this.flagUpdate = false
-            console.log(error)
-            this.errored = true
-        })
-        .finally(() => this.loading = false)
+            .catch(error => {
+                this.flagUpdate = false
+                console.log(error)
+                this.errored = true
+            })
+            .finally(() => this.loading = false)
     },
     methods: {
+        getListaP() {
+            getAPI.get('/lista_preferencia/')
+                .then(response => {
+                    this.API_ListPref = response.data
+                }).then(_ => {
+                    this.filtroPreferencia();
+                })
+                .catch(error => {
+                    console.log(error)
+                    this.errored = true
+                })
+                .finally(() => this.loading = false)
+        },
+
+        getListaH() {
+            getAPI.get('/listadodehobbies/')
+                .then(response => {
+                    this.API_ListHobbie = response.data
+                }).then(_ => {
+                    this.filtroHobbie();
+                })
+                .catch(error => {
+                    console.log(error)
+                    this.errored = true
+                })
+                .finally(() => this.loading = false)
+        },
+
+        filtroHobbie() {
+            for (let i = 0; i < this.API_ListHobbie.length; i++) {
+                if (this.API_ListHobbie[i].perfil.perfil_id == this.Perfil_Logueado.perfil_id) {
+                    this.anteriorHobbie.push(this.API_ListHobbie[i].hobbie)
+                    this.selectedHobbie.push(this.API_ListHobbie[i].hobbie)
+
+                    this.anteriorListaHobbie.push(this.API_ListHobbie[i])
+                }
+            }
+        },
+        filtroPreferencia() {
+            for (let i = 0; i < this.API_ListPref.length; i++) {
+                if (this.API_ListPref[i].perfil.perfil_id == this.Perfil_Logueado.perfil_id) {
+                    this.anteriorPref.push(this.API_ListPref[i].preferencia)
+                    this.selectedPreferencia.push(this.API_ListPref[i].preferencia)
+
+                    this.anteriorListaPref.push(this.API_ListPref[i])
+                }
+            }
+        },
+
+
+
+
+
+
         //Agarrar la imagen subida y guardarla en 'file'
         onFileChange(e) {
             this.file = e.target.files[0];
         },
         submit() {
-
             let formData = new FormData();
             //file corresponde a la imagen subida
-            formData.append('perfil_id', this.userData.perfil_id);
-            formData.append('foto_perfil', this.file);
-            formData.append('email', this.userData.email);
-            formData.append('nombre_user', this.userData.firstname);
-            formData.append('apellidos_user', this.userData.lastname);
-            formData.append('edad', this.userData.age);
-            formData.append('biografia', this.userData.about);
-            formData.append('telefono', this.userData.telefono);
-            formData.append('username', this.userData.user);
-            formData.append('user_facebook', this.userData.facebook);
-            formData.append('user_insta', this.userData.instagram);
-            formData.append('user_twitter', this.userData.twitter);
-            formData.append('ciudad', this.userData.selectedCity);
-            formData.append('genero', 'Hombre');
-            formData.append('foto64', 'null');
-            formData.append('user', this.Perfil_Logueado.user);
-            formData.append('necesita_cuarto', false);
-
-
-            if (this.flagUpdate == true) {
-                let id = this.userData.perfil_id
-                getAPI.put('/perfil/' + id, formData, {
-                    headers: {
-                        'Content-Type': 'multipart/form-data',
-                        "Authorization" :"Token " + Cookies.get('userLogged'),
-                    }
-                }).then((res) => {
-                    console.log("Subida exitosa");
-                    console.log(res);
-                    //guardare hobbies
-                    this.guadarHobbies();
-
-                    location.reload();
-                }).catch(err => {
-                    console.log(err);
-                });
-            } else {
-
-                getAPI.post(`/perfil/`, formData, {
-                    headers: {
-                        'Content-Type': 'multipart/form-data'
-                    }
-                }).then((res) => {
-                    console.log("Subida exitosa");
-                    console.log(res);
-                    location.reload();
-                }).catch(err => {
-                    console.log(err);
-                });
-
+            formData.append('nombre_user', this.Perfil_Logueado.nombre_user);
+            formData.append('apellidos_user', this.Perfil_Logueado.apellidos_user);
+            formData.append('email', this.Perfil_Logueado.email);
+            formData.append('telefono', this.Perfil_Logueado.telefono);
+            formData.append('edad', this.Perfil_Logueado.edad);
+            formData.append('genero', this.Perfil_Logueado.genero);
+            formData.append('biografia', this.Perfil_Logueado.biografia);
+            formData.append('ciudad', this.Perfil_Logueado.ciudad.ciudad_id);
+            if (this.file != null) {
+                formData.append('foto_perfil', this.file);
             }
+            formData.append('username', this.Perfil_Logueado.username);
+            formData.append('user_facebook', this.Perfil_Logueado.user_facebook);
+            formData.append('user_insta', this.Perfil_Logueado.user_insta);
+            formData.append('user_twitter', this.Perfil_Logueado.user_twitter);
 
+            let id = this.Perfil_Logueado.perfil_id
+            getAPI.put('/perfil/' + id, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                    "Authorization": "Token " + Cookies.get('userLogged'),
+                }
+            }).then((res) => {
+                console.log("Subida exitosa");
+                console.log(res);
+                //guardare hobbies
+            }).then(_ => {
+                this.guardarHobbies();
+            }).then(__ => {
+                this.guardarPreferencias();
+            }).then(___ => {
+                this.$router.push('/perfil');
+            }).catch((err) => {
+                console.log("Error al subir");
+                console.log(err);
+            });
         },
+
+
         get_user_logged() {
             return Cookies.get('userLogged')
         },
-        //Guardar las hobbies seleccionadaos
-        guadarHobbies() {
-            for (let i = 0; i < this.userData.selectedHobbie.length; i++) {
+
+
+        guardarHobbies() {
+            for (let i = 0; i < this.anteriorListaHobbie.length; i++) {
+                console.log("AAAAAAAAAAAAAAAAAAAA" + this.anteriorListaHobbie[i].listhobbies_id)
+                getAPI.delete('/listadodehobbies/' + this.anteriorListaHobbie[i].listhobbies_id + '/')
+                    .then(response => {
+                        console.log('Hobbies eliminadas')
+                        console.log(response.data);
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    });
+            }
+
+            for (let i = 0; i < this.selectedHobbie.length; i++) {
                 getAPI.post('/listadodehobbies/', {
-                    perfil: this.userData.perfil_id,
-                    hobbie: this.userData.selectedHobbie[i].id,
+                    perfil: this.Perfil_Logueado.perfil_id,
+                    hobbie: this.selectedHobbie[i].hobbie_id,
                 })
                     .then(response => {
                         console.log('Hobbies guardados')
+                        console.log(response.data);
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    });
+            }
+        },
+
+        guardarPreferencias() {
+            for (let i = 0; i < this.anteriorListaPref.length; i++) {
+                console.log("AAAAAAAAAAAAAAAAAAAA" + this.anteriorListaPref[i].listapref_id)
+                getAPI.delete('/lista_preferecia/' + this.anteriorListaPref[i].listapref_id + '/')
+                    .then(response => {
+                        console.log('Preferencias eliminadas')
+                        console.log(response.data);
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    });
+            }
+            for (let i = 0; i < this.selectedPreferencia.length; i++) {
+                getAPI.post('/lista_preferencia/', {
+                    perfil: this.Perfil_Logueado.perfil_id,
+                    preferencia: this.selectedPreferencia[i].preferencia_id,
+                })
+                    .then(response => {
+                        console.log('Preferencias guardadas')
                         console.log(response.data);
                     })
                     .catch(error => {

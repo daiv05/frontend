@@ -3,7 +3,7 @@
 		<div class="divide-y divide-gray-700">
 			<ul class="pt-2 pb-4 space-y-1 text-sm">
 				<li class="dark:bg-gray-800 dark:text-gray-50">
-					<RouterLink to="/" class="flex items-center p-2 space-x-3 rounded-md">
+					<RouterLink to="#" class="flex items-center p-2 space-x-3 rounded-md">
 						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
 							class="w-5 h-5 fill-current dark:text-gray-400">
 							<path
@@ -39,7 +39,7 @@
 					</router-link>
 				</li>
 				<li>
-					<router-link to="/#" class="flex items-center p-2 space-x-3 rounded-md">
+					<router-link to="/completar_perfil" class="flex items-center p-2 space-x-3 rounded-md">
 					
 						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
 							class="w-5 h-5 fill-current dark:text-gray-400">
@@ -53,19 +53,8 @@
 								d="M272,196.659A56.223,56.223,0,0,0,309.659,159H416V127H309.659a55.991,55.991,0,0,0-107.318,0H96v32H202.341A56.223,56.223,0,0,0,240,196.659V463H136v32H376V463H272ZM232,143a24,24,0,1,1,24,24A24,24,0,0,1,232,143Z">
 							</path>
 						</svg>
-						<span>Configuracion</span>
+						<span>Completar Perfil</span>
 					</router-link>
-				</li>
-				<li>
-					<RouterLink to="/estadistica" class="flex items-center p-2 space-x-3 rounded-md">
-						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
-							class="w-5 h-5 fill-current dark:text-gray-400">
-							<path
-								d="M453.122,79.012a128,128,0,0,0-181.087.068l-15.511,15.7L241.142,79.114l-.1-.1a128,128,0,0,0-181.02,0l-6.91,6.91a128,128,0,0,0,0,181.019L235.485,449.314l20.595,21.578.491-.492.533.533L276.4,450.574,460.032,266.94a128.147,128.147,0,0,0,0-181.019ZM437.4,244.313,256.571,425.146,75.738,244.313a96,96,0,0,1,0-135.764l6.911-6.91a96,96,0,0,1,135.713-.051l38.093,38.787,38.274-38.736a96,96,0,0,1,135.765,0l6.91,6.909A96.11,96.11,0,0,1,437.4,244.313Z">
-							</path>
-						</svg>
-						<span>Estadisticas</span>
-					</RouterLink>
 				</li>
 			</ul>
 			<ul class="pt-4 pb-2 space-y-1 text-sm">

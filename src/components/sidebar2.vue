@@ -16,12 +16,13 @@
             <div ref="content"
                 class="transition-all duration-700 bg-yellow-200 overflow-hidden flex items-center justify-center"
                 :class="[open ? 'max-w-lg' : 'max-w-0']">
-                <div class="h-full p-3 space-y-2 w-60 dark:bg-gray-900 dark:text-gray-100">
+
+
+                <div class="h-full p-3 space-y-2 w-60 dark:bg-gray-900 dark:text-gray-100" style="min-height: 100vh;">
                     <div class="divide-y divide-gray-700">
                         <ul class="pt-2 pb-4 space-y-1 text-sm">
                             <li class="dark:bg-gray-800 dark:text-gray-50">
-                                <a rel="noopener noreferrer" href="#"
-                                    class="flex items-center p-2 space-x-3 rounded-md">
+                                <RouterLink to="#" class="flex items-center p-2 space-x-3 rounded-md">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
                                         class="w-5 h-5 fill-current dark:text-gray-400">
                                         <path
@@ -29,23 +30,21 @@
                                         </path>
                                     </svg>
                                     <span>Inicio</span>
-                                </a>
+                                </RouterLink>
                             </li>
                             <li>
-                                <a rel="noopener noreferrer" href="#"
-                                    class="flex items-center p-2 space-x-3 rounded-md">
+                                <RouterLink to="/vercard" class="flex items-center p-2 space-x-3 rounded-md">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
                                         class="w-5 h-5 fill-current dark:text-gray-400">
                                         <path
                                             d="M479.6,399.716l-81.084-81.084-62.368-25.767A175.014,175.014,0,0,0,368,192c0-97.047-78.953-176-176-176S16,94.953,16,192,94.953,368,192,368a175.034,175.034,0,0,0,101.619-32.377l25.7,62.2L400.4,478.911a56,56,0,1,0,79.2-79.195ZM48,192c0-79.4,64.6-144,144-144s144,64.6,144,144S271.4,336,192,336,48,271.4,48,192ZM456.971,456.284a24.028,24.028,0,0,1-33.942,0l-76.572-76.572-23.894-57.835L380.4,345.771l76.573,76.572A24.028,24.028,0,0,1,456.971,456.284Z">
                                         </path>
                                     </svg>
-                                    <span>roomates</span>
-                                </a>
+                                    <span>Buscar roomates</span>
+                                </RouterLink>
                             </li>
                             <li>
-                                <a rel="noopener noreferrer" href="#"
-                                    class="flex items-center p-2 space-x-3 rounded-md">
+                                <router-link to="/panel_publicacion" class="flex items-center p-2 space-x-3 rounded-md">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
                                         class="w-5 h-5 fill-current dark:text-gray-400">
                                         <path
@@ -55,12 +54,12 @@
                                             d="M60.185,317.476a220.491,220.491,0,0,0,34.808-63.023l4.22-11.975-9.207-7.066C62.918,214.626,48,186.728,48,156.857,48,96.833,109.009,48,184,48c55.168,0,102.767,26.43,124.077,64.3,3.957-.192,7.931-.3,11.923-.3q12.027,0,23.834,1.167c-8.235-21.335-22.537-40.811-42.2-56.961C270.072,30.279,228.3,16,184,16S97.928,30.279,66.364,56.206C33.886,82.885,16,118.63,16,156.857c0,35.8,16.352,70.295,45.25,96.243a188.4,188.4,0,0,1-40.563,60.729L16,318.515V352H32a190.643,190.643,0,0,0,85.231-20.125,157.3,157.3,0,0,1-5.071-33.645A158.729,158.729,0,0,1,60.185,317.476Z">
                                         </path>
                                     </svg>
-                                    <span>Publicaciones</span>
-                                </a>
+                                    <span>Mi Cuarto</span>
+                                </router-link>
                             </li>
                             <li>
-                                <a rel="noopener noreferrer" href="#"
-                                    class="flex items-center p-2 space-x-3 rounded-md">
+                                <router-link to="/completar_perfil" class="flex items-center p-2 space-x-3 rounded-md">
+
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
                                         class="w-5 h-5 fill-current dark:text-gray-400">
                                         <path
@@ -73,39 +72,29 @@
                                             d="M272,196.659A56.223,56.223,0,0,0,309.659,159H416V127H309.659a55.991,55.991,0,0,0-107.318,0H96v32H202.341A56.223,56.223,0,0,0,240,196.659V463H136v32H376V463H272ZM232,143a24,24,0,1,1,24,24A24,24,0,0,1,232,143Z">
                                         </path>
                                     </svg>
-                                    <span>Configuracion</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a rel="noopener noreferrer" href="#"
-                                    class="flex items-center p-2 space-x-3 rounded-md">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
-                                        class="w-5 h-5 fill-current dark:text-gray-400">
-                                        <path
-                                            d="M453.122,79.012a128,128,0,0,0-181.087.068l-15.511,15.7L241.142,79.114l-.1-.1a128,128,0,0,0-181.02,0l-6.91,6.91a128,128,0,0,0,0,181.019L235.485,449.314l20.595,21.578.491-.492.533.533L276.4,450.574,460.032,266.94a128.147,128.147,0,0,0,0-181.019ZM437.4,244.313,256.571,425.146,75.738,244.313a96,96,0,0,1,0-135.764l6.911-6.91a96,96,0,0,1,135.713-.051l38.093,38.787,38.274-38.736a96,96,0,0,1,135.765,0l6.91,6.909A96.11,96.11,0,0,1,437.4,244.313Z">
-                                        </path>
-                                    </svg>
-                                    <span>Mensajes</span>
-                                </a>
+                                    <span>Completar Perfil</span>
+                                </router-link>
                             </li>
                         </ul>
                         <ul class="pt-4 pb-2 space-y-1 text-sm">
                             <li>
                                 <div class="flex items-center p-2 space-x-4 pb-2">
-                                    <img src="../assets/punpun2.jpg" alt=""
+                                    <img v-if="perfil_log.foto_perfil" :src="perfil_log.foto64" alt=""
+                                        class="w-12 h-12 rounded-full dark:bg-gray-500">
+                                    <img v-if="!perfil_log.foto_perfil" src="/img/icons/favicon-96x96.png" alt=""
                                         class="w-12 h-12 rounded-full dark:bg-gray-500">
                                     <div>
-                                        <h2 class="text-lg font-semibold">David Deras</h2>
+                                        <h2 class="text-lg font-semibold">{{ perfil_log.nombre_user }}</h2>
                                         <span class="flex items-center space-x-1">
-                                            <a rel="noopener noreferrer" href="#"
-                                                class="text-xs hover:underline dark:text-gray-400">Ver Perfil</a>
+                                            <RouterLink to="/perfil" class="text-xs hover:underline dark:text-gray-400">
+                                                Mi Perfil
+                                            </RouterLink>
                                         </span>
                                     </div>
                                 </div>
                             </li>
                             <li>
-                                <a rel="noopener noreferrer" href="#"
-                                    class="flex items-center p-2 space-x-3 rounded-md">
+                                <button :onClick="salirSesion" class="flex items-center p-2 space-x-3 rounded-md">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
                                         class="w-5 h-5 fill-current dark:text-gray-400">
                                         <path
@@ -114,12 +103,15 @@
                                         <rect width="32" height="64" x="256" y="232"></rect>
                                     </svg>
                                     <span>Salir</span>
-                                </a>
+                                </button>
                             </li>
                         </ul>
 
                     </div>
                 </div>
+
+
+
                 <slot></slot>
             </div>
         </div>
@@ -139,18 +131,39 @@
 </template>
 
 <script>
+import { getAPI } from '../axios-api'
+import user from '../helper/user'
 export default {
     data() {
         return {
             open: false,
             dimmer: true,
-            right: false
+            right: false,
+            perfil_log: [],
         };
     },
-    methods: {
+    created() {
+        // SE LLAMA A ESTA FUNCION PARA PODER OBTENER EL USUARIO LOGUEADO.
+        // EL PERFIL_USER SE GUARDA EN LA VARIABLE Perfil_Logueado
+        getAPI.get('/user_token/', {
+            headers: user.get_header_authorization_token()
+        }).then(response => {
+            console.log('Perfil logueado obtenido')
+            this.perfil_log = response.data;
+
+            //console.log(this.Perfil_Logueado)
+        }).catch(error => {
+            console.log(error);
+        });
+	},
+	methods: {
         toggle() {
             this.open = !this.open;
-        }
+        },
+        salirSesion() {
+			user.logout();
+			this.$router.push('/login');
+		}
     }
 };
 </script>

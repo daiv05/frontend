@@ -67,11 +67,12 @@
                   {{ post.descrip_lugar }}
                 </p>
               </div>
-              <img class="h-56 w-full object-cover mt-2" :src="post.ruta_foto" alt="">
+              <img class="h-56 w-full object-cover mt-2" :src="post.foto64" alt="">
               <div class="flex items-center justify-between px-4 py-2 bg-gray-900">
                 <h1 class="text-gray-200 font-bold text-xl">${{ post.precio }}</h1>
-                <button class="px-3 py-1 bg-gray-200 text-sm text-gray-900 font-semibold rounded">Mas
-                  información</button>
+                <router-link :to="{ name: 'PublicacionUnica', params: { id_publicacion: post.publicacion_id } }" 
+                  class="px-3 py-1 bg-gray-200 text-sm text-gray-900 font-semibold rounded">Mas información
+                </router-link>
               </div>
             </div>
           </div>
@@ -133,9 +134,7 @@ export default {
       for (let i = 0; i < this.fotos.length; i++) {
         if (this.alquileres[i]?.publicacion_id) {
           if (this.fotos[i].publi_alquiler == this.alquileres[i].publicacion_id) {
-            if (this.alquileres[i].ruta_foto) {
-              this.alquileres[i].ruta_foto = this.fotos[i].foto64;
-            }
+            this.alquileres[i]['foto64'] = this.fotos[i].foto64;
           }
         }
 

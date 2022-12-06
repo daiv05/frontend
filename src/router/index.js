@@ -10,6 +10,7 @@ import subir_foto from '../views/subir_foto.vue'
 import VerCardAlquiler from '../views/VerCardAlquiler.vue'
 import Alquiler from '../views/AlquilerView'
 import Perfil_Unico from '../views/PerfilSelect.vue'
+import completar_perfil from '../views/completar_perfil.vue'
 import { store } from '@/store'
 import Perfil from '../views/Perfil.vue'
 
@@ -42,7 +43,13 @@ const routes = [
     name: 'profileform',
     component: ProfileForm
   },
-  
+
+  {
+    path: '/completar_perfil',
+    name: 'CompletaPerfil',
+    component: completar_perfil
+  },
+
   {
     path: '/crear_publicacion',
     name: 'alquiler_edit',
@@ -62,11 +69,11 @@ const routes = [
   {
 
     path: '/publicacion/:id_publicacion',
-    name: 'alquiler',
+    name: 'PublicacionUnica',
     component: Alquiler
   },
   {
-    path: '/perfil/:id_perfil',
+    path: '/perfil_alquiler/:id_perfil',
     name: 'Perfil_Unico',
     component: Perfil_Unico
   },
