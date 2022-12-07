@@ -256,6 +256,7 @@ import sidebar1 from '../components/Sidebar1.vue'
 import { getAPI } from '../axios-api'
 import user from '../helper/user'
 import { useMeta } from 'vue-meta'
+import Cookies from "js-cookie";
 export default {
     name: 'Mod_Publicacion',
     setup() {
